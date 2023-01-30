@@ -1,0 +1,1261 @@
+<html>
+<head>
+    <title>HYIP Manager Pro. Auto-payment, mass payment included.</title>
+    <link href="images/adminstyle.css" rel="stylesheet" type="text/css">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        .pagination {
+            display: -ms-flexbox;
+            display: flex;
+            padding-left: 0;
+            list-style: none;
+        }
+
+        .page-link {
+            position: relative;
+            display: block;
+            padding: 0.5rem 0.75rem;
+            margin-left: -1px;
+            line-height: 1.25;
+            color: #000;
+            background-color: #fff;
+            border: 1px solid #999;
+        }
+
+        .page-item:first-child .page-link {
+            margin-left: 0;
+            border-top-left-radius: 0.25rem;
+            border-bottom-left-radius: 0.25rem;
+        }
+
+        .page-item:last-child .page-link {
+            border-top-right-radius: 0.25rem;
+            border-bottom-right-radius: 0.25rem;
+        }
+
+        .page-link:hover {
+            z-index: 2;
+            color: #000;
+            text-decoration: none;
+            background-color: #ccc;
+            border-color: #999;
+        }
+
+        .page-link.disabled {
+            color: #999;
+        }
+
+        .page-link.disabled:hover {
+            background-color: #fff;
+        }
+
+        .page-link {
+            cursor: pointer;
+            text-decoration: none;
+            color: #000;
+        }
+
+        .page-item.active .page-link {
+            z-index: 1;
+            color: #000;
+            background-color: #ccc;
+            border-color: #999;
+        }
+
+        .page-item.disabled .page-link {
+            color: #666;
+            pointer-events: none;
+            cursor: auto;
+            background-color: #fff;
+            border-color: #999;
+        }
+
+        .alert {
+            padding: 5px 5px 5px 15px;
+            margin: 2px;
+            border: solid 1px black;
+            display: block;
+        }
+
+        .alert.alert-danger {
+            background: #FFEEEE;
+            border-color: red;
+            color: #660000;
+        }
+
+        .alert.alert-warning {
+            background: #FFFFEE;
+            border-color: yellow;
+            color: #333300;
+        }
+
+        .alert.alert-success {
+            background: #EEFFEE;
+            border-color: green;
+            color: #006600;
+        }
+
+        .alert.alert-info {
+            background: #EEEEFF;
+            border-color: blue;
+            color: #000066;
+        }
+
+        table.form {
+            width: 100%;
+        }
+
+        table.form th {
+            width: 30%;
+            padding: 3px;
+            padding-right: 5px;
+            text-align: right;
+            background: #FFC982;
+            color: #493011;
+        }
+
+        table.form th.title {
+            width: 100%;
+            padding-left: 5px;
+            text-align: left;
+            color: #a45c07;
+        }
+
+        table.form td {
+            width: 70%;
+            padding: 3px;
+            text-align: left;
+            background: #FEF5EA;
+        }
+
+        table.form.nosize td {
+            width: auto;
+        }
+
+        table.form.nosize th {
+            width: auto;
+        }
+
+        table.form thead th {
+            width: auto;
+            padding: 3px;
+            text-align: center;
+            background: #FFC982;
+            color: #FFFFFF;
+        }
+
+        table.form thead td {
+            width: auto;
+            padding: 3px;
+            text-align: left;
+        }
+
+        table.form td input[type=text],
+        table.form td input[type=password],
+        table.form td textarea,
+        table.form td select {
+            width: 100%;
+        }
+
+        table.form td input[type=text].nosize,
+        table.form td input[type=password].nosize,
+        table.form td textarea.nosize,
+        table.form td select.nosize {
+            width: auto;
+        }
+
+        table.form.controls td {
+            background: transparent;
+            width: auto;
+        }
+
+        table.form.controls td input[type=text],
+        table.form.controls td input[type=password],
+        table.form.controls td textarea,
+        table.form.controls td select {
+            margin: 3px;
+        }
+
+        table.list {
+            width: 100%;
+        }
+
+        table.list td {
+            width: auto;
+            padding: 3px;
+        }
+
+        table.list.sub td {
+            width: auto;
+            padding: 1px;
+        }
+
+        table.list th {
+            width: auto;
+            padding: 3px;
+            text-align: center;
+            background: #FFC982;
+            color: #493011;
+        }
+
+        table.list .row1 {
+            background: #FCE7CA;
+        }
+
+        table.list .row2 {
+            background: #FFF3E3;
+        }
+
+        form input[type=submit],
+        form input[type=button],
+        form button,
+        .sbmt {
+            display: inline-block;
+            font-weight: bold;
+            text-align: center;
+            text-decoration: none;
+            white-space: nowrap;
+            vertical-align: middle;
+            user-select: none;
+            border: 1px solid transparent;
+            padding: .25rem .5rem;
+            line-height: 1.5;
+            border-radius: .2rem;
+            border: none;
+        }
+
+        form input[type=submit]:hover,
+        form input[type=button]:hover,
+        form button:hover,
+        .sbmt:hover {
+            background-color: #FAD252;
+        }
+
+        form input[type=submit]:active,
+        form input[type=button]:active,
+        form button:active,
+        .sbmt:active {
+            background-color: #FFC200;
+        }
+
+        form input[type=submit]:focus,
+        form input[type=button]:focus,
+        form button:focus,
+        .sbmt:focus {
+            box-shadow: 0 0 0 .2rem rgba(255, 236, 176, .5);
+        }
+
+        form input[type=submit]:disabled,
+        form input[type=button]:disabled,
+        form button:disabled,
+        .sbmt:disabled {
+            opacity: .65;
+        }
+
+        .btn {
+            cursor: pointer;
+            text-transform: uppercase;
+            margin: 1px;
+        }
+
+        .sbmt.btn-sm {
+            font-size: .525rem;
+            padding: .25rem .35rem;
+            text-transform: uppercase;
+            cursor: pointer;
+            margin: 1px;
+        }
+
+        .btn-success {
+            color: #fff;
+            background-color: #28a745;
+            border-color: #28a745;
+        }
+
+        .btn-success:hover {
+            background-color: #218838 !important;
+            border-color: #1e7e34 !important;
+        }
+
+        .btn-success:focus {
+            background-color: #218838 !important;
+            box-shadow: 0 0 0 .2rem rgba(40, 167, 69, .5) !important;
+        }
+
+        .btn-danger {
+            color: #fff;
+            background-color: #dc3545;
+            border-color: #dc3545;
+        }
+
+        .btn-danger:hover {
+            background-color: #c82333 !important;
+            border-color: #bd2130 !important;
+        }
+
+        .btn-danger:focus {
+            background-color: #c82333 !important;
+            box-shadow: 0 0 0 .2rem rgba(220, 53, 69, .5) !important;
+        }
+
+        .btn-info {
+            color: #fff;
+            background-color: #17a2b8;
+            border-color: #17a2b8;
+        }
+
+        .btn-info:hover {
+            background-color: #138496 !important;
+            border-color: #117a8b !important;
+        }
+
+        .btn-info:focus {
+            background-color: #138496 !important;
+            box-shadow: 0 0 0 .2rem rgba(23, 162, 184, .5) !important;
+        }
+
+        .btn-primary {
+            color: #fff;
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+
+        .btn-primary:hover {
+            background-color: #0069d9 !important;
+            border-color: #0062cc !important;
+        }
+
+        .btn-primary:focus {
+            background-color: #007bff !important;
+            box-shadow: 0 0 0 .2rem rgba(38, 143, 255, .5) !important;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: .25em .4em;
+            font-size: 75%;
+            font-weight: 700;
+            line-height: 1;
+            text-align: center;
+            /*white-space: nowrap;*/
+            vertical-align: baseline;
+            border-radius: .25rem;
+            margin: .25em;
+        }
+
+        .badge-bg {
+            display: inline-block;
+            font-size: .525rem;
+            padding: .25rem .35rem;
+            text-transform: uppercase;
+            font-weight: 700;
+            text-align: center;
+            /*white-space: nowrap;*/
+            vertical-align: baseline;
+            border-radius: .25rem;
+        }
+
+        .badge-success {
+            color: #fff;
+            background-color: #28a745;
+        }
+
+        .badge-info {
+            color: #fff;
+            background-color: #17a2b8;
+        }
+
+        .badge-danger {
+            color: #fff;
+            background-color: #dc3545;
+        }
+
+        .badge-warning {
+            color: #212529;
+            background-color: #ffc107;
+        }
+
+        .badge-primary {
+            color: #fff;
+            background-color: #007bff;
+        }
+
+        .badge.sticker {
+            font-size: 90%;
+        }
+
+        .hide {
+            display: none;
+        }
+
+        .pshead {
+            padding: 3px;
+            background: #FF8D00;
+            margin: 2px 0;
+            font-weight: bold;
+            overflow: hidden;
+        }
+
+        .pshead b {
+            display: block;
+            width: 250px;
+            float: left;
+        }
+
+        .pshead a {
+            float: right;
+        }
+
+        .psettings {
+            display: none;
+        }
+    </style>
+    <style>
+        .nav {
+            --display: flex;
+            --flex-wrap: wrap;
+            padding: 0 .25rem;
+            margin-bottom: 0;
+            list-style: none;
+        }
+
+        .nav-link {
+            border-radius: .25rem;
+            display: block;
+            padding: .5rem 1rem;
+            color: #493011;
+            text-decoration: none;
+            background-color: #FFF3E3;
+            border: solid 1px transparent;
+            -webkit-text-decoration-skip: objects;
+            margin-top: 0.2rem;
+            text-align: left;
+            font-weight: bold;
+        }
+
+        .nav-link:last-child {
+            margin-bottom: 0.2rem;
+        }
+
+        .nav-link:hover {
+            background-color: #FFC982;
+        }
+
+        .nav-link.active {
+            background-color: #FFC982;
+        }
+
+        .nav-link:active,
+        .nav-link:focus {
+            background-color: #FCE7CA
+        }
+
+        .dropdown-toggle.show {
+            border-bottom-right-radius: 0;
+            border-bottom-left-radius: 0;
+        }
+
+        .dropdown-toggle::after {
+            --display: inline-block;
+            display: none;
+            width: 0;
+            height: 0;
+            margin-left: .255em;
+            vertical-align: .255em;
+            content: "";
+            border-top: .3em solid;
+            border-right: .3em solid transparent;
+            border-bottom: 0;
+            border-left: .3em solid transparent;
+            z-index: 1000;
+        }
+
+        .dropdown-menu {
+            --position: absolute;
+            --top: 100%;
+            left: 0;
+            z-index: 1000;
+            --display: none;
+            --float: left;
+            --min-width: 10rem;
+            padding: .5rem 0;
+            margin: 0 0 .125rem 0;
+            --font-size: 1rem;
+            color: #212529;
+            text-align: left;
+            list-style: none;
+            background-color: #fff;
+            background-clip: padding-box;
+            border: 1px solid rgba(0, 0, 0, .15);
+            border-top: 0;
+            border-bottom-right-radius: .25rem;
+            border-bottom-left-radius: .25rem;
+        }
+
+        .dropdown-menu.show {
+            display: block;
+        }
+
+        .dropdown-item {
+            display: block;
+            --width: 100%;
+            padding: .25rem 1rem;
+            clear: both;
+            font-weight: 400;
+            color: #212529;
+            text-align: inherit;
+            --white-space: nowrap;
+            background-color: transparent;
+            border: 0;
+            text-decoration: none;
+        }
+
+        .dropdown-item:hover {
+            background-color: #FCE7CA;
+        }
+
+        .dropdown-item.active {
+            background-color: #FFC982;
+        }
+
+        .dropdown-item:active,
+        .dropdown-item:focus {
+            background-color: #FCE7CA;
+        }
+
+        a.sort_link {
+            cursor: pointer;
+            color: #606060;
+        }
+
+        a.sort_link.active {
+            color: red;
+        }
+
+        a.link.username {
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        b.username {
+            font-size: 1.2em;
+        }
+
+        .hlp.badge {
+            color: #fff;
+            font-size: 100%;
+        }
+
+        .hlp {
+            --font-size: auto;
+            color: black;
+            text-decoration: none;
+            cursor: help;
+            position: relative;
+            display: inline-block;
+        }
+
+        .hlp[title]:after,
+        .hlp[data-hlp]:after {
+            opacity: 0;
+            content: attr(title);
+            position: absolute;
+            top: 100%;
+            left: 0;
+            color: #fff;
+            transition: opacity 0.3s;
+            border-radius: 6px;
+            background-color: #555;
+            padding: 5px 5px;
+            width: 220px;
+            display: none;
+            font-size: 90%;
+            z-index: 1000;
+            text-align: left;
+            white-space: pre-wrap;
+        }
+
+        .hlp[data-hlp]:after {
+            content: attr(data-hlp);
+            white-space: pre-wrap;
+        }
+
+        .hlp[title]:hover:after,
+        .hlp[data-hlp]:hover:after {
+            opacity: 1;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body bgcolor="#FFFFF2" link="#666699" vlink="#666699" alink="#666699" leftmargin="0" topmargin="0" marginwidth="0"
+    marginheight="0">
+    <center>
+        <table width="760" border="0" cellpadding="0" cellspacing="0">
+            <tbody>
+                <tr>
+                    <td valign="top">
+                        <table cellspacing="0" cellpadding="0" border="0" width="100%">
+                            <tbody>
+                                <tr>
+                                    <td background="images/ver.gif" bgcolor="#FF8D00"><img src="images/top.gif"
+                                            border="0" align="left"></td>
+                                    <td background="images/ver.gif" bgcolor="#FF8D00" valign="bottom" align="right">
+                                        <span style="font-family: verdana; font-size: 12px; color: white"> <b>
+                                                <div id="google_translate_element"></div> <a href="?"
+                                                    class="toplink">Home</a> · <a href="index.php?a=logout"
+                                                    class="toplink">Logout</a>
+                                            </b></span>&nbsp; &nbsp; </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td valign="top">
+                        <table cellspacing="0" cellpadding="1" border="0" width="100%" bgcolor="#ff8d00">
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <table width="100%" height="100%" border="0" cellpadding="0" cellspacing="0">
+                                            <tbody>
+                                                <tr bgcolor="#FFFFFF" valign="top">
+                                                    <td width="300" align="center">
+                                                        <table cellspacing="0" cellpadding="2" border="0" width="172">
+                                                            <tbody>
+                                                                <tr>
+                                                                    <th colspan="2"><img src="images/q.gif" width="1"
+                                                                            height="3"></th>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th colspan="2" class="title">Menu</th>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="menutxt"><a href="?a=programs">Investment
+                                                                            Programs</a></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="menutxt"><a
+                                                                            href="?a=expiring_deposits">Expiring
+                                                                            Deposits</a></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="menutxt">&nbsp;</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="menutxt"><a href="?a=users">Users</a>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="menutxt"><a
+                                                                            href="?a=ext_accounts_blacklist">Accounts
+                                                                            Blacklist</a></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="menutxt"><a
+                                                                            href="?a=top_referral_earnings">Top Referral
+                                                                            Earnings</a></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="menutxt">&nbsp;</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="menutxt">&nbsp;</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="menutxt"><a
+                                                                            href="?a=transactions">Transactions</a></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="menutxt"><a
+                                                                            href="?a=withdrawal_requests">Withdrawal
+                                                                            Requests</a></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="menutxt"><a
+                                                                            href="?a=transactions&amp;ttype=add_funds">Add
+                                                                            Funds</a></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="menutxt"><a
+                                                                            href="?a=transactions&amp;ttype=deposit">Deposits</a>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="menutxt"><a
+                                                                            href="?a=transactions&amp;ttype=withdrawal">Withdrawals</a>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="menutxt"><a
+                                                                            href="?a=transactions&amp;ttype=earning">Earnings</a>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="menutxt"><a
+                                                                            href="?a=transactions&amp;ttype=commissions">Referral</a>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="menutxt"><a
+                                                                            href="?a=transactions&amp;ttype=exchange">Exchange</a>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="menutxt"><a
+                                                                            href="?a=pending_deposits">Pending
+                                                                            Deposits</a></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="menutxt"><a
+                                                                            href="?a=add_transactions">Add Bonus</a>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="menutxt">&nbsp;</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="menutxt">&nbsp;</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="menutxt"><a
+                                                                            href="?a=settings">Settings</a></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="menutxt"><a
+                                                                            href="?a=processings">Processings</a></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="menutxt"><a
+                                                                            href="?a=auto-pay-settings">Auto-Withdrawals
+                                                                            Settings</a></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="menutxt"><a href="?a=referrals">Referral
+                                                                            Settings</a></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="menutxt"><a
+                                                                            href="?a=email_templates">Email
+                                                                            Templates</a></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="menutxt"><a href="?a=seo_links">Links
+                                                                            Replacement</a></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="menutxt"><a
+                                                                            href="?a=security">Security</a></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="menutxt"><a
+                                                                            href="?a=earning_holidays">Earning
+                                                                            Holidays</a></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="menutxt"><a
+                                                                            href="?a=info_box_settings">Info Box
+                                                                            Settings</a></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="menutxt"><a
+                                                                            href="?a=exchange_rates">Exchange Rates</a>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="menutxt"><a
+                                                                            href="?a=maintenance_page">Maintenance
+                                                                            Page</a></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="menutxt">&nbsp;</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="menutxt">&nbsp;</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="menutxt">&nbsp;</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="menutxt"><a href="?a=check_ips">IPs
+                                                                            Check</a></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="menutxt"><a href="?a=newsletter">Send a
+                                                                            Newsletter</a></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="menutxt"><a href="?a=custompages">Custom
+                                                                            Pages</a></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="menutxt"><a href="?a=news">News</a></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="menutxt"><a href="?a=user_notices">User
+                                                                            Notices</a></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="menutxt"><a href="?a=tell_friend">Tell A
+                                                                            Friend</a></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="menutxt">&nbsp;</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="menutxt">&nbsp;</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="menutxt"><a href="?a=logout">Logout</a>
+                                                                    </td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </td>
+                                                    <td bgcolor="#ff8d00" valign="top" width="1"><img src="images/q.gif"
+                                                            width="1" height="1"></td>
+                                                    <td bgcolor="#FFFFFF" valign="top" width="99%">
+                                                        <!-- Main: Start -->
+                                                        <table width="100%" height="100%" border="0" cellpadding="10"
+                                                            cellspacing="0" class="forTexts">
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td width="100%" height="100%" valign="top">
+                                                                        <h3>Info Box Settings:</h3>
+                                                                        <form method="post" name="menuf"><input
+                                                                                type="hidden" name="form_id"
+                                                                                value="16637566732085"><input
+                                                                                type="hidden" name="form_token"
+                                                                                value="c657a165e12fa0a62b7d948d5abb2f69">
+                                                                            <input type="hidden" name="a"
+                                                                                value="info_box_settings"> <input
+                                                                                type="hidden" name="action"
+                                                                                value="save">
+                                                                            <table class="form">
+                                                                                <tbody>
+                                                                                    <tr>
+                                                                                        <th>Show Info Box:</th>
+                                                                                        <td> <select
+                                                                                                name="show_info_box"
+                                                                                                class="inpts">
+                                                                                                <option value="0">Hide
+                                                                                                </option>
+                                                                                                <option value="1"
+                                                                                                    selected="">Show
+                                                                                                </option>
+                                                                                            </select> </td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <th>Start Date:</th>
+                                                                                        <td> <select
+                                                                                                name="show_info_box_started"
+                                                                                                class="inpts">
+                                                                                                <option value="0">Hide
+                                                                                                </option>
+                                                                                                <option value="1"
+                                                                                                    selected="">Show
+                                                                                                </option>
+                                                                                            </select> </td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <th>Running days:</th>
+                                                                                        <td> <select
+                                                                                                name="show_info_box_running_days"
+                                                                                                class="inpts">
+                                                                                                <option value="0">Hide
+                                                                                                </option>
+                                                                                                <option value="1"
+                                                                                                    selected="">Show
+                                                                                                </option>
+                                                                                            </select> </td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <th>Total Accounts:</th>
+                                                                                        <td> <select
+                                                                                                name="show_info_box_total_accounts"
+                                                                                                class="inpts">
+                                                                                                <option value="0">Hide
+                                                                                                </option>
+                                                                                                <option value="1"
+                                                                                                    selected="">Show
+                                                                                                </option>
+                                                                                            </select> </td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <th>Total Active Accounts:</th>
+                                                                                        <td> <select
+                                                                                                name="show_info_box_active_accounts"
+                                                                                                class="inpts">
+                                                                                                <option value="0">Hide
+                                                                                                </option>
+                                                                                                <option value="1"
+                                                                                                    selected="">Show
+                                                                                                </option>
+                                                                                            </select> </td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <th>VIP Accounts:</th>
+                                                                                        <td> <select
+                                                                                                name="show_info_box_vip_accounts"
+                                                                                                class="inpts">
+                                                                                                <option value="0"
+                                                                                                    selected="">Hide
+                                                                                                </option>
+                                                                                                <option value="1">Show
+                                                                                                </option>
+                                                                                            </select> </td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <th>VIP Account Min Deposit:
+                                                                                        </th>
+                                                                                        <td> <input type="text"
+                                                                                                name="vip_users_deposit_amount"
+                                                                                                value="0" class="inpts">
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <th>Total Deposits:</th>
+                                                                                        <td> <select
+                                                                                                name="show_info_box_deposit_funds"
+                                                                                                class="inpts">
+                                                                                                <option value="0">Hide
+                                                                                                </option>
+                                                                                                <option value="1"
+                                                                                                    selected="">Show
+                                                                                                </option>
+                                                                                            </select> </td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <th>Today Deposits:</th>
+                                                                                        <td> <select
+                                                                                                name="show_info_box_today_deposit_funds"
+                                                                                                class="inpts">
+                                                                                                <option value="0"
+                                                                                                    selected="">Hide
+                                                                                                </option>
+                                                                                                <option value="1">Show
+                                                                                                </option>
+                                                                                            </select> </td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <th>Total Withdrawals:</th>
+                                                                                        <td> <select
+                                                                                                name="show_info_box_total_withdraw"
+                                                                                                class="inpts">
+                                                                                                <option value="0">Hide
+                                                                                                </option>
+                                                                                                <option value="1"
+                                                                                                    selected="">Show
+                                                                                                </option>
+                                                                                            </select> </td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <th>Today Withdrawals:</th>
+                                                                                        <td> <select
+                                                                                                name="show_info_box_today_withdraw_funds"
+                                                                                                class="inpts">
+                                                                                                <option value="0"
+                                                                                                    selected="">Hide
+                                                                                                </option>
+                                                                                                <option value="1">Show
+                                                                                                </option>
+                                                                                            </select> </td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <th>Visitors Online:</th>
+                                                                                        <td> <select
+                                                                                                name="show_info_box_visitor_online"
+                                                                                                class="inpts">
+                                                                                                <option value="0">Hide
+                                                                                                </option>
+                                                                                                <option value="1"
+                                                                                                    selected="">Show
+                                                                                                </option>
+                                                                                            </select> </td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <th>Members Online:</th>
+                                                                                        <td> <select
+                                                                                                name="show_info_box_members_online"
+                                                                                                class="inpts">
+                                                                                                <option value="0">Hide
+                                                                                                </option>
+                                                                                                <option value="1"
+                                                                                                    selected="">Show
+                                                                                                </option>
+                                                                                            </select> </td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <th>The Newest Member:</th>
+                                                                                        <td> <select
+                                                                                                name="show_info_box_newest_member"
+                                                                                                class="inpts">
+                                                                                                <option value="0"
+                                                                                                    selected="">Hide
+                                                                                                </option>
+                                                                                                <option value="1">Show
+                                                                                                </option>
+                                                                                            </select> </td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <th>Last Withdrawal:</th>
+                                                                                        <td> <select
+                                                                                                name="show_info_box_lastwithdrawal"
+                                                                                                class="inpts">
+                                                                                                <option value="0"
+                                                                                                    selected="">Hide
+                                                                                                </option>
+                                                                                                <option value="1">Show
+                                                                                                </option>
+                                                                                            </select> </td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <th>Last Deposit:</th>
+                                                                                        <td> <select
+                                                                                                name="show_info_box_lastdeposit"
+                                                                                                class="inpts">
+                                                                                                <option value="0"
+                                                                                                    selected="">Hide
+                                                                                                </option>
+                                                                                                <option value="1">Show
+                                                                                                </option>
+                                                                                            </select> </td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <th>Last Topup:</th>
+                                                                                        <td> <select
+                                                                                                name="show_info_box_lastaddfunds"
+                                                                                                class="inpts">
+                                                                                                <option value="0"
+                                                                                                    selected="">Hide
+                                                                                                </option>
+                                                                                                <option value="1">Show
+                                                                                                </option>
+                                                                                            </select> </td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <th>Last Update Date:</th>
+                                                                                        <td> <select
+                                                                                                name="show_info_box_last_update"
+                                                                                                class="inpts">
+                                                                                                <option value="0">Hide
+                                                                                                </option>
+                                                                                                <option value="1"
+                                                                                                    selected="">Show
+                                                                                                </option>
+                                                                                            </select> </td>
+                                                                                    </tr>
+                                                                                </tbody>
+                                                                            </table>
+                                                                            <div class="alert alert-warning"> These info
+                                                                                avaliable an every page. Please note:
+                                                                                each option takes time to be generated,
+                                                                                do not enable ones you do not use.
+                                                                            </div> <br>
+                                                                            <table class="form">
+                                                                                <tbody>
+                                                                                    <tr>
+                                                                                        <th colspan="2">Last &amp; Tops:
+                                                                                        </th>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <th>Number of Last Topups:</th>
+                                                                                        <td><input type="text"
+                                                                                                name="index_last_add_funds"
+                                                                                                value="0" class="inpts">
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <th>Number of Last Deposits:
+                                                                                        </th>
+                                                                                        <td><input type="text"
+                                                                                                name="index_last_deposits"
+                                                                                                value="10"
+                                                                                                class="inpts"></td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <th>Number of Last Withdrawals:
+                                                                                        </th>
+                                                                                        <td><input type="text"
+                                                                                                name="index_last_withdrawals"
+                                                                                                value="10"
+                                                                                                class="inpts"></td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <th>Number of Top Referrals:
+                                                                                        </th>
+                                                                                        <td><input type="text"
+                                                                                                name="index_top_referrals"
+                                                                                                value="0" class="inpts">
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <th>Number of Top Investors:
+                                                                                        </th>
+                                                                                        <td><input type="text"
+                                                                                                name="index_top_investors"
+                                                                                                value="0" class="inpts">
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <th>Number of Last Members:</th>
+                                                                                        <td><input type="text"
+                                                                                                name="index_last_members"
+                                                                                                value="0" class="inpts">
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                </tbody>
+                                                                            </table>
+                                                                            <div class="alert alert-warning"> These info
+                                                                                avaliable an every page. Please note:
+                                                                                each option takes time to be generated,
+                                                                                do not enable ones you do not use.
+                                                                            </div> <br>
+                                                                            <table class="form">
+                                                                                <tbody>
+                                                                                    <tr>
+                                                                                        <th colspan="2">Stats Pages:
+                                                                                        </th>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <th>Show Stats Links Box:</th>
+                                                                                        <td> <select
+                                                                                                name="show_stats_box"
+                                                                                                class="inpts">
+                                                                                                <option value="0">Hide
+                                                                                                </option>
+                                                                                                <option value="1"
+                                                                                                    selected="">Show
+                                                                                                </option>
+                                                                                            </select> </td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <th>Investors Page:</th>
+                                                                                        <td> <select
+                                                                                                name="show_members_stats"
+                                                                                                class="inpts">
+                                                                                                <option value="0">
+                                                                                                    Disable</option>
+                                                                                                <option value="1"
+                                                                                                    selected="">Enable
+                                                                                                </option>
+                                                                                            </select> </td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <th>Paidouts Page:</th>
+                                                                                        <td> <select
+                                                                                                name="show_paidout_stats"
+                                                                                                class="inpts">
+                                                                                                <option value="0">
+                                                                                                    Disable</option>
+                                                                                                <option value="1"
+                                                                                                    selected="">Enable
+                                                                                                </option>
+                                                                                            </select> </td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <th>Top Investors Page:</th>
+                                                                                        <td> <select
+                                                                                                name="show_top10_stats"
+                                                                                                class="inpts">
+                                                                                                <option value="0">
+                                                                                                    Disable</option>
+                                                                                                <option value="1"
+                                                                                                    selected="">Enable
+                                                                                                </option>
+                                                                                            </select> </td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <th>Last Investors Page:</th>
+                                                                                        <td> <select
+                                                                                                name="show_last10_stats"
+                                                                                                class="inpts">
+                                                                                                <option value="0">
+                                                                                                    Disable</option>
+                                                                                                <option value="1"
+                                                                                                    selected="">Enable
+                                                                                                </option>
+                                                                                            </select> </td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <th>Top Referrers Page:</th>
+                                                                                        <td> <select
+                                                                                                name="show_refs10_stats"
+                                                                                                class="inpts">
+                                                                                                <option value="0"
+                                                                                                    selected="">Disable
+                                                                                                </option>
+                                                                                                <option value="1">Enable
+                                                                                                </option>
+                                                                                            </select> </td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <th>Top Referrers Page:</th>
+                                                                                        <td> <select
+                                                                                                name="show_refs10_stats"
+                                                                                                class="inpts">
+                                                                                                <option value="0"
+                                                                                                    selected="">Disable
+                                                                                                </option>
+                                                                                                <option value="1">Enable
+                                                                                                </option>
+                                                                                            </select>
+                                                                                            <table class="form&quot;">
+                                                                                                <tbody>
+                                                                                                    <tr>
+                                                                                                        <th>Users number
+                                                                                                            on the page:
+                                                                                                        </th>
+                                                                                                        <td><input
+                                                                                                                type="text"
+                                                                                                                name="refs10_qusers"
+                                                                                                                value="0"
+                                                                                                                class="inpts">
+                                                                                                        </td>
+                                                                                                    </tr>
+                                                                                                    <tr>
+                                                                                                        <th>Reset
+                                                                                                            date:<br><i>yyyy-mm-dd</i>
+                                                                                                        </th>
+                                                                                                        <td><input
+                                                                                                                type="text"
+                                                                                                                name="refs10_start_date"
+                                                                                                                value="0000-00-00"
+                                                                                                                class="inpts">
+                                                                                                        </td>
+                                                                                                    </tr>
+                                                                                                </tbody>
+                                                                                            </table>
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                </tbody>
+                                                                            </table> <br><br>
+                                                                            <center> <input type="submit"
+                                                                                    class="sbmt btn-success"
+                                                                                    value="Save"> </center>
+                                                                        </form>
+                                                                    </td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table> <!-- Main: END -->
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td height="19" bgcolor="ff8d00">
+                        <div align="center" class="forCopyright">Powered with HYIP Manager Pro. <a
+                                href="http://www.goldcoders.com" class="forCopyright">GoldCoders.com</a></div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </center>
+</body>
+</html>

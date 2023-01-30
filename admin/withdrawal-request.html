@@ -1,0 +1,1380 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+    <title>HYIP Manager Pro. Auto-payment, mass payment included.</title>
+    <link href="images/adminstyle.css" rel="stylesheet" type="text/css">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="css/adminstyle.css">
+    <script src="javascript/withdrawal-request.js"></script>
+    <style>
+        .pagination {
+            display: -ms-flexbox;
+            display: flex;
+            padding-left: 0;
+            list-style: none;
+        }
+
+        .page-link {
+            position: relative;
+            display: block;
+            padding: 0.5rem 0.75rem;
+            margin-left: -1px;
+            line-height: 1.25;
+            color: #000;
+            background-color: #fff;
+            border: 1px solid #999;
+        }
+
+        .page-item:first-child .page-link {
+            margin-left: 0;
+            border-top-left-radius: 0.25rem;
+            border-bottom-left-radius: 0.25rem;
+        }
+
+        .page-item:last-child .page-link {
+            border-top-right-radius: 0.25rem;
+            border-bottom-right-radius: 0.25rem;
+        }
+
+        .page-link:hover {
+            z-index: 2;
+            color: #000;
+            text-decoration: none;
+            background-color: #ccc;
+            border-color: #999;
+        }
+
+        .page-link.disabled {
+            color: #999;
+        }
+
+        .page-link.disabled:hover {
+            background-color: #fff;
+        }
+
+        .page-link {
+            cursor: pointer;
+            text-decoration: none;
+            color: #000;
+        }
+
+        .page-item.active .page-link {
+            z-index: 1;
+            color: #000;
+            background-color: #ccc;
+            border-color: #999;
+        }
+
+        .page-item.disabled .page-link {
+            color: #666;
+            pointer-events: none;
+            cursor: auto;
+            background-color: #fff;
+            border-color: #999;
+        }
+
+        .alert {
+            padding: 5px 5px 5px 15px;
+            margin: 2px;
+            border: solid 1px black;
+            display: block;
+        }
+
+        .alert.alert-danger {
+            background: #FFEEEE;
+            border-color: red;
+            color: #660000;
+        }
+
+        .alert.alert-warning {
+            background: #FFFFEE;
+            border-color: yellow;
+            color: #333300;
+        }
+
+        .alert.alert-success {
+            background: #EEFFEE;
+            border-color: green;
+            color: #006600;
+        }
+
+        .alert.alert-info {
+            background: #EEEEFF;
+            border-color: blue;
+            color: #000066;
+        }
+
+        table.form {
+            width: 100%;
+        }
+
+        table.form th {
+            width: 30%;
+            padding: 3px;
+            padding-right: 5px;
+            text-align: right;
+            background: #FFC982;
+            color: #493011;
+        }
+
+        table.form th.title {
+            width: 100%;
+            padding-left: 5px;
+            text-align: left;
+            color: #a45c07;
+        }
+
+        table.form td {
+            width: 70%;
+            padding: 3px;
+            text-align: left;
+            background: #FEF5EA;
+        }
+
+        table.form.nosize td {
+            width: auto;
+        }
+
+        table.form.nosize th {
+            width: auto;
+        }
+
+        table.form thead th {
+            width: auto;
+            padding: 3px;
+            text-align: center;
+            background: #FFC982;
+            color: #FFFFFF;
+        }
+
+        table.form thead td {
+            width: auto;
+            padding: 3px;
+            text-align: left;
+        }
+
+        table.form td input[type=text],
+        table.form td input[type=password],
+        table.form td textarea,
+        table.form td select {
+            width: 100%;
+        }
+
+        table.form td input[type=text].nosize,
+        table.form td input[type=password].nosize,
+        table.form td textarea.nosize,
+        table.form td select.nosize {
+            width: auto;
+        }
+
+        table.form.controls td {
+            background: transparent;
+            width: auto;
+        }
+
+        table.form.controls td input[type=text],
+        table.form.controls td input[type=password],
+        table.form.controls td textarea,
+        table.form.controls td select {
+            margin: 3px;
+        }
+
+        table.list {
+            width: 100%;
+        }
+
+        table.list td {
+            width: auto;
+            padding: 3px;
+        }
+
+        table.list.sub td {
+            width: auto;
+            padding: 1px;
+        }
+
+        table.list th {
+            width: auto;
+            padding: 3px;
+            text-align: center;
+            background: #FFC982;
+            color: #493011;
+        }
+
+        table.list .row1 {
+            background: #FCE7CA;
+        }
+
+        table.list .row2 {
+            background: #FFF3E3;
+        }
+
+        form input[type=submit],
+        form input[type=button],
+        form button,
+        .sbmt {
+            display: inline-block;
+            font-weight: bold;
+            text-align: center;
+            text-decoration: none;
+            white-space: nowrap;
+            vertical-align: middle;
+            user-select: none;
+            border: 1px solid transparent;
+            padding: .25rem .5rem;
+            line-height: 1.5;
+            border-radius: .2rem;
+            border: none;
+        }
+
+        form input[type=submit]:hover,
+        form input[type=button]:hover,
+        form button:hover,
+        .sbmt:hover {
+            background-color: #FAD252;
+        }
+
+        form input[type=submit]:active,
+        form input[type=button]:active,
+        form button:active,
+        .sbmt:active {
+            background-color: #FFC200;
+        }
+
+        form input[type=submit]:focus,
+        form input[type=button]:focus,
+        form button:focus,
+        .sbmt:focus {
+            box-shadow: 0 0 0 .2rem rgba(255, 236, 176, .5);
+        }
+
+        form input[type=submit]:disabled,
+        form input[type=button]:disabled,
+        form button:disabled,
+        .sbmt:disabled {
+            opacity: .65;
+        }
+
+        .btn {
+            cursor: pointer;
+            text-transform: uppercase;
+            margin: 1px;
+        }
+
+        .sbmt.btn-sm {
+            font-size: .525rem;
+            padding: .25rem .35rem;
+            text-transform: uppercase;
+            cursor: pointer;
+            margin: 1px;
+        }
+
+        .btn-success {
+            color: #fff;
+            background-color: #28a745;
+            border-color: #28a745;
+        }
+
+        .btn-success:hover {
+            background-color: #218838 !important;
+            border-color: #1e7e34 !important;
+        }
+
+        .btn-success:focus {
+            background-color: #218838 !important;
+            box-shadow: 0 0 0 .2rem rgba(40, 167, 69, .5) !important;
+        }
+
+        .btn-danger {
+            color: #fff;
+            background-color: #dc3545;
+            border-color: #dc3545;
+        }
+
+        .btn-danger:hover {
+            background-color: #c82333 !important;
+            border-color: #bd2130 !important;
+        }
+
+        .btn-danger:focus {
+            background-color: #c82333 !important;
+            box-shadow: 0 0 0 .2rem rgba(220, 53, 69, .5) !important;
+        }
+
+        .btn-info {
+            color: #fff;
+            background-color: #17a2b8;
+            border-color: #17a2b8;
+        }
+
+        .btn-info:hover {
+            background-color: #138496 !important;
+            border-color: #117a8b !important;
+        }
+
+        .btn-info:focus {
+            background-color: #138496 !important;
+            box-shadow: 0 0 0 .2rem rgba(23, 162, 184, .5) !important;
+        }
+
+        .btn-primary {
+            color: #fff;
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+
+        .btn-primary:hover {
+            background-color: #0069d9 !important;
+            border-color: #0062cc !important;
+        }
+
+        .btn-primary:focus {
+            background-color: #007bff !important;
+            box-shadow: 0 0 0 .2rem rgba(38, 143, 255, .5) !important;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: .25em .4em;
+            font-size: 75%;
+            font-weight: 700;
+            line-height: 1;
+            text-align: center;
+            /*white-space: nowrap;*/
+            vertical-align: baseline;
+            border-radius: .25rem;
+            margin: .25em;
+        }
+
+        .badge-bg {
+            display: inline-block;
+            font-size: .525rem;
+            padding: .25rem .35rem;
+            text-transform: uppercase;
+            font-weight: 700;
+            text-align: center;
+            /*white-space: nowrap;*/
+            vertical-align: baseline;
+            border-radius: .25rem;
+        }
+
+        .badge-success {
+            color: #fff;
+            background-color: #28a745;
+        }
+
+        .badge-info {
+            color: #fff;
+            background-color: #17a2b8;
+        }
+
+        .badge-danger {
+            color: #fff;
+            background-color: #dc3545;
+        }
+
+        .badge-warning {
+            color: #212529;
+            background-color: #ffc107;
+        }
+
+        .badge-primary {
+            color: #fff;
+            background-color: #007bff;
+        }
+
+        .badge.sticker {
+            font-size: 90%;
+        }
+
+        .hide {
+            display: none;
+        }
+
+        .pshead {
+            padding: 3px;
+            background: #FF8D00;
+            margin: 2px 0;
+            font-weight: bold;
+            overflow: hidden;
+        }
+
+        .pshead b {
+            display: block;
+            width: 250px;
+            float: left;
+        }
+
+        .pshead a {
+            float: right;
+        }
+
+        .psettings {
+            display: none;
+        }
+    </style>
+    <style>
+        .nav {
+            --display: flex;
+            --flex-wrap: wrap;
+            padding: 0 .25rem;
+            margin-bottom: 0;
+            list-style: none;
+        }
+
+        .nav-link {
+            border-radius: .25rem;
+            display: block;
+            padding: .5rem 1rem;
+            color: #493011;
+            text-decoration: none;
+            background-color: #FFF3E3;
+            border: solid 1px transparent;
+            -webkit-text-decoration-skip: objects;
+            margin-top: 0.2rem;
+            text-align: left;
+            font-weight: bold;
+        }
+
+        .nav-link:last-child {
+            margin-bottom: 0.2rem;
+        }
+
+        .nav-link:hover {
+            background-color: #FFC982;
+        }
+
+        .nav-link.active {
+            background-color: #FFC982;
+        }
+
+        .nav-link:active,
+        .nav-link:focus {
+            background-color: #FCE7CA
+        }
+
+        .dropdown-toggle.show {
+            border-bottom-right-radius: 0;
+            border-bottom-left-radius: 0;
+        }
+
+        .dropdown-toggle::after {
+            --display: inline-block;
+            display: none;
+            width: 0;
+            height: 0;
+            margin-left: .255em;
+            vertical-align: .255em;
+            content: "";
+            border-top: .3em solid;
+            border-right: .3em solid transparent;
+            border-bottom: 0;
+            border-left: .3em solid transparent;
+            z-index: 1000;
+        }
+
+        .dropdown-menu {
+            --position: absolute;
+            --top: 100%;
+            left: 0;
+            z-index: 1000;
+            --display: none;
+            --float: left;
+            --min-width: 10rem;
+            padding: .5rem 0;
+            margin: 0 0 .125rem 0;
+            --font-size: 1rem;
+            color: #212529;
+            text-align: left;
+            list-style: none;
+            background-color: #fff;
+            background-clip: padding-box;
+            border: 1px solid rgba(0, 0, 0, .15);
+            border-top: 0;
+            border-bottom-right-radius: .25rem;
+            border-bottom-left-radius: .25rem;
+        }
+
+        .dropdown-menu.show {
+            display: block;
+        }
+
+        .dropdown-item {
+            display: block;
+            --width: 100%;
+            padding: .25rem 1rem;
+            clear: both;
+            font-weight: 400;
+            color: #212529;
+            text-align: inherit;
+            --white-space: nowrap;
+            background-color: transparent;
+            border: 0;
+            text-decoration: none;
+        }
+
+        .dropdown-item:hover {
+            background-color: #FCE7CA;
+        }
+
+        .dropdown-item.active {
+            background-color: #FFC982;
+        }
+
+        .dropdown-item:active,
+        .dropdown-item:focus {
+            background-color: #FCE7CA;
+        }
+
+        a.sort_link {
+            cursor: pointer;
+            color: #606060;
+        }
+
+        a.sort_link.active {
+            color: red;
+        }
+
+        a.link.username {
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        b.username {
+            font-size: 1.2em;
+        }
+
+        .hlp.badge {
+            color: #fff;
+            font-size: 100%;
+        }
+
+        .hlp {
+            --font-size: auto;
+            color: black;
+            text-decoration: none;
+            cursor: help;
+            position: relative;
+            display: inline-block;
+        }
+
+        .hlp[title]:after,
+        .hlp[data-hlp]:after {
+            opacity: 0;
+            content: attr(title);
+            position: absolute;
+            top: 100%;
+            left: 0;
+            color: #fff;
+            transition: opacity 0.3s;
+            border-radius: 6px;
+            background-color: #555;
+            padding: 5px 5px;
+            width: 220px;
+            display: none;
+            font-size: 90%;
+            z-index: 1000;
+            text-align: left;
+            white-space: pre-wrap;
+        }
+
+        .hlp[data-hlp]:after {
+            content: attr(data-hlp);
+            white-space: pre-wrap;
+        }
+
+        .hlp[title]:hover:after,
+        .hlp[data-hlp]:hover:after {
+            opacity: 1;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body bgcolor="#FFFFF2" link="#666699" vlink="#666699" alink="#666699" leftmargin="0" topmargin="0" marginwidth="0"
+    marginheight="0">
+    <center>
+        <table width="760" border="0" cellpadding="0" cellspacing="0">
+            <tr>
+                <td valign=top>
+                    <table cellspacing=0 cellpadding=0 border=0 width=100%>
+                        <tr>
+                            <td background="images/ver.gif" bgcolor=#FF8D00><img src="css/images/top.gif" border="0"
+                                    align=left></td>
+                            <td background="images/ver.gif" bgcolor=#FF8D00 valign=bottom align=right> <span
+                                    style="font-family: verdana; font-size: 12px; color: white"> <b>
+                                        <div id="google_translate_element"></div> <a href=? class=toplink>Home</a>
+                                        &middot; <a href=index.php?a=logout class=toplink>Logout</a>
+                                    </b></span>&nbsp; &nbsp; </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td valign=top>
+                    <table cellspacing=0 cellpadding=1 border=0 width=100% bgcolor=#ff8d00>
+                        <tr>
+                            <td>
+                                <table width="100%" height="100%" border="0" cellpadding="0" cellspacing="0">
+                                    <tr bgcolor="#FFFFFF" valign="top">
+                                        <td width="300" align=center>
+                                            <table cellspacing=0 cellpadding=2 border=0 width="172">
+                                                <tr>
+                                                    <th colspan=2><img src=images/q.gif width=1 height=3></th>
+                                                </tr>
+                                                <tr>
+                                                    <th colspan=2 class=title>Menu</th>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a href="investment-program.html">Investment Programs</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a href="expiring-deposit.html">Expiring
+                                                            Deposits</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt>&nbsp;</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a href="users.html">Users</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a href="account-blacklist.html">Accounts
+                                                            Blacklist</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a href="top-referrals.html">Top Referral
+                                                            Earnings</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt>&nbsp;</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt>&nbsp;</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a href="Transactions.html">Transactions</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a href="withdrawal-request.html">Withdrawal
+                                                            Requests</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a href="add-funds.html">Add
+                                                            Funds</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a
+                                                            href="deposits.html">Deposits</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a
+                                                            href="withdrawals.html">Withdrawals</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a
+                                                            href="earnings.html">Earnings</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a
+                                                            href="referrals.html">Referral</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a
+                                                            href="exchange.html">Exchange</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a href="pending-deposit.html">Pending Deposits</a>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a href="add-bonus.html">Add Bonus</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt>&nbsp;</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt>&nbsp;</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a href="settings.html">Settings</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a href="proccessings.html">Processings</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a href="?a=auto-pay-settings">Auto-Withdrawals
+                                                            Settings</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a href="?a=referrals">Referral Settings</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a href="?a=email_templates">Email Templates</a>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a href="?a=seo_links">Links Replacement</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a href="?a=security">Security</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a href="?a=earning_holidays">Earning Holidays</a>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a href="?a=info_box_settings">Info Box
+                                                            Settings</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a href="?a=exchange_rates">Exchange Rates</a>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a href="?a=maintenance_page">Maintenance Page</a>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt>&nbsp;</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt>&nbsp;</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt>&nbsp;</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a href="?a=check_ips">IPs Check</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a href="?a=newsletter">Send a Newsletter</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a href="?a=custompages">Custom Pages</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a href="?a=news">News</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a href="?a=user_notices">User Notices</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a href="?a=tell_friend">Tell A Friend</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt>&nbsp;</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt>&nbsp;</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a href=?a=logout>Logout</a></td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                        <td bgcolor="#ff8d00" valign="top" width=1><img src=images/q.gif width=1
+                                                height=1></td>
+                                        <td bgcolor="#FFFFFF" valign="top" width=99%>
+                                            <!-- Main: Start -->
+                                            <table width="100%" height="100%" border="0" cellpadding="10"
+                                                cellspacing="0" class="forTexts">
+                                                <tr>
+                                                    <td width=100% height=100% valign=top>
+                                                        <h3>Withdrawal Requests:</h3>
+                                                        <script
+                                                            language=javascript> function go(p) { document.trans.p.value = p; document.trans.submit(); } function sort(s, d) { document.trans.p.value = 1; document.trans.o.value = s; document.trans.d.value = d; document.trans.submit(); } function func1() { if (confirm("Do you really want to process this withdrawal(s)?")) { document.getElementById("action2").value = "pay"; document.trans.target = "_blank"; document.trans.submit(); document.getElementById("action2").value = ""; document.trans.target = "_self"; } return false; } function func2() { if (confirm("Are you sure you want to remove selected withdrawal(s)?\n\nFunds will be returned to the user's balance.")) { document.getElementById("action2").value = "remove"; document.trans.submit(); document.getElementById("action2").value = ""; } } function func3() { if (confirm("Are you sure you want to set this request(s) as processed?\n\nNo funds will be sent to the user account(s)!")) { document.getElementById("action2").value = "assure"; document.trans.submit(); document.getElementById("action2").value = ""; } } function select_all_transactions() { var chbxs = document.getElementsByClassName("trn"); for (i in chbxs) { if (chbxs[i].getAttribute("data-non-auto") != 1) { chbxs[i].checked = !chbxs[i].checked; } } return false; }  </script>
+                                                        <form method=post name=trans><input type="hidden" name="form_id"
+                                                                value="16637602334976"><input type="hidden"
+                                                                name="form_token"
+                                                                value="953e0ae1dedae062e7d56385dd8ec688"> <input
+                                                                type=hidden name=a value="withdrawal_requests"> <input
+                                                                type=hidden id="action2" name=action2> <input
+                                                                type=hidden name=userid value="0"> <input type=hidden
+                                                                name=p> <input type=hidden name=o> <input type=hidden
+                                                                name=d>
+                                                            <table class="form controls nosize">
+                                                                <tr>
+                                                                    <td> <select name=ec class=inpts
+                                                                            onchange="document.trans.submit()">
+                                                                            <option value=-1>All eCurrencies</option>
+                                                                            <option value=1006>Bitcoin</option>
+                                                                            <option value=1007>Ethereum</option>
+                                                                            <option value=1008>Perfect Money</option>
+                                                                            <option value=1009>Payeer</option>
+                                                                            <option value=1010>USDT (TRC20)</option>
+                                                                        </select> <select name=rtype class=inpts
+                                                                            onchange="document.trans.submit()">
+                                                                            <option value=0>All Requests</option>
+                                                                            <option value=1>First Requests</option>
+                                                                            <option value=2>Last Requests</option>
+                                                                            <option value=3>First and Last</option>
+                                                                        </select> Amount <input type=text
+                                                                            name=amount_from value="0.00"
+                                                                            class="inpts nosize" size=8> to <input
+                                                                            type=text name=amount_to value="0.00"
+                                                                            class="inpts nosize" size=8> </td>
+                                                                    <td style="text-align:right" valign=top nowrap>
+                                                                        From: <select name="from_Day"
+                                                                            class="inpts nosize">
+                                                                            <option value="1">01</option>
+                                                                            <option value="2">02</option>
+                                                                            <option value="3">03</option>
+                                                                            <option value="4">04</option>
+                                                                            <option value="5">05</option>
+                                                                            <option value="6">06</option>
+                                                                            <option value="7">07</option>
+                                                                            <option value="8">08</option>
+                                                                            <option value="9">09</option>
+                                                                            <option value="10">10</option>
+                                                                            <option value="11">11</option>
+                                                                            <option value="12">12</option>
+                                                                            <option value="13">13</option>
+                                                                            <option value="14">14</option>
+                                                                            <option value="15">15</option>
+                                                                            <option value="16">16</option>
+                                                                            <option value="17">17</option>
+                                                                            <option value="18">18</option>
+                                                                            <option value="19">19</option>
+                                                                            <option value="20">20</option>
+                                                                            <option value="21">21</option>
+                                                                            <option value="22" selected="selected">22
+                                                                            </option>
+                                                                            <option value="23">23</option>
+                                                                            <option value="24">24</option>
+                                                                            <option value="25">25</option>
+                                                                            <option value="26">26</option>
+                                                                            <option value="27">27</option>
+                                                                            <option value="28">28</option>
+                                                                            <option value="29">29</option>
+                                                                            <option value="30">30</option>
+                                                                            <option value="31">31</option>
+                                                                        </select>
+                                                                        <select name="from_Month" class="inpts nosize">
+                                                                            <option value="01">01</option>
+                                                                            <option value="02">02</option>
+                                                                            <option value="03">03</option>
+                                                                            <option value="04">04</option>
+                                                                            <option value="05">05</option>
+                                                                            <option value="06">06</option>
+                                                                            <option value="07">07</option>
+                                                                            <option value="08" selected="selected">08
+                                                                            </option>
+                                                                            <option value="09">09</option>
+                                                                            <option value="10">10</option>
+                                                                            <option value="11">11</option>
+                                                                            <option value="12">12</option>
+                                                                        </select>
+                                                                        <select name="from_Year" class="inpts nosize">
+                                                                            <option value="2014">2014</option>
+                                                                            <option value="2015">2015</option>
+                                                                            <option value="2016">2016</option>
+                                                                            <option value="2017">2017</option>
+                                                                            <option value="2018">2018</option>
+                                                                            <option value="2019">2019</option>
+                                                                            <option value="2020">2020</option>
+                                                                            <option value="2021">2021</option>
+                                                                            <option value="2022" selected="selected">
+                                                                                2022</option>
+                                                                        </select> <br> To: <select name="to_Day"
+                                                                            class="inpts nosize">
+                                                                            <option value="1">01</option>
+                                                                            <option value="2">02</option>
+                                                                            <option value="3">03</option>
+                                                                            <option value="4">04</option>
+                                                                            <option value="5">05</option>
+                                                                            <option value="6">06</option>
+                                                                            <option value="7">07</option>
+                                                                            <option value="8">08</option>
+                                                                            <option value="9">09</option>
+                                                                            <option value="10">10</option>
+                                                                            <option value="11">11</option>
+                                                                            <option value="12">12</option>
+                                                                            <option value="13">13</option>
+                                                                            <option value="14">14</option>
+                                                                            <option value="15">15</option>
+                                                                            <option value="16">16</option>
+                                                                            <option value="17">17</option>
+                                                                            <option value="18">18</option>
+                                                                            <option value="19">19</option>
+                                                                            <option value="20">20</option>
+                                                                            <option value="21" selected="selected">21
+                                                                            </option>
+                                                                            <option value="22">22</option>
+                                                                            <option value="23">23</option>
+                                                                            <option value="24">24</option>
+                                                                            <option value="25">25</option>
+                                                                            <option value="26">26</option>
+                                                                            <option value="27">27</option>
+                                                                            <option value="28">28</option>
+                                                                            <option value="29">29</option>
+                                                                            <option value="30">30</option>
+                                                                            <option value="31">31</option>
+                                                                        </select>
+                                                                        <select name="to_Month" class="inpts nosize">
+                                                                            <option value="01">01</option>
+                                                                            <option value="02">02</option>
+                                                                            <option value="03">03</option>
+                                                                            <option value="04">04</option>
+                                                                            <option value="05">05</option>
+                                                                            <option value="06">06</option>
+                                                                            <option value="07">07</option>
+                                                                            <option value="08">08</option>
+                                                                            <option value="09" selected="selected">09
+                                                                            </option>
+                                                                            <option value="10">10</option>
+                                                                            <option value="11">11</option>
+                                                                            <option value="12">12</option>
+                                                                        </select>
+                                                                        <select name="to_Year" class="inpts nosize">
+                                                                            <option value="2014">2014</option>
+                                                                            <option value="2015">2015</option>
+                                                                            <option value="2016">2016</option>
+                                                                            <option value="2017">2017</option>
+                                                                            <option value="2018">2018</option>
+                                                                            <option value="2019">2019</option>
+                                                                            <option value="2020">2020</option>
+                                                                            <option value="2021">2021</option>
+                                                                            <option value="2022" selected="selected">
+                                                                                2022</option>
+                                                                        </select>
+                                                                    </td>
+                                                                    <td nowrap valign=top> Per Page: <select name=onpage
+                                                                            class="inpts nosize"
+                                                                            onchange="document.trans.submit()">
+                                                                            <option value=20 selected>20
+                                                                            <option value=50>50
+                                                                            <option value=100>100
+                                                                        </select> <br> <input type=submit value="Apply"
+                                                                            class="sbmt"> <button type=submit
+                                                                            name="action2" value="csv"
+                                                                            class=sbmt>CSV</button> </td>
+                                                                </tr>
+                                                            </table>
+                                                            <style>
+                                                                .trn_user a.badge {
+                                                                    display: none;
+                                                                    text-decoration: none;
+                                                                }
+
+                                                                .trn_user:hover a.badge {
+                                                                    display: inline;
+                                                                }
+                                                            </style>
+                                                            <table class="list" id="list">
+                                                                <tr>
+                                                                    <th><a href="javascript:return;"
+                                                                            onclick="select_all_transactions()">#</a>
+                                                                    </th>
+                                                                    <th><a onclick="sort('username', 1)"
+                                                                            class="sort_link">UserName</a> <a
+                                                                            onclick="sort('username', 0)"
+                                                                            class="sort_link">&darr;</a> <a
+                                                                            onclick="sort('username', 1)"
+                                                                            class="sort_link">&uarr;</a> </th>
+                                                                    <th><a onclick="sort('date', 1)"
+                                                                            class="sort_link">Date</a> <a
+                                                                            onclick="sort('date', 0)"
+                                                                            class="sort_link">&darr;</a> <a
+                                                                            onclick="sort('date', 1)"
+                                                                            class="sort_link">&uarr;</a> </th>
+                                                                    <th><a onclick="sort('amount', 1)"
+                                                                            class="sort_link">Amount</a> <a
+                                                                            onclick="sort('amount', 1)"
+                                                                            class="sort_link">&darr;</a> <a
+                                                                            onclick="sort('amount', 0)"
+                                                                            class="sort_link">&uarr;</a> </th>
+                                                                    <th>Actions</th>
+                                                                </tr>
+
+
+                                                                                                                                                    <p class="alert alert-warning" id="errMessage" style="font-weight: bolder;"> </p>
+
+                                                                <!-- <tr class="row1 trn_user">
+                                                                    <td> <input type=checkbox name="trn[21364]"
+                                                                            class="trn" id="trn_21364" value=1> </td>
+                                                                    <td> <a class="link username">Yagami237</a>
+                                                                        <small>(Upline: Nothando21)</small></b> <a
+                                                                            class="badge badge-danger" target="_blank"
+                                                                            href="?a=user_edit&id=441">edit</a> <a
+                                                                            class="badge badge-info" target="_blank"
+                                                                            href="?a=user_details&id=441">manage</a>
+                                                                        <br>&rarr; <b><small>Wallet Address:
+                                                                                TJfnCFEZSdyL625GgRq3i4nQDM9nxmTMTw</small></b>
+                                                                        <br><small style="color:gray"></small>
+                                                                        <br><small style="color:#2F4F4F">Balance: $0.00
+                                                                            | Active Deposit: $500.00</small>
+                                                                    </td>
+                                                                    <td align=center><small>Sep-21-2022<br>11:22:38
+                                                                            AM</small></td>
+                                                                    <td nowrap align=right><b>$16.09</b> <img
+                                                                            src="images/1010.gif" align=absmiddle
+                                                                            hspace=1 height=17> </td>
+                                                                    <td nowrap align=center> <a
+                                                                            href="?a=withdrawal_requests&action2=pay_manual&id=21364"
+                                                                            target=_blank class="sbmt btn-sm btn-info"
+                                                                            style="margin-bottom:2px;">manual
+                                                                            pay</a><br> </td>
+                                                                </tr>
+                                                                <tr class="row2 trn_user">
+                                                                    <td> <input type=checkbox name="trn[21359]"
+                                                                            class="trn" id="trn_21359" value=1> </td>
+                                                                    <td> <a class="link username">Abd7475</a>
+                                                                        <small>(Upline: Namono)</small></b> <a
+                                                                            class="badge badge-danger" target="_blank"
+                                                                            href="?a=user_edit&id=1323">edit</a> <a
+                                                                            class="badge badge-info" target="_blank"
+                                                                            href="?a=user_details&id=1323">manage</a>
+                                                                        <br>&rarr; <b><small>Wallet Address:
+                                                                                TRd8DV956MDNsh4688gVgVBuASeRVavS5Y</small></b>
+                                                                        <br><small style="color:gray"></small>
+                                                                        <br><small style="color:#2F4F4F">Balance: $4.91
+                                                                            | Active Deposit: $248.00</small>
+                                                                    </td>
+                                                                    <td align=center><small>Sep-21-2022<br>10:38:03
+                                                                            AM</small></td>
+                                                                    <td nowrap align=right><b>$26.00</b> <img
+                                                                            src="images/1010.gif" align=absmiddle
+                                                                            hspace=1 height=17> </td>
+                                                                    <td nowrap align=center> <a
+                                                                            href="?a=withdrawal_requests&action2=pay_manual&id=21359"
+                                                                            target=_blank class="sbmt btn-sm btn-info"
+                                                                            style="margin-bottom:2px;">manual
+                                                                            pay</a><br> </td>
+                                                                </tr>
+                                                                <tr class="row1 trn_user">
+                                                                    <td> <input type=checkbox name="trn[21343]"
+                                                                            class="trn" id="trn_21343" value=1> </td>
+                                                                    <td> <a class="link username">Dabiku</a>
+                                                                        <small>(Upline: n/a)</small></b> <a
+                                                                            class="badge badge-danger" target="_blank"
+                                                                            href="?a=user_edit&id=1048">edit</a> <a
+                                                                            class="badge badge-info" target="_blank"
+                                                                            href="?a=user_details&id=1048">manage</a>
+                                                                        <br>&rarr; <b><small>Wallet Address:
+                                                                                bc1q8xwsyukcxf7ey4htp5us2tgtjtd4c5mhftjnxt</small></b>
+                                                                        <br><small style="color:gray"></small>
+                                                                        <br><small style="color:#2F4F4F">Balance:
+                                                                            $49029.27 | Active Deposit: $0.00</small>
+                                                                    </td>
+                                                                    <td align=center><small>Sep-21-2022<br>09:29:35
+                                                                            AM</small></td>
+                                                                    <td nowrap align=right><b>$496.39</b> <img
+                                                                            src="images/1006.gif" align=absmiddle
+                                                                            hspace=1 height=17> </td>
+                                                                    <td nowrap align=center> <a
+                                                                            href="?a=withdrawal_requests&action2=pay_manual&id=21343"
+                                                                            target=_blank class="sbmt btn-sm btn-info"
+                                                                            style="margin-bottom:2px;">manual
+                                                                            pay</a><br> </td>
+                                                                </tr>
+                                                                <tr class="row2 trn_user">
+                                                                    <td> <input type=checkbox name="trn[21336]"
+                                                                            class="trn" id="trn_21336" value=1> </td>
+                                                                    <td> <a class="link username">Bohlokwa</a>
+                                                                        <small>(Upline: n/a)</small></b> <a
+                                                                            class="badge badge-danger" target="_blank"
+                                                                            href="?a=user_edit&id=29">edit</a> <a
+                                                                            class="badge badge-info" target="_blank"
+                                                                            href="?a=user_details&id=29">manage</a>
+                                                                        <br>&rarr; <b><small>Wallet Address:
+                                                                                bc1qxcnvfprjs5z4uggxg5frjjjrpl4cf6rzts3x6y</small></b>
+                                                                        <br><small style="color:gray"></small>
+                                                                        <br><small style="color:#2F4F4F">Balance:
+                                                                            $52655.44 | Active Deposit: $0.00</small>
+                                                                    </td>
+                                                                    <td align=center><small>Sep-21-2022<br>09:13:50
+                                                                            AM</small></td>
+                                                                    <td nowrap align=right><b>$953.75</b> <img
+                                                                            src="images/1006.gif" align=absmiddle
+                                                                            hspace=1 height=17> </td>
+                                                                    <td nowrap align=center> <a
+                                                                            href="?a=withdrawal_requests&action2=pay_manual&id=21336"
+                                                                            target=_blank class="sbmt btn-sm btn-info"
+                                                                            style="margin-bottom:2px;">manual
+                                                                            pay</a><br> </td>
+                                                                </tr>
+                                                                <tr class="row1 trn_user">
+                                                                    <td> <input type=checkbox name="trn[21335]"
+                                                                            class="trn" id="trn_21335" value=1> </td>
+                                                                    <td> <a class="link username">Kagiso22</a>
+                                                                        <small>(Upline: Kelebogile)</small></b> <a
+                                                                            class="badge badge-danger" target="_blank"
+                                                                            href="?a=user_edit&id=62">edit</a> <a
+                                                                            class="badge badge-info" target="_blank"
+                                                                            href="?a=user_details&id=62">manage</a>
+                                                                        <br>&rarr; <b><small>Wallet Address:
+                                                                                bc1qsru9shv48nlexujwzex2e49wedkt29xxxvdaw5unjed4nxsauj0svm9jhf</small></b>
+                                                                        <br><small style="color:gray"></small>
+                                                                        <br><small style="color:#2F4F4F">Balance:
+                                                                            $99946.91 | Active Deposit: $0.00</small>
+                                                                    </td>
+                                                                    <td align=center><small>Sep-21-2022<br>09:06:07
+                                                                            AM</small></td>
+                                                                    <td nowrap align="right" ><b>$1455.66</b> <img
+                                                                            src="images/1006.gif" align=absmiddle
+                                                                            hspace=1 height=17> </td>
+                                                                    <td nowrap align=center> <a
+                                                                            href="?a=withdrawal_requests&action2=pay_manual&id=21335"
+                                                                            target=_blank class="sbmt btn-sm btn-info"
+                                                                            style="margin-bottom:2px;">manual
+                                                                            pay</a><br> </td>
+                                                                </tr>
+                                                                <tr class="row2 trn_user">
+                                                                    <td> <input type=checkbox name="trn[21333]"
+                                                                            class="trn" id="trn_21333" value=1> </td>
+                                                                    <td> <a class="link username">Happiness689</a>
+                                                                        <small>(Upline: n/a)</small></b> <a
+                                                                            class="badge badge-danger" target="_blank"
+                                                                            href="?a=user_edit&id=282">edit</a> <a
+                                                                            class="badge badge-info" target="_blank"
+                                                                            href="?a=user_details&id=282">manage</a>
+                                                                        <br>&rarr; <b><small>Wallet Address:
+                                                                                bc1qqt4mxnl6uttawqzynymqx8jffjcd9usvr79nd2</small></b>
+                                                                        <br><small style="color:gray"></small>
+                                                                        <br><small style="color:#2F4F4F">Balance:
+                                                                            $141505.28 | Active Deposit: $0.00</small>
+                                                                    </td>
+                                                                    <td align=center><small>Sep-21-2022<br>09:03:24
+                                                                            AM</small></td>
+                                                                    <td nowrap align=right><b>$449.83</b> <img
+                                                                            src="images/1006.gif" align=absmiddle
+                                                                            hspace=1 height=17> </td>
+                                                                    <td nowrap align=center> <a
+                                                                            href="?a=withdrawal_requests&action2=pay_manual&id=21333"
+                                                                            target=_blank class="sbmt btn-sm btn-info"
+                                                                            style="margin-bottom:2px;">manual
+                                                                            pay</a><br> </td>
+                                                                </tr>
+                                                                <tr class="row1 trn_user">
+                                                                    <td> <input type="checkbox" name="trn[21330]"
+                                                                            class="trn" id="trn_21330" value=1> </td>
+                                                                    <td> <a class="link username">Fatmata</a>
+                                                                        <small>(Upline: n/a)</small></b> <a
+                                                                            class="badge badge-danger" target="_blank"
+                                                                            href="?a=user_edit&id=363">edit</a> <a
+                                                                            class="badge badge-info" target="_blank"
+                                                                            href="?a=user_details&id=363">manage</a>
+                                                                        <br>&rarr; <b><small>Wallet Address:
+                                                                                0x1e256a3dda3d9e8aefa0cc2c12092f0123b23a1f</small></b>
+                                                                        <br><small style="color:gray"></small>
+                                                                        <br><small style="color:#2F4F4F">Balance:
+                                                                            $41481.67 | Active Deposit: $0.00</small>
+                                                                    </td>
+                                                                    <td align="center"><small>Sep-21-2022<br>08:59:17
+                                                                            AM</small></td>
+                                                                    <td nowrap align="right"></td><b>$2918.04</b> <img
+                                                                        src="images/1007.gif" align=absmiddle hspace=1
+                                                                        height=17>
+                                                    </td>
+                                                    <td nowrap align=center> <a
+                                                            href="?a=withdrawal_requests&action2=pay_manual&id=21330"
+                                                            target=_blank class="sbmt btn-sm btn-info"
+                                                            style="margin-bottom:2px;">manual
+                                                            pay</a><br> </td>
+                                                </tr>
+                                                <tr class="row2 trn_user">
+                                                    <td> <input type=checkbox name="trn[21325]" class="trn"
+                                                            id="trn_21325" value=1> </td>
+                                                    <td> <a class="link username">Segomotso56</a>
+                                                        <small>(Upline: Mandere57)</small></b> <a
+                                                            class="badge badge-danger" target="_blank"
+                                                            href="?a=user_edit&id=817">edit</a> <a
+                                                            class="badge badge-info" target="_blank"
+                                                            href="?a=user_details&id=817">manage</a>
+                                                        <br>&rarr; <b><small>Wallet Address:
+                                                                0x52315a4e8964316b0ec72fa61fca62c17b60d553</small></b>
+                                                        <br><small style="color:gray"></small>
+                                                        <br><small style="color:#2F4F4F">Balance:
+                                                            $98133.34 | Active Deposit: $0.00</small>
+                                                    </td>
+                                                    <td align=center><small>Sep-21-2022<br>08:35:45
+                                                            AM</small></td>
+                                                    <td nowrap align=right><b>$117.94</b> <img src="images/1007.gif"
+                                                            align=absmiddle hspace=1 height=17> </td>
+                                                    <td nowrap align=center> <a
+                                                            href="?a=withdrawal_requests&action2=pay_manual&id=21325"
+                                                            target=_blank class="sbmt btn-sm btn-info"
+                                                            style="margin-bottom:2px;">manual
+                                                            pay</a><br> </td>
+                                                </tr>
+                                                <tr class="row1 trn_user">
+                                                    <td> <input type=checkbox name="trn[21320]" class="trn"
+                                                            id="trn_21320" value=1> </td>
+                                                    <td> <a class="link username">Mukisa</a>
+                                                        <small>(Upline: n/a)</small></b> <a class="badge badge-danger"
+                                                            target="_blank" href="?a=user_edit&id=193">edit</a> <a
+                                                            class="badge badge-info" target="_blank"
+                                                            href="?a=user_details&id=193">manage</a>
+                                                        <br>&rarr; <b><small>Wallet Address:
+                                                                1AKA1RnngzuCh76TtrrbtghUykfwCJP42B</small></b>
+                                                        <br><small style="color:gray"></small>
+                                                        <br><small style="color:#2F4F4F">Balance:
+                                                            $587225.59 | Active Deposit: $0.00</small>
+                                                    </td>
+                                                    <td align=center><small>Sep-21-2022<br>08:33:47
+                                                            AM</small></td>
+                                                    <td nowrap align=right><b>$969.23</b> <img src="images/1006.gif"
+                                                            align=absmiddle hspace=1 height=17> </td>
+                                                    <td nowrap align=center> <a
+                                                            href="?a=withdrawal_requests&action2=pay_manual&id=21320"
+                                                            target=_blank class="sbmt btn-sm btn-info"
+                                                            style="margin-bottom:2px;">manual
+                                                            pay</a><br> </td>
+                                                </tr>
+                                                <tr class="row2 trn_user">
+                                                    <td> <input type=checkbox name="trn[20566]" class="trn"
+                                                            id="trn_20566" value=1> </td>
+                                                    <td> <a class="link username">Joseph15</a>
+                                                        <small>(Upline: Adisa32)</small></b> <a
+                                                            class="badge badge-danger" target="_blank"
+                                                            href="?a=user_edit&id=157">edit</a> <a
+                                                            class="badge badge-info" target="_blank"
+                                                            href="?a=user_details&id=157">manage</a>
+                                                        <br>&rarr; <b><small>Wallet Address:
+                                                                0x72eee6f65a78ef110fa33dc20b4fccd7b3aa7be741e3b542d1e5de6245277e12</small></b>
+                                                        <br><small style="color:gray"></small>
+                                                        <br><small style="color:#2F4F4F">Balance:
+                                                            $684541.98 | Active Deposit: $0.00</small>
+                                                    </td>
+                                                    <td align=center><small>Sep-15-2022<br>08:15:32
+                                                            AM</small></td>
+                                                    <td nowrap align=right><b>$4056.00</b> <img src="images/1007.gif"
+                                                            align=absmiddle hspace=1 height=17> </td>
+                                                    <td nowrap align=center> <a
+                                                            href="?a=withdrawal_requests&action2=pay_manual&id=20566"
+                                                            target=_blank class="sbmt btn-sm btn-info"
+                                                            style="margin-bottom:2px;">manual
+                                                            pay</a><br> </td>
+                                                </tr>
+                                                <tr class="row1 trn_user">
+                                                    <td> <input type=checkbox name="trn[20102]" class="trn"
+                                                            id="trn_20102" value=1> </td>
+                                                    <td> <a class="link username">Evith20</a>
+                                                        <small>(Upline: Martinique05)</small></b> <a
+                                                            class="badge badge-danger" target="_blank"
+                                                            href="?a=user_edit&id=94">edit</a> <a
+                                                            class="badge badge-info" target="_blank"
+                                                            href="?a=user_details&id=94">manage</a>
+                                                        <br>&rarr; <b><small>Wallet Address:
+                                                                0x8e8dd74a4234bf5a1b635326b12e83412ea7637d</small></b>
+                                                        <br><small style="color:gray"></small>
+                                                        <br><small style="color:#2F4F4F">Balance:
+                                                            $207043.02 | Active Deposit: $0.00</small>
+                                                    </td>
+                                                    <td align=center><small>Sep-12-2022<br>05:53:43
+                                                            AM</small></td>
+                                                    <td nowrap align=right><b>$1652.82</b> <img src="images/1007.gif"
+                                                            align=absmiddle hspace=1 height=17> </td>
+                                                    <td nowrap align=center> <a
+                                                            href="?a=withdrawal_requests&action2=pay_manual&id=20102"
+                                                            target=_blank class="sbmt btn-sm btn-info"
+                                                            style="margin-bottom:2px;">manual
+                                                            pay</a><br> </td>
+                                                </tr>
+                                                <tr class="row2 trn_user">
+                                                    <td> <input type=checkbox name="trn[19969]" class="trn"
+                                                            id="trn_19969" value=1> </td>
+                                                    <td> <a class="link username">Evith20</a>
+                                                        <small>(Upline: Martinique05)</small></b> <a
+                                                            class="badge badge-danger" target="_blank"
+                                                            href="?a=user_edit&id=94">edit</a> <a
+                                                            class="badge badge-info" target="_blank"
+                                                            href="?a=user_details&id=94">manage</a>
+                                                        <br>&rarr; <b><small>Wallet Address:
+                                                                0x8e8dd74a4234bf5a1b635326b12e83412ea7637d</small></b>
+                                                        <br><small style="color:gray"></small>
+                                                        <br><small style="color:#2F4F4F">Balance:
+                                                            $207043.02 | Active Deposit: $0.00</small>
+                                                    </td>
+                                                    <td align=center><small>Sep-11-2022<br>06:04:20
+                                                            AM</small></td>
+                                                    <td nowrap align=right><b>$1686.01</b> <img src="images/1007.gif"
+                                                            align=absmiddle hspace=1 height=17> </td>
+                                                    <td nowrap align=center> <a
+                                                            href="?a=withdrawal_requests&action2=pay_manual&id=19969"
+                                                            target=_blank class="sbmt btn-sm btn-info"
+                                                            style="margin-bottom:2px;">manual
+                                                            pay</a><br> </td>
+                                                </tr>
+                                                <tr class="row1 trn_user">
+                                                    <td> <input type=checkbox name="trn[19381]" class="trn"
+                                                            id="trn_19381" value=1> </td>
+                                                    <td> <a class="link username">Ayesha</a>
+                                                        <small>(Upline: n/a)</small></b> <a class="badge badge-danger"
+                                                            target="_blank" href="?a=user_edit&id=179">edit</a> <a
+                                                            class="badge badge-info" target="_blank"
+                                                            href="?a=user_details&id=179">manage</a>
+                                                        <br>&rarr; <b><small>Wallet Address:
+                                                            </small></b> <br><small style="color:gray"></small>
+                                                        <br><small style="color:#2F4F4F">Balance: $1361564.36 |
+                                                            Active Deposit: $0.00</small>
+                                                    </td>
+                                                    <td align=center><small>Sep-6-2022<br>10:42:13
+                                                            AM</small></td>
+                                                    <td nowrap align=right><b>$714.53</b> <img src="images/1007.gif"
+                                                            align=absmiddle hspace=1 height=17> </td>
+                                                    <td nowrap align=center> <a
+                                                            href="?a=withdrawal_requests&action2=pay_manual&id=19381"
+                                                            target=_blank class="sbmt btn-sm btn-info"
+                                                            style="margin-bottom:2px;">manual
+                                                            pay</a><br> </td>
+                                                </tr>
+                                                <tr>
+
+                                                    <td colspan="3"><b>Total for selected options:</b>
+                                                    </td>
+                                                    <td align="right nowrap"> $4324.89 <img src="images/1006.gif"
+                                                            align="absmiddle"><br>$11145.36 <img src="images/1007.gif"
+                                                            align="absmiddle"><br>$42.09 <img src="images/1010.gif"
+                                                            align="absmiddle"><br>
+                                                    </td>
+                                                    <td></td>
+
+                                                </tr> -->
+                                            </table>
+                                            </form> <br>
+                                            <center> <input type=button value="Mass payment" class="btn btn-info sbmt"
+                                                    title="Automatically pay withdrawl requests" id="mass_payment" >
+                                                &nbsp; <input type=button value="Remove" class="btn btn-warning sbmt"
+                                                    title="Remove withdrawal requests and return funds to user's balance"
+                                                    id="remove"> &nbsp; <input type=button value="Assure"
+                                                    class="btn btn-danger sbmt"
+                                                    id="assure"
+                                                    title="Assure withdrawal requests as processed. It means you already process the transactions outside the system and just notify it transactions was completed."
+                                                    > &nbsp; <ul class="pagination">
+                                                    <li class="page-item"><a
+                                                            class="prev page-link disabled">&lt;&lt;</a>
+                                                    </li>
+                                                    <li class="page-item active"><a class="page-link">1</a>
+                                                    </li>
+                                                    <li class="page-item"><a
+                                                            class="next page-link disabled">&gt;&gt;</a>
+                                                    </li>
+                                                </ul>
+                                            </center>
+                                        </td>
+                                    </tr>
+                                </table> <!-- Main: END -->
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+        </td>
+        </tr>
+        <tr>
+            <td height="19" bgcolor="ff8d00">
+                <div align="center" class="forCopyright">Powered with HYIP Manager Pro. <a
+                        href=http://www.goldcoders.com class="forCopyright">GoldCoders.com</a></div>
+            </td>
+        </tr>
+        </table>
+    </center>
+    <script src="javascript/withdrawal_request_func.js"></script>
+
+</body>
+
+
+<!-- errMessage -->

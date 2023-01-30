@@ -1,0 +1,1257 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+    <title>HYIP Manager Pro. Auto-payment, mass payment included.</title>
+    <link href="css/adminstyle.css" rel="stylesheet" type="text/css">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <style>
+        .pagination {
+            display: -ms-flexbox;
+            display: flex;
+            padding-left: 0;
+            list-style: none;
+        }
+
+        .page-link {
+            position: relative;
+            display: block;
+            padding: 0.5rem 0.75rem;
+            margin-left: -1px;
+            line-height: 1.25;
+            color: #000;
+            background-color: #fff;
+            border: 1px solid #999;
+        }
+
+        .page-item:first-child .page-link {
+            margin-left: 0;
+            border-top-left-radius: 0.25rem;
+            border-bottom-left-radius: 0.25rem;
+        }
+
+        .page-item:last-child .page-link {
+            border-top-right-radius: 0.25rem;
+            border-bottom-right-radius: 0.25rem;
+        }
+
+        .page-link:hover {
+            z-index: 2;
+            color: #000;
+            text-decoration: none;
+            background-color: #ccc;
+            border-color: #999;
+        }
+
+        .page-link.disabled {
+            color: #999;
+        }
+
+        .page-link.disabled:hover {
+            background-color: #fff;
+        }
+
+        .page-link {
+            cursor: pointer;
+            text-decoration: none;
+            color: #000;
+        }
+
+        .page-item.active .page-link {
+            z-index: 1;
+            color: #000;
+            background-color: #ccc;
+            border-color: #999;
+        }
+
+        .page-item.disabled .page-link {
+            color: #666;
+            pointer-events: none;
+            cursor: auto;
+            background-color: #fff;
+            border-color: #999;
+        }
+
+        .alert {
+            padding: 5px 5px 5px 15px;
+            margin: 2px;
+            border: solid 1px black;
+            display: block;
+        }
+
+        .alert.alert-danger {
+            background: #FFEEEE;
+            border-color: red;
+            color: #660000;
+        }
+
+        .alert.alert-warning {
+            background: #FFFFEE;
+            border-color: yellow;
+            color: #333300;
+        }
+
+        .alert.alert-success {
+            background: #EEFFEE;
+            border-color: green;
+            color: #006600;
+        }
+
+        .alert.alert-info {
+            background: #EEEEFF;
+            border-color: blue;
+            color: #000066;
+        }
+
+        table.form {
+            width: 100%;
+        }
+
+        table.form th {
+            width: 30%;
+            padding: 3px;
+            padding-right: 5px;
+            text-align: right;
+            background: #FFC982;
+            color: #493011;
+        }
+
+        table.form th.title {
+            width: 100%;
+            padding-left: 5px;
+            text-align: left;
+            color: #a45c07;
+        }
+
+        table.form td {
+            width: 70%;
+            padding: 3px;
+            text-align: left;
+            background: #FEF5EA;
+        }
+
+        table.form.nosize td {
+            width: auto;
+        }
+
+        table.form.nosize th {
+            width: auto;
+        }
+
+        table.form thead th {
+            width: auto;
+            padding: 3px;
+            text-align: center;
+            background: #FFC982;
+            color: #FFFFFF;
+        }
+
+        table.form thead td {
+            width: auto;
+            padding: 3px;
+            text-align: left;
+        }
+
+        table.form td input[type=text],
+        table.form td input[type=password],
+        table.form td textarea,
+        table.form td select {
+            width: 100%;
+        }
+
+        table.form td input[type=text].nosize,
+        table.form td input[type=password].nosize,
+        table.form td textarea.nosize,
+        table.form td select.nosize {
+            width: auto;
+        }
+
+        table.form.controls td {
+            background: transparent;
+            width: auto;
+        }
+
+        table.form.controls td input[type=text],
+        table.form.controls td input[type=password],
+        table.form.controls td textarea,
+        table.form.controls td select {
+            margin: 3px;
+        }
+
+        table.list {
+            width: 100%;
+        }
+
+        table.list td {
+            width: auto;
+            padding: 3px;
+        }
+
+        table.list.sub td {
+            width: auto;
+            padding: 1px;
+        }
+
+        table.list th {
+            width: auto;
+            padding: 3px;
+            text-align: center;
+            background: #FFC982;
+            color: #493011;
+        }
+
+        table.list .row1 {
+            background: #FCE7CA;
+        }
+
+        table.list .row2 {
+            background: #FFF3E3;
+        }
+
+        form input[type=submit],
+        form input[type=button],
+        form button,
+        .sbmt {
+            display: inline-block;
+            font-weight: bold;
+            text-align: center;
+            text-decoration: none;
+            white-space: nowrap;
+            vertical-align: middle;
+            user-select: none;
+            border: 1px solid transparent;
+            padding: .25rem .5rem;
+            line-height: 1.5;
+            border-radius: .2rem;
+            border: none;
+        }
+
+        form input[type=submit]:hover,
+        form input[type=button]:hover,
+        form button:hover,
+        .sbmt:hover {
+            background-color: #FAD252;
+        }
+
+        form input[type=submit]:active,
+        form input[type=button]:active,
+        form button:active,
+        .sbmt:active {
+            background-color: #FFC200;
+        }
+
+        form input[type=submit]:focus,
+        form input[type=button]:focus,
+        form button:focus,
+        .sbmt:focus {
+            box-shadow: 0 0 0 .2rem rgba(255, 236, 176, .5);
+        }
+
+        form input[type=submit]:disabled,
+        form input[type=button]:disabled,
+        form button:disabled,
+        .sbmt:disabled {
+            opacity: .65;
+        }
+
+        .btn {
+            cursor: pointer;
+            text-transform: uppercase;
+            margin: 1px;
+        }
+
+        .sbmt.btn-sm {
+            font-size: .525rem;
+            padding: .25rem .35rem;
+            text-transform: uppercase;
+            cursor: pointer;
+            margin: 1px;
+        }
+
+        .btn-success {
+            color: #fff;
+            background-color: #28a745;
+            border-color: #28a745;
+        }
+
+        .btn-success:hover {
+            background-color: #218838 !important;
+            border-color: #1e7e34 !important;
+        }
+
+        .btn-success:focus {
+            background-color: #218838 !important;
+            box-shadow: 0 0 0 .2rem rgba(40, 167, 69, .5) !important;
+        }
+
+        .btn-danger {
+            color: #fff;
+            background-color: #dc3545;
+            border-color: #dc3545;
+        }
+
+        .btn-danger:hover {
+            background-color: #c82333 !important;
+            border-color: #bd2130 !important;
+        }
+
+        .btn-danger:focus {
+            background-color: #c82333 !important;
+            box-shadow: 0 0 0 .2rem rgba(220, 53, 69, .5) !important;
+        }
+
+        .btn-info {
+            color: #fff;
+            background-color: #17a2b8;
+            border-color: #17a2b8;
+        }
+
+        .btn-info:hover {
+            background-color: #138496 !important;
+            border-color: #117a8b !important;
+        }
+
+        .btn-info:focus {
+            background-color: #138496 !important;
+            box-shadow: 0 0 0 .2rem rgba(23, 162, 184, .5) !important;
+        }
+
+        .btn-primary {
+            color: #fff;
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+
+        .btn-primary:hover {
+            background-color: #0069d9 !important;
+            border-color: #0062cc !important;
+        }
+
+        .btn-primary:focus {
+            background-color: #007bff !important;
+            box-shadow: 0 0 0 .2rem rgba(38, 143, 255, .5) !important;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: .25em .4em;
+            font-size: 75%;
+            font-weight: 700;
+            line-height: 1;
+            text-align: center;
+            /*white-space: nowrap;*/
+            vertical-align: baseline;
+            border-radius: .25rem;
+            margin: .25em;
+        }
+
+        .badge-bg {
+            display: inline-block;
+            font-size: .525rem;
+            padding: .25rem .35rem;
+            text-transform: uppercase;
+            font-weight: 700;
+            text-align: center;
+            /*white-space: nowrap;*/
+            vertical-align: baseline;
+            border-radius: .25rem;
+        }
+
+        .badge-success {
+            color: #fff;
+            background-color: #28a745;
+        }
+
+        .badge-info {
+            color: #fff;
+            background-color: #17a2b8;
+        }
+
+        .badge-danger {
+            color: #fff;
+            background-color: #dc3545;
+        }
+
+        .badge-warning {
+            color: #212529;
+            background-color: #ffc107;
+        }
+
+        .badge-primary {
+            color: #fff;
+            background-color: #007bff;
+        }
+
+        .badge.sticker {
+            font-size: 90%;
+        }
+
+        .hide {
+            display: none;
+        }
+
+        .pshead {
+            padding: 3px;
+            background: #FF8D00;
+            margin: 2px 0;
+            font-weight: bold;
+            overflow: hidden;
+        }
+
+        .pshead b {
+            display: block;
+            width: 250px;
+            float: left;
+        }
+
+        .pshead a {
+            float: right;
+        }
+
+        .psettings {
+            display: none;
+        }
+    </style>
+    <style>
+        .nav {
+            --display: flex;
+            --flex-wrap: wrap;
+            padding: 0 .25rem;
+            margin-bottom: 0;
+            list-style: none;
+        }
+
+        .nav-link {
+            border-radius: .25rem;
+            display: block;
+            padding: .5rem 1rem;
+            color: #493011;
+            text-decoration: none;
+            background-color: #FFF3E3;
+            border: solid 1px transparent;
+            -webkit-text-decoration-skip: objects;
+            margin-top: 0.2rem;
+            text-align: left;
+            font-weight: bold;
+        }
+
+        .nav-link:last-child {
+            margin-bottom: 0.2rem;
+        }
+
+        .nav-link:hover {
+            background-color: #FFC982;
+        }
+
+        .nav-link.active {
+            background-color: #FFC982;
+        }
+
+        .nav-link:active,
+        .nav-link:focus {
+            background-color: #FCE7CA
+        }
+
+        .dropdown-toggle.show {
+            border-bottom-right-radius: 0;
+            border-bottom-left-radius: 0;
+        }
+
+        .dropdown-toggle::after {
+            --display: inline-block;
+            display: none;
+            width: 0;
+            height: 0;
+            margin-left: .255em;
+            vertical-align: .255em;
+            content: "";
+            border-top: .3em solid;
+            border-right: .3em solid transparent;
+            border-bottom: 0;
+            border-left: .3em solid transparent;
+            z-index: 1000;
+        }
+
+        .dropdown-menu {
+            --position: absolute;
+            --top: 100%;
+            left: 0;
+            z-index: 1000;
+            --display: none;
+            --float: left;
+            --min-width: 10rem;
+            padding: .5rem 0;
+            margin: 0 0 .125rem 0;
+            --font-size: 1rem;
+            color: #212529;
+            text-align: left;
+            list-style: none;
+            background-color: #fff;
+            background-clip: padding-box;
+            border: 1px solid rgba(0, 0, 0, .15);
+            border-top: 0;
+            border-bottom-right-radius: .25rem;
+            border-bottom-left-radius: .25rem;
+        }
+
+        .dropdown-menu.show {
+            display: block;
+        }
+
+        .dropdown-item {
+            display: block;
+            --width: 100%;
+            padding: .25rem 1rem;
+            clear: both;
+            font-weight: 400;
+            color: #212529;
+            text-align: inherit;
+            --white-space: nowrap;
+            background-color: transparent;
+            border: 0;
+            text-decoration: none;
+        }
+
+        .dropdown-item:hover {
+            background-color: #FCE7CA;
+        }
+
+        .dropdown-item.active {
+            background-color: #FFC982;
+        }
+
+        .dropdown-item:active,
+        .dropdown-item:focus {
+            background-color: #FCE7CA;
+        }
+
+        a.sort_link {
+            cursor: pointer;
+            color: #606060;
+        }
+
+        a.sort_link.active {
+            color: red;
+        }
+
+        a.link.username {
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        b.username {
+            font-size: 1.2em;
+        }
+
+        .hlp.badge {
+            color: #fff;
+            font-size: 100%;
+        }
+
+        .hlp {
+            --font-size: auto;
+            color: black;
+            text-decoration: none;
+            cursor: help;
+            position: relative;
+            display: inline-block;
+        }
+
+        .hlp[title]:after,
+        .hlp[data-hlp]:after {
+            opacity: 0;
+            content: attr(title);
+            position: absolute;
+            top: 100%;
+            left: 0;
+            color: #fff;
+            transition: opacity 0.3s;
+            border-radius: 6px;
+            background-color: #555;
+            padding: 5px 5px;
+            width: 220px;
+            display: none;
+            font-size: 90%;
+            z-index: 1000;
+            text-align: left;
+            white-space: pre-wrap;
+        }
+
+        .hlp[data-hlp]:after {
+            content: attr(data-hlp);
+            white-space: pre-wrap;
+        }
+
+        .hlp[title]:hover:after,
+        .hlp[data-hlp]:hover:after {
+            opacity: 1;
+            display: inline-block;
+        }
+    </style>
+</head>
+<!-- list -->
+<body bgcolor="#FFFFF2" link="#666699" vlink="#666699" alink="#666699" leftmargin="0" topmargin="0" marginwidth="0"
+    marginheight="0">
+    <center>
+        <table width="760" border="0" cellpadding="0" cellspacing="0">
+            <tr>
+                <td valign=top>
+                    <table cellspacing=0 cellpadding=0 border=0 width=100%>
+                        <tr>
+                            <td background="images/ver.gif" bgcolor=#FF8D00><img src="css/images/top.gif" border="0"
+                                    align=left></td>
+                            <td background="images/ver.gif" bgcolor=#FF8D00 valign=bottom align=right> <span
+                                    style="font-family: verdana; font-size: 12px; color: white"> <b>
+                                        <div id="google_translate_element"></div> <a href=? class=toplink>Home</a>
+                                        &middot; <a href=index.php?a=logout class=toplink>Logout</a>
+                                    </b></span>&nbsp; &nbsp; </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td valign=top>
+                    <table cellspacing=0 cellpadding=1 border=0 width=100% bgcolor=#ff8d00>
+                        <tr>
+                            <td>
+                                <table width="100%" height="100%" border="0" cellpadding="0" cellspacing="0">
+                                    <tr bgcolor="#FFFFFF" valign="top">
+                                        <td width="300" align=center>
+                                            <table cellspacing=0 cellpadding=2 border=0 width="172">
+                                                <tr>
+                                                    <th colspan=2><img src=images/q.gif width=1 height=3></th>
+                                                </tr>
+                                                <tr>
+                                                    <th colspan=2 class=title>Menu</th>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a href="investment-program.html">Investment Programs</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a href="expiring-deposit.html">Expiring
+                                                            Deposits</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt>&nbsp;</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a href="users.html">Users</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a href="account-blacklist.html">Accounts
+                                                            Blacklist</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a href="top-referrals.html">Top Referral
+                                                            Earnings</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt>&nbsp;</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt>&nbsp;</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a href="Transactions.html">Transactions</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a href="withdrawal-request.html">Withdrawal
+                                                            Requests</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a href="add-funds.html">Add
+                                                            Funds</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a
+                                                            href="deposits.html">Deposits</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a
+                                                            href="withdrawals.html">Withdrawals</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a
+                                                            href="earnings.html">Earnings</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a
+                                                            href="referrals.html">Referral</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a
+                                                            href="exchange.html">Exchange</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a href="pending-deposit.html">Pending Deposits</a>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a href="add-bonus.html">Add Bonus</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt>&nbsp;</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt>&nbsp;</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a href="settings.html">Settings</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a href="proccessings.html">Processings</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a href="?a=auto-pay-settings">Auto-Withdrawals
+                                                            Settings</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a href="?a=referrals">Referral Settings</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a href="?a=email_templates">Email Templates</a>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a href="?a=seo_links">Links Replacement</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a href="?a=security">Security</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a href="?a=earning_holidays">Earning Holidays</a>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a href="?a=info_box_settings">Info Box
+                                                            Settings</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a href="?a=exchange_rates">Exchange Rates</a>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a href="?a=maintenance_page">Maintenance Page</a>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt>&nbsp;</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt>&nbsp;</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt>&nbsp;</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a href="?a=check_ips">IPs Check</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a href="?a=newsletter">Send a Newsletter</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a href="?a=custompages">Custom Pages</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a href="?a=news">News</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a href="?a=user_notices">User Notices</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a href="?a=tell_friend">Tell A Friend</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt>&nbsp;</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt>&nbsp;</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a href=?a=logout>Logout</a></td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                        <td bgcolor="#ff8d00" valign="top" width=1><img src=images/q.gif width=1
+                                                height=1></td>
+                                        <td bgcolor="#FFFFFF" valign="top" width=99%>
+                                            <!-- Main: Start -->
+                                            <table width="100%" height="100%" border="0" cellpadding="10"
+                                                cellspacing="0" class="forTexts">
+                                                <tr>
+                                                    <td width=100% height=100% valign=top>
+                                                        <!-- <script
+                                                            language=javascript>  function OF() { change_days_hours_label(); var period = document.nform.hperiod[document.nform.hperiod.selectedIndex].value; if (period == "d") { document.getElementById("tr_work_week").style.display = ""; } else if (period == "h" && document.nform.hq_days.value >= 24*7) { document.getElementById("tr_work_week").style.display = ""; } else { document.getElementById("tr_work_week").style.display = "none"; } if (period == "end" || period == "endh") { document.getElementById("duration_without_limit").style.display = "none"; document.getElementById("duration_divider").style.display = "none"; } else { document.getElementById("duration_without_limit").style.display = ""; document.getElementById("duration_divider").style.display = ""; } }   function change_days_hours_label() { var frm = document.nform; if (frm.hperiod[frm.hperiod.selectedIndex].value.match(/^\d*h$/) || frm.hperiod[frm.hperiod.selectedIndex].value == "endh") { document.getElementById("duration_in_days_label").style.display = "none"; document.getElementById("duration_in_hours_label").style.display = "inline"; } else { document.getElementById("duration_in_days_label").style.display = "inline"; document.getElementById("duration_in_hours_label").style.display = "none"; } if (document.getElementById("tr_periodic_bonus")) { if (frm.hperiod[frm.hperiod.selectedIndex].value.substr(0,3) == "end") { document.getElementById("tr_periodic_bonus").style.display = "none"; } else { document.getElementById("tr_periodic_bonus").style.display = ""; } } } function checkform() { if (document.nform.hname.value=="") { alert("Please anter a HYIP name!"); document.nform.hname.focus(); return false; } return true; }  </script> -->
+                                                        <h3>Add Investment Package:</h3>
+                                                        <form >
+                                                            <!-- <input type="hidden" name="form_id"
+                                                                value="16659911665386"><input type="hidden"
+                                                                name="form_token"
+                                                                value="b6756996adeb9b4f3bcfa1bc085188b6"> <input
+                                                                type=hidden name=id value="0"> -->
+                                                            <table class="form nosize">
+                                                                <tr>
+                                                                    <th><a data-hlp="Enter your package name here."
+                                                                            class=hlp>Package Name:</a></th>
+                                                                    <td><input type=text name=hname class=inpts size=30
+                                                                            value="" id="package_name" placeholder="Package Name" ></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th><a data-hlp="If Closed no users can deposit in the package but all current deposits are working as usual. If Public the package is opened for deposits."
+                                                                            class=hlp>Closed Package:</a></th>
+                                                                    <td> <select name=closed class=inpts id="package_door">
+                                                                            <option value="Public" selected>Public</option>
+                                                                            <option value="Closed">Closed</option>
+                                                                        </select> </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th><a data-hlp="Users will receive earnings if the package status is active."
+                                                                            class=hlp>Status:</th>
+                                                                    <td> <select name=hstatus class=inpts id="package_status">
+                                                                            <option value="Active">Active</option>
+                                                                            <option value="Inactive">Inactive</option>
+                                                                        </select> </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th><a data-hlp="Specify here when user will get earning from deposit at this package"
+                                                                            class=hlp>Payment period:</a></th>
+                                                                    <td> <select name=hperiod id="payment_period" class="inpts" >
+                                                                            <option value="daily">Daily</option>
+                                                                            <option value="weekly">Weekly</option>
+                                                                            <option value="bi-weekly">Bi-weekly</option>
+                                                                            <option value="monthly">Monthly</option>
+                                                                            <option value="2months">Every 2 months</option>
+                                                                            <option value="3months">Every 3 months</option>
+                                                                            <option value="6months">Every 6 months</option>
+                                                                            <option value="yearly">Yearly</option>
+                                                                            <option value="hourly">Hourly</option>
+                                                                            <option value="specified_hours">After the specified
+                                                                                Hours</option>
+                                                                            <option value="specified_days">After the specified Days
+                                                                            </option>
+                                                                        </select> </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th><a data-hlp="Specify your package duration here. For example 30 days, 365 days, or no limit."
+                                                                            class=hlp>Package Duration:</a></th>
+                                                                    <td> <span id="duration_with_end"> <input type=text
+                                                                                name=hq_days class="inpts nosize" size=5
+                                                                                value="" oninput="OF();">&nbsp; <span
+                                                                                id="duration_in_days_label">days</span>
+                                                                            <span id="duration_in_hours_label"><a
+                                                                                    data-hlp="If `Payment period` is set to `Hourly`, plan duration counts in hours"
+                                                                                    class=hlp>hours</a></span> </span>
+                                                                        <span id="duration_divider"> | </span> <span
+                                                                            id="duration_without_limit"><input
+                                                                                type=checkbox name=hq_days_nolimit
+                                                                                value=1 onclick="checkb()"> without time
+                                                                            limit</span> </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td style="background: #fff" colspan=2>&nbsp;</t>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th class=title colspan=2><a class=hlp
+                                                                            data-hlp="Type 0 in the max amount field if you do not want to limit your users' maximal deposit amount.">Specify
+                                                                            the Investment Package Earning Rates:</a>
+                                                                    </th>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td colspan=2>
+                                                                        <style>
+                                                                            #hyip_rates input.num[type=text] {
+                                                                                text-align: right !important;
+                                                                            }
+
+                                                                            #hyip_rates td {
+                                                                                text-align: center !important;
+                                                                            }
+
+                                                                            #hyip_rates td {
+                                                                                border-bottom: solid 1px #FFC982;
+                                                                            }
+
+                                                                            .fiat_rate {
+                                                                                margin: 1px 0;
+                                                                            }
+
+                                                                            .fiat_rates {
+                                                                                text-align: right;
+                                                                            }
+                                                                        </style>
+                                                                        <table class="list" id="hyip_rates">
+                                                                            <tr>
+                                                                                <th></th>
+                                                                                <th>Name</th>
+                                                                                <th>Min Amount ($)</th>
+                                                                                <th>Max Amount ($)</th>
+                                                                                <th>Percent</th>
+                                                                            </tr>
+                                                                            <tr>
+                                                                            
+                                                                            <tr>
+                                                                                <td><input type=button value="-"
+                                                                                        onclick="fieldRemove(this);"
+                                                                                        class="btn-sm sbmt"></td>
+                                                                                <td><input type=text
+                                                                                        name="rate_amount_name[]"
+                                                                                       placeholder="Package Name"
+                                                                                        id="package_name01"
+                                                                                        class="inpts rate_name" size=10>
+                                                                                </td>
+                                                                                <td> <input type=number
+                                                                                        name="rate_min_amount[]"
+                                                                                       id="min_amount"
+                                                                                       placeholder="min amount"
+                                                                                        class="inpts num rate_min_amount"
+                                                                                        size=5> </td>
+                                                                                <td> <input type=number
+                                                                                        name="rate_max_amount[]"
+                                                                                        placeholder="max amount"
+                                                                                        id="max_amount"
+                                                                                        class="inpts num rate_max_amount">
+                                                                                </td>
+                                                                                <td><input type=number
+                                                                                    placeholder="percentage"
+                                                                                          id="percentage"                         
+                                                                                        name="rate_percent[]" 
+                                                                                        class="inpts rate_percent num"
+                                                                                        size=5></td>
+                                                                            </tr>
+                                                                            <tr id="rfield_last">
+                                                                                <th colspan=5><input type=button
+                                                                                        value="+"
+                                                                                        style="width:100px;font-weight:bold;"
+                                                                                        onclick="fieldAdd()"
+                                                                                        class="btn-sm sbmt"></th>
+                                                                            </tr>
+                                                                            <tr id="rfield_tpl" style="display:none">
+                                                                                <td><input type=button value="-" onclick="fieldRemove(this);" class="btn-sm sbmt"></td>
+                                                                                <td><input type=text name="rate_amount_name[]" value="" class="inpts rate_name" size=10></td>
+                                                                                <td> <input type=text name="rate_min_amount[]" value="" class="inpts num rate_min_amount">
+                                                                                </td>
+                                                                                <td> <input type=text name="rate_max_amount[]" value="" class="inpts num rate_max_amount">
+                                                                                </td>
+                                                                                <td><input type=text
+                                                                                        name="rate_percent[]" value=""
+                                                                                        class="inpts rate_percent num"
+                                                                                        size=5></td>
+                                                                            </tr>
+                                                                            <script> function fieldAdd() { var hr = document.getElementById("hyip_rates"); var rn = hr.getElementsByClassName("rate_name"); var tpl1 = document.getElementById("rfield_tpl"); tpl = tpl1.cloneNode(true); tpl.getElementsByClassName("rate_name")[0].value = "Plan " + (rn.length); var lst = document.getElementById("rfield_last"); var prt = lst.parentNode; tpl.style.display = "table-row"; tpl.id = ""; prt.insertBefore(tpl, lst); } function fieldRemove(o) { var tr = o.parentNode.parentNode; var bd = tr.parentNode; bd.removeChild(tr); } </script>
+                                                                        </table>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td style="background:#fff;" colspan=2>&nbsp;</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th><a data-hlp="Define wether return the principal to user balance once the package is finished or not"
+                                                                            class=hlp>Return Principal:</a></th>
+                                                                    <td> <select name=hreturn_profit
+                                                                            class="inpts nosize" onchange="checkrd();">
+                                                                            <option value=0 selected>Do not Return
+                                                                                Pricipal</option>
+                                                                            <option value=1>Return Pricipal</option>
+                                                                        </select> <span id="return_profit_percent">and
+                                                                            <a data-hlp="Hold some percent of deposit princial and return principal partially"
+                                                                                class=hlp>hold</a> <input type=text
+                                                                                name="hreturn_profit_percent" value=""
+                                                                                class="inpts nosize" size=3>%</span>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th>Description:</th>
+                                                                    <td><textarea cols=80 rows=10 name=plan_description
+                                                                            class=inpts></textarea></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th><a data-hlp="Edit earining history description from standard description (Ex: Earning from deposit $100.00 - 2 %) to your own"
+                                                                            class=hlp>Earnings History Memo:</a></th>
+                                                                    <td> <input type=text name=earning_decription
+                                                                            value="Earning from deposit #deposit_amount# - #percent# %"
+                                                                            maxsize=255 class=inpts> <small>Available
+                                                                            variables: #deposit_amount#, #percent#,
+                                                                            #package_name#</small> </td>
+                                                                </tr>
+                                                                <tr id=tr_compouding0>
+                                                                    <th class=title colspan=2>Compounding Settings</th>
+                                                                </tr>
+                                                                <tr id=tr_compouding1>
+                                                                    <th><a data-hlp="Compounding is the ability of an asset to generate earnings, which are then reinvested or remain invested with the goal of generating their own earnings. In other words, compounding refers to generating earnings from previous earnings."
+                                                                            class=hlp>Compounding:</a></th>
+                                                                    <td> <select name=use_compound class=inpts
+                                                                            onchange="CheckCompound();">
+                                                                            <option value=0 selected>Disable</option>
+                                                                            <option value=1>Enable</option>
+                                                                        </select> </td>
+                                                                </tr>
+                                                                <tr id=tr_compouding2>
+                                                                    <th><a data-hlp="Allow compounding for deposits in this limits only. If deposit amount is too high coumpound will grouw dpeosit too fast."
+                                                                            class=hlp>Compounding Deposit Amount
+                                                                            Limits:</a></th>
+                                                                    <td>
+                                                                        <nobr>min: $<input type=input
+                                                                                name=compound_min_deposit value="0.00"
+                                                                                class="inpts nosize" size=6> max:
+                                                                            $<input type=input name=compound_max_deposit
+                                                                                value="0.00" class="inpts nosize"
+                                                                                size=6> <small>set 0 to skip</small>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr id=tr_compouding3>
+                                                                    <th><a data-hlp="You can limit available earning reinvestment percents to limit deposit amount grows too fast."
+                                                                            class=hlp>Compounding Percent Limits:</a>
+                                                                    </th>
+                                                                    <td><input type=input name=compound_percents
+                                                                            value="" class="inpts nosize" size=10>
+                                                                        <small>ex: 0-50,70,100</small></td>
+                                                                </tr>
+                                                                <tr id=tr_compouding4>
+                                                                    <th><a data-hlp="If plan does not return principal you can allow return compounded earnings"
+                                                                            class=hlp>Return Compounded Amount on
+                                                                            Deposit End:</a></th>
+                                                                    <td> <select name=compound_return class=inpts>
+                                                                            <option value=0 selected>Disable</option>
+                                                                            <option value=1>Enable</option>
+                                                                        </select> </td>
+                                                                </tr>
+                                                                <script> function CheckCompound() {
+                                                                        var e = document.getElementById("hperiod"); var period_str = e.options[e.selectedIndex].value; var show_compound = 0; if (document.nform.use_compound.selectedIndex == 1) { show_compound = 1; } if ((period_str == "end") || (period_str == "endh")) { show_compound = 0; document.getElementById("tr_compouding0").style.display = "none"; document.getElementById("tr_compouding1").style.display = "none"; document.getElementById("tr_delay_earnigs").style.display = "none"; } else { document.getElementById("tr_compouding0").style.display = "table-row"; document.getElementById("tr_compouding1").style.display = "table-row"; document.getElementById("tr_delay_earnigs").style.display = "table-row"; } if (!show_compound) { // document.nform.use_compound.disabled = true; 
+                                                                            document.getElementById("tr_compouding2").style.display = "none"; document.getElementById("tr_compouding3").style.display = "none"; document.nform.compound_return.disabled = true; document.getElementById("tr_compouding4").style.display = "none"; document.getElementById("calc_compound1").style.display = "none"; document.getElementById("calc_compound2").style.display = "none";
+                                                                        } else { // document.nform.use_compound.disabled = false; 
+                                                                            document.getElementById("tr_compouding2").style.display = "table-row"; document.getElementById("tr_compouding3").style.display = "table-row"; document.nform.compound_return.disabled = false; if (document.nform.hreturn_profit.selectedIndex == 1) { document.getElementById("tr_compouding4").style.display = "none"; } else { document.getElementById("tr_compouding4").style.display = "table-row"; } document.getElementById("calc_compound1").style.display = ""; document.getElementById("calc_compound2").style.display = "";
+                                                                        } CheckDailyPlan();
+                                                                    } //CheckCompound(); 
+                                                                </script>
+                                                                <tr id=tr_release0>
+                                                                    <th class=title colspan=2>Principal Release Settings
+                                                                    </th>
+                                                                </tr>
+                                                                <tr id=tr_release1>
+                                                                    <th><a data-hlp="Allow users to release deposit principal to user account and withdraw it. You can define a fee for this transaction and minimal deposit duration"
+                                                                            class=hlp>Principal Release:</a></th>
+                                                                    <td> <select name=withdraw_principal
+                                                                            onchange="checkc()" class=inpts>
+                                                                            <option value=0 selected>Disable</option>
+                                                                            <option value=1>Enable</option>
+                                                                        </select> </td>
+                                                                </tr>
+                                                                <tr id=tr_release2>
+                                                                    <th><a data-hlp="Toggle wether user able to release deposit partially or full amount only"
+                                                                            class=hlp>Principal Release Full Amount
+                                                                            only:</a></th>
+                                                                    <td> <select name=withdraw_principal_full
+                                                                            class=inpts>
+                                                                            <option value=0 selected>Disable</option>
+                                                                            <option value=1>Enable</option>
+                                                                        </select> </td>
+                                                                </tr>
+                                                                <tr id=tr_release3>
+                                                                    <th><a data-hlp="Start duration is 0. To deny principal withdraw set 100% fee for duration."
+                                                                            class=hlp>Principal Release Fees:</a></th>
+                                                                    <td>
+                                                                        <table class=form>
+                                                                            <tr>
+                                                                                <th>Deposit Duration (days):</th>
+                                                                                <td> <input type=input
+                                                                                        name=withdraw_principal_duration0
+                                                                                        value="" class="inpts nosize"
+                                                                                        size=4> <input type=input
+                                                                                        name=withdraw_principal_duration1
+                                                                                        value="" class="inpts nosize"
+                                                                                        size=4> <input type=input
+                                                                                        name=withdraw_principal_duration2
+                                                                                        value="" class="inpts nosize"
+                                                                                        size=4> <input type=input
+                                                                                        name=withdraw_principal_duration3
+                                                                                        value="" class="inpts nosize"
+                                                                                        size=4> </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <th>Principal Release Fee (%):
+                                                                    </td>
+                                                                    <td> <input type=input
+                                                                            name=withdraw_principal_percent0 value=""
+                                                                            class="inpts nosize" size=4> <input
+                                                                            type=input name=withdraw_principal_percent1
+                                                                            value="" class="inpts nosize" size=4> <input
+                                                                            type=input name=withdraw_principal_percent2
+                                                                            value="" class="inpts nosize" size=4> <input
+                                                                            type=input name=withdraw_principal_percent3
+                                                                            value="" class="inpts nosize" size=4> </td>
+                                                                </tr>
+                                                            </table> <small>Start duration is 0. To deny principal
+                                                                withdraw set 100% fee for duration.</small>
+                                                    </td>
+                                                </tr>
+                                                <tr id=tr_release4>
+                                                    <th>Maximal Principal Release Period:</th>
+                                                    <td><input type=input name=withdraw_principal_duration_max value=""
+                                                            class="inpts nosize"> days from deposit start <small>(set 0
+                                                            to skip limit)</small></td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan=2></td>
+                                                </tr>
+                                                <tr id="tr_work_week">
+                                                    <th><a data-hlp="Earnings will crdit on user accounts on work days (Mon-Fri) only"
+                                                            class=hlp>Work days earnings only<br>(Mon-Fri):</a></th>
+                                                    <td colspan=2> <select name=work_week class=inpts>
+                                                            <option value=0 selected>Disable</option>
+                                                            <option value=1>Enable</option>
+                                                        </select> </td>
+                                                </tr>
+                                                <tr>
+                                                    <th><a data-hlp="Administrator can select a parent package. Then users should deposit to parent package before depositing to this one"
+                                                            class=hlp>Require "parent" Package Deposit:</a></th>
+                                                    <td>
+                                                        <!--input type=checkbox name=parentch value=1 ><br-->
+                                                        <select name=parent class=inpts>
+                                                            <option value=0>Disable</option>
+                                                            <option value="1">8% After 24 hours
+                                                            <option value="2">16% After 24 hours
+                                                            <option value="3">33% After 48 hours
+                                                        </select>
+                                                    </td>
+                                                </tr>
+                                                <tr id="tr_hold_earnigs">
+                                                    <th>Hold earnings on account some days after payout:</th>
+                                                    <td> <input type=text name=hold value="" class="inpts nosize"
+                                                            size=5> days <small>(set 0 to disable this feature)</small>
+                                                    </td>
+                                                </tr>
+                                                <tr id="tr_delay_earnigs">
+                                                    <th>Delay earning for some days since deposit:</th>
+                                                    <td> <input type=text name=delay value="" class="inpts nosize"
+                                                            size=5 onchange="CheckCompound();"> days <small>(set 0 to
+                                                            disable this feature)</small> </td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Limit User Active Deposits Number:</th>
+                                                    <td colspan=2> <input type=text name=deposits_limit_num value=""
+                                                            class="inpts nosize" size=5> deposits (per user) <small>(set
+                                                            0 to skip)</small> </td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Limit User Active Deposits Amount:</th>
+                                                    <td> $<input type=text name=active_deposits_limit_amount
+                                                            value="0.00" class="inpts nosize" size=10> (per user)
+                                                        <small>(set 0 to skip)</small> </td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Deposit Source Limits:</th>
+                                                    <td> <input type=checkbox name=allow_internal_deps value=1 checked>
+                                                        Accept deposits from account balance<br> <input type=checkbox
+                                                            name=allow_external_deps value=1 checked> Accept deposits
+                                                        from payment processings </td>
+                                                </tr>
+                                            </table> <br>
+                                            <script
+                                                language=javascript> function CheckDailyPlan() { if (document.nform.hperiod[document.nform.hperiod.selectedIndex].value == "d") { document.nform.work_week.disabled = false; } else if (document.nform.hperiod[document.nform.hperiod.selectedIndex].value == "h" && document.nform.hq_days.value >= 24 * 7) { document.nform.work_week.disabled = false; } else { document.nform.work_week.disabled = true; } } function checkb(flag) {
+                                                        var frm = document.nform; var flg = frm.hq_days_nolimit.checked; frm.hq_days.disabled = flg; frm.hreturn_profit.disabled = flg; frm.hreturn_profit_percent.disabled = flg; if (flg) { document.getElementById("duration_with_end").style.display = "none"; document.getElementById("duration_divider").style.display = "none"; for (i = 0; i < frm.hperiod.options.length; i++) { if (frm.hperiod.options[i].value.substr(0, 3) == "end") { if (frm.hperiod.selectedIndex == i) frm.hperiod.selectedIndex = 0; frm.hperiod.options[i] = null; i--; } } } else { document.getElementById("duration_with_end").style.display = ""; document.getElementById("duration_divider").style.display = ""; i = frm.hperiod.options.length; if (frm.hperiod.options[i - 1].value != "end") { frm.hperiod.options[i] = new Option("After the specifeid Hours", "endh"); frm.hperiod.options[i + 1] = new Option("After the specifeid Days", "end"); } } change_days_hours_label(); // if (!flag) { }
+                                                    } function checkc() { var show_release = 0; var display_type = "none"; if (document.nform.withdraw_principal.selectedIndex == 1) { show_release = 1; display_type = "table-row"; } document.getElementById("tr_release2").style.display = display_type; document.getElementById("tr_release3").style.display = display_type; document.getElementById("tr_release4").style.display = display_type; for (i = 0; i < 4; i++) { document.nform["withdraw_principal_percent" + i].disabled = (show_release) ? false : true; document.nform["withdraw_principal_duration" + i].disabled = (show_release) ? false : true; } document.nform.withdraw_principal_duration_max.disabled = (show_release) ? false : true; document.nform.withdraw_principal_full.disabled = (show_release) ? false : true; } function checkrd() { var sts = document.nform.hreturn_profit.selectedIndex == 1 ? false : true; document.getElementById("return_profit_percent").style.display = sts ? "none" : ""; document.nform.hreturn_profit_percent.disabled = sts; if (document.nform.compound_return) { if (document.nform.use_compound.selectedIndex == 0) { sts = false; } document.getElementById("tr_compouding4").style.display = sts ? "" : "none"; } } checkrd();  </script>
+                                            <br> <input type=hidden name=a value="programs"> <input type=hidden
+                                                name=action value="edit"> <input type=hidden name=do value="save">
+                                                                                                                                                                                                    <p class="alert alert-warning" id="errMessage" style="font-weight: bolder;"></p>
+
+                                            <center> <input type=submit value="Save" class="sbmt btn btn-success" id="save" >
+                                            </center>
+                                            </form> <br>
+                                            <script
+                                                src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+                                            <script
+                                                src="https://cdnjs.cloudflare.com/ajax/libs/highcharts/6.0.7/highcharts.js"></script>
+                                            <script> var currencyPow = 2; var chart_options = { chart: { type: "line" }, title: { text: "Earnings Preview" }, subtitle: { text: "" }, legend: { enabled: false }, xAxis: { type: "datetime", labels: { format: "{value:%b %e}" } }, yAxis: { min: 0, title: { text: "Amount" } }, tooltip: { headerFormat: "<span style=font-size:10px>{point.key}</span><table>", pointFormat: "<tr><td style=color:{series.color};padding:0>{series.name}: </td>" + "<td style=padding:0 nowrap><b>{point.y}</b></td></tr>", footerFormat: "</table>", xDateFormat: "%b %e", shared: true, useHTML: true }, plotOptions: { column: { pointPadding: 0.2, borderWidth: 0 } } }; chart_options.tooltip.valuePrefix = "$"; $(document).ready(function () { drawGraph(); }); function drawGraph() { var data = CalculateProfit(); if (!data) { data = {}; data.profit = []; data.reinv = []; data.earn = []; } var series = [{ "name": "Profit", "color": "#ffbb00", "data": data.profit }, { "name": "Principal", "color": "#00c292", "data": data.reinv }, { "name": "Earning", "color": "#92c200", "data": data.earn },]; chart_options.series = series; $("#chart_earnings").highcharts(chart_options); } function CalculateProfit() { var error = ""; var calc_amount = parseFloat(document.getElementById("calc_deposit").value); if (isNaN(calc_amount)) error = "Invalid Deposit Amount"; if (error) { showError(error); return; } var parCompound = parseInt(document.getElementById("calc_compound").value); if (isNaN(parCompound)) error = "Invalid Compound Value"; if (error) { showError(error); return; } var parPercent = 0; var percs = document.nform.elements["rate_percent[]"]; var mins = document.getElementsByClassName("rate_min_amount"); var maxs = document.getElementsByClassName("rate_max_amount"); for (i = 0; i < percs.length; i++) { var max = parseFloat(maxs[i].value); if (isNaN(max)) max = 0; var min = parseFloat(mins[i].value); if (isNaN(min)) min = 0; var pers = parseFloat(percs[i].value); if (isNaN(pers)) pers = 0; if (min <= calc_amount && (max == 0 || max >= calc_amount)) { parPercent = pers; break; } } if (parPercent == 0) error = "Percent not found for entered Deposit"; if (error) { showError(error); return; } var durScale = "d"; var periodMul = 1; var periodScale = document.nform.hperiod.value; var matches = periodScale.match(/^(\d+)(\w)/); if (matches) { periodMul = matches[1]; periodScale = matches[2]; } if (periodMul < 1) { periodMul = 1; } if (periodScale == "b-w") { periodMul = 2; periodScale = "w"; } if (periodScale == "h" || periodScale == "endh") { durScale = "h"; } if (periodScale == "d" && document.nform.work_week.checked) { periodScale = "wd"; } var durNum = parseInt(document.nform.hq_days.value); if (isNaN(durNum)) error = "Package Duration is not set"; if (error) { showError(error); return; } if (document.nform.hq_days_nolimit.checked) { durNum = 365; } var principalBack = 0; if (document.nform.hreturn_profit.selectedIndex == 1) { var principalBack = 100; var hold_percent = parseFloat(document.nform.hreturn_profit_percent.value); if (isNaN(hold_percent)) hold_percent = 0; principalBack -= hold_percent; } var compoundBack = 0; if (document.nform.compound_return.selectedIndex == 1) { var compoundBack = 100; } showError(""); error = null; var todayDate = new Date(); todayDate.setHours(0); todayDate.setMinutes(0); todayDate.setSeconds(0); todayDate.setMilliseconds(0); var today = todayDate.getTime(); var endDate = new Date(); endDate.setHours(0); endDate.setMinutes(0); endDate.setSeconds(0); endDate.setMilliseconds(0); switch (durScale) { case "h": endDate.setTime(today + durNum * 60 * 60 * 1000); break; case "d": endDate.setTime(today + durNum * 24 * 60 * 60 * 1000); break; } var principal = reinv = calc_amount; var profit = principal * (principalBack / 100); creinv = []; cprofit = []; cearn = []; var curDate = new Date(); curDate.setHours(0); curDate.setMinutes(0); curDate.setSeconds(0); curDate.setMilliseconds(0); creinv.push([curDate.getTime(), reinv.toFixed(currencyPow) * 1]); cprofit.push([curDate.getTime(), profit.toFixed(currencyPow) * 1]); cearn.push([curDate.getTime(), 0]); var earnDay = true; while (curDate.getTime() < endDate.getTime()) { switch (periodScale) { case "end": case "endh": curDate = endDate; parCompound = 0; break; case "h": curDate.setTime(curDate.getTime() + periodMul * 60 * 60 * 1000); break; case "d": curDate.setTime(curDate.getTime() + periodMul * 24 * 60 * 60 * 1000); break; case "wd": curDate.setTime(curDate.getTime() + periodMul * 24 * 60 * 60 * 1000); earnDay = (curDate.getDay() == 0 || curDate.getDay() == 6) ? false : true; break; case "w": curDate.setTime(curDate.getTime() + periodMul * 7 * 24 * 60 * 60 * 1000); break; case "m": var years = Math.floor(periodMul / 12); var months = periodMul - years * 12; curDate.setFullYear(curDate.getFullYear() + years, curDate.getMonth() + months, curDate.getDate()); break; case "y": curDate.setFullYear(curDate.getFullYear() + periodMul, curDate.getMonth(), curDate.getDate()); break; } if (earnDay) { var earn = reinv * (parPercent / 100); var comp = earn * (parCompound / 100); var prof = earn - comp; reinv += comp; profit += prof + comp * (principalBack / 100); } creinv.push([curDate.getTime(), reinv.toFixed(currencyPow) * 1]); cprofit.push([curDate.getTime(), profit.toFixed(currencyPow) * 1]); cearn.push([curDate.getTime(), prof.toFixed(currencyPow) * 1]); } if (principalBack == 0 && compoundBack > 0) { profit += reinv - calc_amount; } document.getElementById("chart_principal").innerHTML = numberFormat(principal, currencyPow); document.getElementById("chart_percent").innerHTML = numberFormat(parPercent, 2); document.getElementById("chart_profit").innerHTML = numberFormat(profit, currencyPow); var totalROI = (profit / principal) * 100; document.getElementById("chart_profit_percent").innerHTML = numberFormat(totalROI, 2); document.getElementById("chart_profit_percent").style.color = (totalROI <= 100) ? "red" : "green"; data = {}; data.reinv = creinv; data.profit = cprofit; data.earn = cearn; return data; } function showError(error) { var err = document.getElementById("calc_error"); err.innerHTML = error; err.style.display = ""; if (error == "") err.style.display = "none"; } function numberFormat(number, decimals, dec_point, thousands_sep) { number = (number + "").replace(/[^0-9+\-Ee.]/g, ""); var n = !isFinite(+number) ? 0 : +number, prec = !isFinite(+decimals) ? 0 : Math.abs(decimals), sep = (typeof thousands_sep === "undefined") ? "," : thousands_sep, dec = (typeof dec_point === "undefined") ? "." : dec_point, s = "", toFixedFix = function (n, prec) { var k = Math.pow(10, prec); return "" + Math.round(n * k) / k; }; s = (prec ? toFixedFix(n, prec) : "" + Math.round(n)).split("."); if (s[0].length > 3) { s[0] = s[0].replace(/\B(?=(?:\d{3})+(?!\d))/g, sep); } if ((s[1] || "").length < prec) { s[1] = s[1] || ""; s[1] += new Array(prec - s[1].length + 1).join("0"); } return s.join(dec); } </script>
+                                            <div id="chart_earnings" style="width:100%;height:300px;"></div>
+                                            <table class="form nosize">
+                                                <tr>
+                                                    <th>Principal:</th>
+                                                    <td>$<b id="chart_principal"></b></td>
+                                                    <th>Profit:</th>
+                                                    <td>$<b id="chart_profit"></b></td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Plan Percent:</th>
+                                                    <td><b id="chart_percent"></b>%</td>
+                                                    <th>Total ROI:</th>
+                                                    <td><b id="chart_profit_percent"></b>%</td>
+                                                </tr>
+                                            </table>
+                                            <div class=error id="calc_error" style="display:none"></div>
+                                            <table class="form nosize">
+                                                <tr>
+                                                    <th>Deposit:</th>
+                                                    <td><input type=text id="calc_deposit" value=1000 class=inpts></td>
+                                                    <th id="calc_compound1">Compound:</th>
+                                                    <td id="calc_compound2"><input type="range" min="0" max="100"
+                                                            value="0" step=1 class=inpts id="calc_compound"></td>
+                                                    <td><input type="button" value="Update Chart" class="sbmt btn"
+                                                            onclick="drawGraph()"></td>
+                                                </tr>
+                                            </table>
+                                            <script
+                                                language=javascript> OF(); CheckCompound(); checkb(1); checkc(); checkrd(); </script>
+                                            <div class="alert alert-warning"> Edit your package here.<br> <br> Set a
+                                                name, a package duration and rates. Select a payment period.<br> <br>
+                                                Earnings only on mon-fri:<br> Allow earnings only on working days.<br>
+                                                <br> Allow depositing only after the user has deposited to the following
+                                                package:<br> Administrator can select a 'parent' package. Then users
+                                                should deposit to the parent package before depositing to the current
+                                                one.<br> <br> Compounding:<br> Users can set a compounding percent while
+                                                depositing. For example if one sets the 40% compounding, then the system
+                                                will add 40% of earnings to the deposit, and 60% of earnings to the
+                                                user's account.<br> <br> Compounding deposit amount limits:<br> Here you
+                                                can limit the deposit amount for which compounding is possible.<br> <br>
+                                                Compounding percents limits:<br> You can limit the compounding percent
+                                                here. The range or solid values are possible to specify.<br> <br> Hold
+                                                earnings at account:<br> Use this feature if you like user can withdraw
+                                                earning after several days only.<br><br> Delay earnings:<br> You can set
+                                                initial delay. Then user's deposits start work after specified days only
+                                                <br><br> Example 1.<br> Creating a package for unlimited period with
+                                                1.2% daily:<br> Set the name, the rates, check 'no limit' in the
+                                                duration field, select the 'daily' payment period, set the 'active'
+                                                status.<br> Users will receive 1.2% daily for the unlimited period.<br>
+                                                <br> Example 2.<br> Creating a package for 30 days with 1.3% daily:<br>
+                                                Set the name, the rates, type 30 in the duration field, select the
+                                                'daily' payment period, set the 'active' status and check 'return
+                                                principal'.<br> Users will receive 1.3% daily for 30 days and get their
+                                                deposit back after 30 days. If they deposit $100, they will receive
+                                                $100*0.013*30 + $100 (return principal) = $139.<br> <br> Example 3.<br>
+                                                Creating a package for 1 year with 1.3% daily:<br> Set the name, the
+                                                rates, type 365 in the package duration field, select 'daily' payment
+                                                period, set 'active' status, do not check 'return principal'<br> Users
+                                                will receive 1.3% daily for 1 year and will not receive his deposit
+                                                after 365 days. If they deposit $100, they will receive $100*0.013*365 =
+                                                $474.5.<br> <br> Example 4.<br> Creating a package for 1 month with rate
+                                                125%<br> Set the name, the rates, type 31 in the package duration field,
+                                                select 'after the specified period' in the payment period field, set
+                                                status 'active' and do not check 'return principal'.<br> Users will
+                                                receive 125% in a month. If one deposits $100, he will receive $100*1.25
+                                                = $125.<br> <br> Example 5.<br> Creating a package for 1 month with 30%
+                                                weekly rate:<br> Set the name, the rates, type 31 in the package
+                                                duration field, select 'weekly' payment period, set 'active' status, do
+                                                not check 'return principal'.<br> Users will receive 30% weekly. If one
+                                                deposits $100, he will receive $100*0.30*4 = $120.<br> <br> </div>
+                                        </td>
+                                    </tr>
+                                </table> <!-- Main: END -->
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+        </td>
+        </tr>
+        <tr>
+            <td height="19" bgcolor="ff8d00">
+                <div align="center" class="forCopyright">Powered with HYIP Manager Pro. <a
+                        href=http://www.goldcoders.com class="forCopyright">GoldCoders.com</a></div>
+            </td>
+        </tr>
+        </table>
+    </center>
+    <script src="javascript/add_investment_program.js"></script>
+</body>
+</html>
+

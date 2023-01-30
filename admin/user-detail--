@@ -1,0 +1,1140 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+    <title>HYIP Manager Pro. Auto-payment, mass payment included.</title>
+    <link href="css/adminstyle.css" rel="stylesheet" type="text/css">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <script src="javascript/user-details.js"></script>
+    <style>
+        .pagination {
+            display: -ms-flexbox;
+            display: flex;
+            padding-left: 0;
+            list-style: none;
+        }
+
+        .page-link {
+            position: relative;
+            display: block;
+            padding: 0.5rem 0.75rem;
+            margin-left: -1px;
+            line-height: 1.25;
+            color: #000;
+            background-color: #fff;
+            border: 1px solid #999;
+        }
+
+        .page-item:first-child .page-link {
+            margin-left: 0;
+            border-top-left-radius: 0.25rem;
+            border-bottom-left-radius: 0.25rem;
+        }
+
+        .page-item:last-child .page-link {
+            border-top-right-radius: 0.25rem;
+            border-bottom-right-radius: 0.25rem;
+        }
+
+        .page-link:hover {
+            z-index: 2;
+            color: #000;
+            text-decoration: none;
+            background-color: #ccc;
+            border-color: #999;
+        }
+
+        .page-link.disabled {
+            color: #999;
+        }
+
+        .page-link.disabled:hover {
+            background-color: #fff;
+        }
+
+        .page-link {
+            cursor: pointer;
+            text-decoration: none;
+            color: #000;
+        }
+
+        .page-item.active .page-link {
+            z-index: 1;
+            color: #000;
+            background-color: #ccc;
+            border-color: #999;
+        }
+
+        .page-item.disabled .page-link {
+            color: #666;
+            pointer-events: none;
+            cursor: auto;
+            background-color: #fff;
+            border-color: #999;
+        }
+
+        .alert {
+            padding: 5px 5px 5px 15px;
+            margin: 2px;
+            border: solid 1px black;
+            display: block;
+        }
+
+        .alert.alert-danger {
+            background: #FFEEEE;
+            border-color: red;
+            color: #660000;
+        }
+
+        .alert.alert-warning {
+            background: #FFFFEE;
+            border-color: yellow;
+            color: #333300;
+        }
+
+        .alert.alert-success {
+            background: #EEFFEE;
+            border-color: green;
+            color: #006600;
+        }
+
+        .alert.alert-info {
+            background: #EEEEFF;
+            border-color: blue;
+            color: #000066;
+        }
+
+        table.form {
+            width: 100%;
+        }
+
+        table.form th {
+            width: 30%;
+            padding: 3px;
+            padding-right: 5px;
+            text-align: right;
+            background: #FFC982;
+            color: #493011;
+        }
+
+        table.form th.title {
+            width: 100%;
+            padding-left: 5px;
+            text-align: left;
+            color: #a45c07;
+        }
+
+        table.form td {
+            width: 70%;
+            padding: 3px;
+            text-align: left;
+            background: #FEF5EA;
+        }
+
+        table.form.nosize td {
+            width: auto;
+        }
+
+        table.form.nosize th {
+            width: auto;
+        }
+
+        table.form thead th {
+            width: auto;
+            padding: 3px;
+            text-align: center;
+            background: #FFC982;
+            color: #FFFFFF;
+        }
+
+        table.form thead td {
+            width: auto;
+            padding: 3px;
+            text-align: left;
+        }
+
+        table.form td input[type=text],
+        table.form td input[type=password],
+        table.form td textarea,
+        table.form td select {
+            width: 100%;
+        }
+
+        table.form td input[type=text].nosize,
+        table.form td input[type=password].nosize,
+        table.form td textarea.nosize,
+        table.form td select.nosize {
+            width: auto;
+        }
+
+        table.form.controls td {
+            background: transparent;
+            width: auto;
+        }
+
+        table.form.controls td input[type=text],
+        table.form.controls td input[type=password],
+        table.form.controls td textarea,
+        table.form.controls td select {
+            margin: 3px;
+        }
+
+        table.list {
+            width: 100%;
+        }
+
+        table.list td {
+            width: auto;
+            padding: 3px;
+        }
+
+        table.list.sub td {
+            width: auto;
+            padding: 1px;
+        }
+
+        table.list th {
+            width: auto;
+            padding: 3px;
+            text-align: center;
+            background: #FFC982;
+            color: #493011;
+        }
+
+        table.list .row1 {
+            background: #FCE7CA;
+        }
+
+        table.list .row2 {
+            background: #FFF3E3;
+        }
+
+        form input[type=submit],
+        form input[type=button],
+        form button,
+        .sbmt {
+            display: inline-block;
+            font-weight: bold;
+            text-align: center;
+            text-decoration: none;
+            white-space: nowrap;
+            vertical-align: middle;
+            user-select: none;
+            border: 1px solid transparent;
+            padding: .25rem .5rem;
+            line-height: 1.5;
+            border-radius: .2rem;
+            border: none;
+        }
+
+        form input[type=submit]:hover,
+        form input[type=button]:hover,
+        form button:hover,
+        .sbmt:hover {
+            background-color: #FAD252;
+        }
+
+        form input[type=submit]:active,
+        form input[type=button]:active,
+        form button:active,
+        .sbmt:active {
+            background-color: #FFC200;
+        }
+
+        form input[type=submit]:focus,
+        form input[type=button]:focus,
+        form button:focus,
+        .sbmt:focus {
+            box-shadow: 0 0 0 .2rem rgba(255, 236, 176, .5);
+        }
+
+        form input[type=submit]:disabled,
+        form input[type=button]:disabled,
+        form button:disabled,
+        .sbmt:disabled {
+            opacity: .65;
+        }
+
+        .btn {
+            cursor: pointer;
+            text-transform: uppercase;
+            margin: 1px;
+        }
+
+        .sbmt.btn-sm {
+            font-size: .525rem;
+            padding: .25rem .35rem;
+            text-transform: uppercase;
+            cursor: pointer;
+            margin: 1px;
+        }
+
+        .btn-success {
+            color: #fff;
+            background-color: #28a745;
+            border-color: #28a745;
+        }
+
+        .btn-success:hover {
+            background-color: #218838 !important;
+            border-color: #1e7e34 !important;
+        }
+
+        .btn-success:focus {
+            background-color: #218838 !important;
+            box-shadow: 0 0 0 .2rem rgba(40, 167, 69, .5) !important;
+        }
+
+        .btn-danger {
+            color: #fff;
+            background-color: #dc3545;
+            border-color: #dc3545;
+        }
+
+        .btn-danger:hover {
+            background-color: #c82333 !important;
+            border-color: #bd2130 !important;
+        }
+
+        .btn-danger:focus {
+            background-color: #c82333 !important;
+            box-shadow: 0 0 0 .2rem rgba(220, 53, 69, .5) !important;
+        }
+
+        .btn-info {
+            color: #fff;
+            background-color: #17a2b8;
+            border-color: #17a2b8;
+        }
+
+        .btn-info:hover {
+            background-color: #138496 !important;
+            border-color: #117a8b !important;
+        }
+
+        .btn-info:focus {
+            background-color: #138496 !important;
+            box-shadow: 0 0 0 .2rem rgba(23, 162, 184, .5) !important;
+        }
+
+        .btn-primary {
+            color: #fff;
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+
+        .btn-primary:hover {
+            background-color: #0069d9 !important;
+            border-color: #0062cc !important;
+        }
+
+        .btn-primary:focus {
+            background-color: #007bff !important;
+            box-shadow: 0 0 0 .2rem rgba(38, 143, 255, .5) !important;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: .25em .4em;
+            font-size: 75%;
+            font-weight: 700;
+            line-height: 1;
+            text-align: center;
+            /*white-space: nowrap;*/
+            vertical-align: baseline;
+            border-radius: .25rem;
+            margin: .25em;
+        }
+
+        .badge-bg {
+            display: inline-block;
+            font-size: .525rem;
+            padding: .25rem .35rem;
+            text-transform: uppercase;
+            font-weight: 700;
+            text-align: center;
+            /*white-space: nowrap;*/
+            vertical-align: baseline;
+            border-radius: .25rem;
+        }
+
+        .badge-success {
+            color: #fff;
+            background-color: #28a745;
+        }
+
+        .badge-info {
+            color: #fff;
+            background-color: #17a2b8;
+        }
+
+        .badge-danger {
+            color: #fff;
+            background-color: #dc3545;
+        }
+
+        .badge-warning {
+            color: #212529;
+            background-color: #ffc107;
+        }
+
+        .badge-primary {
+            color: #fff;
+            background-color: #007bff;
+        }
+
+        .badge.sticker {
+            font-size: 90%;
+        }
+
+        .hide {
+            display: none;
+        }
+
+        .pshead {
+            padding: 3px;
+            background: #FF8D00;
+            margin: 2px 0;
+            font-weight: bold;
+            overflow: hidden;
+        }
+
+        .pshead b {
+            display: block;
+            width: 250px;
+            float: left;
+        }
+
+        .pshead a {
+            float: right;
+        }
+
+        .psettings {
+            display: none;
+        }
+    </style>
+    <style>
+        .nav {
+            --display: flex;
+            --flex-wrap: wrap;
+            padding: 0 .25rem;
+            margin-bottom: 0;
+            list-style: none;
+        }
+
+        .nav-link {
+            border-radius: .25rem;
+            display: block;
+            padding: .5rem 1rem;
+            color: #493011;
+            text-decoration: none;
+            background-color: #FFF3E3;
+            border: solid 1px transparent;
+            -webkit-text-decoration-skip: objects;
+            margin-top: 0.2rem;
+            text-align: left;
+            font-weight: bold;
+        }
+
+        .nav-link:last-child {
+            margin-bottom: 0.2rem;
+        }
+
+        .nav-link:hover {
+            background-color: #FFC982;
+        }
+
+        .nav-link.active {
+            background-color: #FFC982;
+        }
+
+        .nav-link:active,
+        .nav-link:focus {
+            background-color: #FCE7CA
+        }
+
+        .dropdown-toggle.show {
+            border-bottom-right-radius: 0;
+            border-bottom-left-radius: 0;
+        }
+
+        .dropdown-toggle::after {
+            --display: inline-block;
+            display: none;
+            width: 0;
+            height: 0;
+            margin-left: .255em;
+            vertical-align: .255em;
+            content: "";
+            border-top: .3em solid;
+            border-right: .3em solid transparent;
+            border-bottom: 0;
+            border-left: .3em solid transparent;
+            z-index: 1000;
+        }
+
+        .dropdown-menu {
+            --position: absolute;
+            --top: 100%;
+            left: 0;
+            z-index: 1000;
+            --display: none;
+            --float: left;
+            --min-width: 10rem;
+            padding: .5rem 0;
+            margin: 0 0 .125rem 0;
+            --font-size: 1rem;
+            color: #212529;
+            text-align: left;
+            list-style: none;
+            background-color: #fff;
+            background-clip: padding-box;
+            border: 1px solid rgba(0, 0, 0, .15);
+            border-top: 0;
+            border-bottom-right-radius: .25rem;
+            border-bottom-left-radius: .25rem;
+        }
+
+        .dropdown-menu.show {
+            display: block;
+        }
+
+        .dropdown-item {
+            display: block;
+            --width: 100%;
+            padding: .25rem 1rem;
+            clear: both;
+            font-weight: 400;
+            color: #212529;
+            text-align: inherit;
+            --white-space: nowrap;
+            background-color: transparent;
+            border: 0;
+            text-decoration: none;
+        }
+
+        .dropdown-item:hover {
+            background-color: #FCE7CA;
+        }
+
+        .dropdown-item.active {
+            background-color: #FFC982;
+        }
+
+        .dropdown-item:active,
+        .dropdown-item:focus {
+            background-color: #FCE7CA;
+        }
+
+        a.sort_link {
+            cursor: pointer;
+            color: #606060;
+        }
+
+        a.sort_link.active {
+            color: red;
+        }
+
+        a.link.username {
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        b.username {
+            font-size: 1.2em;
+        }
+
+        .hlp.badge {
+            color: #fff;
+            font-size: 100%;
+        }
+
+        .hlp {
+            --font-size: auto;
+            color: black;
+            text-decoration: none;
+            cursor: help;
+            position: relative;
+            display: inline-block;
+        }
+
+        .hlp[title]:after,
+        .hlp[data-hlp]:after {
+            opacity: 0;
+            content: attr(title);
+            position: absolute;
+            top: 100%;
+            left: 0;
+            color: #fff;
+            transition: opacity 0.3s;
+            border-radius: 6px;
+            background-color: #555;
+            padding: 5px 5px;
+            width: 220px;
+            display: none;
+            font-size: 90%;
+            z-index: 1000;
+            text-align: left;
+            white-space: pre-wrap;
+        }
+
+        .hlp[data-hlp]:after {
+            content: attr(data-hlp);
+            white-space: pre-wrap;
+        }
+
+        .hlp[title]:hover:after,
+        .hlp[data-hlp]:hover:after {
+            opacity: 1;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body bgcolor="#FFFFF2" link="#666699" vlink="#666699" alink="#666699" leftmargin="0" topmargin="0" marginwidth="0"
+    marginheight="0">
+    <center>
+        <table width="760" border="0" cellpadding="0" cellspacing="0">
+            <tr>
+                <td valign=top>
+                    <table cellspacing=0 cellpadding=0 border=0 width=100%>
+                        <tr>
+                            <td background="images/ver.gif" bgcolor=#FF8D00><img src="images/top.gif" border="0"
+                                    align=left></td>
+                            <td background="images/ver.gif" bgcolor=#FF8D00 valign=bottom align=right> <span
+                                    style="font-family: verdana; font-size: 12px; color: white"> <b>
+                                        <div id="google_translate_element"></div> <a href=? class=toplink>Home</a>
+                                        &middot; <a href=index.php?a=logout class=toplink>Logout</a>
+                                    </b></span>&nbsp; &nbsp; </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td valign=top>
+                    <table cellspacing=0 cellpadding=1 border=0 width=100% bgcolor=#ff8d00>
+                        <tr>
+                            <td>
+                                <table width="100%" height="100%" border="0" cellpadding="0" cellspacing="0">
+                                    <tr bgcolor="#FFFFFF" valign="top">
+                                        <td width="300" align=center>
+                                            <table cellspacing=0 cellpadding=2 border=0 width="172">
+                                                <tr>
+                                                    <th colspan=2><img src=images/q.gif width=1 height=3></th>
+                                                </tr>
+                                                <tr>
+                                                    <th colspan=2 class=title>Menu</th>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a href="investment-program.html">Investment Programs</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a href="expiring-deposit.html">Expiring
+                                                            Deposits</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt>&nbsp;</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a href="users.html">Users</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a href="account-blacklist.html">Accounts
+                                                            Blacklist</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a href="top-referrals.html">Top Referral
+                                                            Earnings</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt>&nbsp;</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt>&nbsp;</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a href="Transactions.html">Transactions</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a href="withdrawal-request.html">Withdrawal
+                                                            Requests</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a href="add-funds.html">Add
+                                                            Funds</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a
+                                                            href="deposits.html">Deposits</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a
+                                                            href="withdrawals.html">Withdrawals</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a
+                                                            href="earnings.html">Earnings</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a
+                                                            href="referrals.html">Referral</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a
+                                                            href="exchange.html">Exchange</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a href="pending-deposit.html">Pending Deposits</a>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a href="add-bonus.html">Add Bonus</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt>&nbsp;</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt>&nbsp;</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a href="settings.html">Settings</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a href="proccessings.html">Processings</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a href="?a=auto-pay-settings">Auto-Withdrawals
+                                                            Settings</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a href="?a=referrals">Referral Settings</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a href="?a=email_templates">Email Templates</a>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a href="?a=seo_links">Links Replacement</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a href="?a=security">Security</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a href="?a=earning_holidays">Earning Holidays</a>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a href="?a=info_box_settings">Info Box
+                                                            Settings</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a href="?a=exchange_rates">Exchange Rates</a>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a href="?a=maintenance_page">Maintenance Page</a>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt>&nbsp;</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt>&nbsp;</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt>&nbsp;</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a href="?a=check_ips">IPs Check</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a href="?a=newsletter">Send a Newsletter</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a href="?a=custompages">Custom Pages</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a href="?a=news">News</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a href="?a=user_notices">User Notices</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a href="?a=tell_friend">Tell A Friend</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt>&nbsp;</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt>&nbsp;</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a href=?a=logout>Logout</a></td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                        <td bgcolor="#ff8d00" valign="top" width=1><img src=images/q.gif width=1
+                                                height=1></td>
+                                        <td bgcolor="#FFFFFF" valign="top" width=99%>
+                                            <!-- Main: Start -->
+                                            <table width="100%" height="100%" border="0" cellpadding="10"
+                                                cellspacing="0" class="forTexts">
+                                                <tr>
+                                                    <td width=100% height=100% valign=top>
+                                                        <style>
+                                                            .sbmt-group {
+                                                                display: inline-block;
+                                                                float: right;
+                                                            }
+                                                        </style>
+                                                        <h3>User Details: <a href="?a=user_edit&id=441"
+                                                                class="sbmt btn-sm btn-success">edit</a></h3>
+                                                        <table class=form>
+                                                            <tr>
+                                                                <th>Username:</th>
+                                                                <td>Yagami237</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th>Full Name:</th>
+                                                                <td>Ngameni kameni rostand leroy</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th>E-mail:</th>
+                                                                <td><a
+                                                                        href="/cdn-cgi/l/email-protection#c6aaa3b4a9bfaba3a8afa1a7a5b4f186a1aba7afaae8a5a9ab"><span
+                                                                            class="__cf_email__"
+                                                                            data-cfemail="d9b5bcabb6a0b4bcb7b0beb8baabee99beb4b8b0b5f7bab6b4">[email&#160;protected]</span>
+                                                                </td>
+                                                            </tr>
+                                                        </table> <br>
+                                                        <table class=list>
+                                                            <tr>
+                                                                <th>Processing</th>
+                                                                <th>Balance</th>
+                                                                <th>Account</th>
+                                                            </tr>
+                                                            <tr>
+                                                                <th style="text-align:right">Bitcoin <img
+                                                                        src="images/1006.gif" height=17 witdth=44
+                                                                        align=absmiddle></th>
+                                                                <td>$0.00</td>
+                                                                <td> Wallet Address:
+                                                                    1Mm3GZb8gB2gxbYiy7mwg4esXJWbgvLD8K<br> </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th style="text-align:right">Ethereum <img
+                                                                        src="images/1007.gif" height=17 witdth=44
+                                                                        align=absmiddle></th>
+                                                                <td>$0.00</td>
+                                                                <td> Wallet Address:
+                                                                    0x4c96d7230f775f7c5998d18c8dc168867edb3591<br> </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th style="text-align:right">Perfect Money <img
+                                                                        src="images/1008.gif" height=17 witdth=44
+                                                                        align=absmiddle></th>
+                                                                <td>$0.00</td>
+                                                                <td> Account ID: <i>n/a</i><br> </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th style="text-align:right">Payeer <img
+                                                                        src="images/1009.gif" height=17 witdth=44
+                                                                        align=absmiddle></th>
+                                                                <td>$0.00</td>
+                                                                <td> Account ID: <i>n/a</i><br> </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th style="text-align:right">USDT (TRC20) <img
+                                                                        src="images/1010.gif" height=17 witdth=44
+                                                                        align=absmiddle></th>
+                                                                <td>$0.00</td>
+                                                                <td> Wallet Address:
+                                                                    TJfnCFEZSdyL625GgRq3i4nQDM9nxmTMTw<br> </td>
+                                                            </tr>
+                                                        </table> <br>
+                                                        <table class=form>
+                                                            <tr>
+                                                                <th>Total Balance:</th>
+                                                                <td>$0.00 <div class="sbmt-group"> <a
+                                                                            href="?a=transactions&userid=441"
+                                                                            class="sbmt btn-sm btn-info">history</a>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th>Total Deposit:</th>
+                                                                <td>$4113.71 <div class="sbmt-group"><a
+                                                                            href="?a=transactions&userid=441&ttype=deposit"
+                                                                            class="sbmt btn-sm btn-info"
+                                                                            style="float:right">history</a></div>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th>Active Deposit:</th>
+                                                                <td>$477.86 <div class="sbmt-group"> <a
+                                                                            href="?a=user_deposits&id=441&ttype=deposit"
+                                                                            class="sbmt btn-sm btn-danger"
+                                                                            style="float:right">manage deposits</a>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th>Total Earning:</th>
+                                                                <td>$290.86 <div class="sbmt-group"><a
+                                                                            href="?a=transactions&userid=441&ttype=earning"
+                                                                            class="sbmt btn-sm btn-info">history</a>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th>Total Withdrawal:</th>
+                                                                <td>$0.00 <div class="sbmt-group"><a
+                                                                            href="?a=user_withdraw_request&userid=441"
+                                                                            class="sbmt btn-sm btn-danger">Withdraw
+                                                                            Request</a> <a
+                                                                            href="?a=transactions&userid=441&ttype=withdrawal"
+                                                                            class="sbmt btn-sm btn-info">history</a>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th>Pending Withdrawals:</th>
+                                                                <td>$0.00 <div class="sbmt-group"><a
+                                                                            href="?a=withdrawal_requests&userid=441"
+                                                                            class="sbmt btn-sm btn-danger">process
+                                                                            withdrawals</a></div>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th>Total Bonus:</th>
+                                                                <td>$0.00 <div class="sbmt-group"> <a
+                                                                            href="?a=add_transactions&userid=441"
+                                                                            class="sbmt btn-sm btn-danger">add a
+                                                                            bonus</a> <a
+                                                                            href="?a=transactions&userid=441&ttype=bonus"
+                                                                            class="sbmt btn-sm btn-info">history</a>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th>Total Penalty:</th>
+                                                                <td>$0.00 <div class="sbmt-group"> <a
+                                                                            href="?a=add_transactions&userid=441&trans_type=penalty"
+                                                                            class="sbmt btn-sm btn-danger">add a
+                                                                            penalty</a> <a
+                                                                            href="?a=transactions&userid=441&ttype=penalty"
+                                                                            class="sbmt btn-sm btn-info">history</a>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th>Referrals 1st Level:</th>
+                                                                <td>1 <div class="sbmt-group"> <a
+                                                                            href="?a=user_refs&id=441"
+                                                                            class="sbmt btn-sm btn-primary">referrals</a>
+                                                                        <a href="?a=user_traffic&id=441"
+                                                                            class="sbmt btn-sm btn-success">traffic</a>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th>Referral Commissions:</th>
+                                                                <td>$0.00 <div class="sbmt-group"><a
+                                                                            href="?a=transactions&userid=441&ttype=commissions"
+                                                                            class="sbmt btn-sm btn-info">history</a>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                        </table> <br>
+                                                        <h3>User IPs:</h3>
+                                                        <table class=list>
+                                                            <tr>
+                                                                <th>IP</th>
+                                                                <th>Last Access</th>
+                                                            </tr>
+                                                            <tr class="row1">
+                                                                <td>102.244.152.96</td>
+                                                                <td>Sep-21-2022 10:36:18 AM (0 hours 11 min)</td>
+                                                            </tr>
+                                                            <tr class="row2">
+                                                                <td>102.244.73.80</td>
+                                                                <td>Sep-19-2022 11:10:54 AM (1 day 23 hours)</td>
+                                                            </tr>
+                                                            <tr class="row1">
+                                                                <td>102.244.73.31</td>
+                                                                <td>Sep-18-2022 11:05:07 AM (2 days 23 hours)</td>
+                                                            </tr>
+                                                            <tr class="row2">
+                                                                <td>102.244.73.196</td>
+                                                                <td>Sep-17-2022 08:27:43 AM (4 days 2 hours)</td>
+                                                            </tr>
+                                                            <tr class="row1">
+                                                                <td>129.0.212.223</td>
+                                                                <td>Sep-16-2022 08:47:38 AM (5 days 2 hours)</td>
+                                                            </tr>
+                                                            <tr class="row2">
+                                                                <td>102.244.73.142</td>
+                                                                <td>Sep-16-2022 05:51:03 AM (5 days 4 hours)</td>
+                                                            </tr>
+                                                            <tr class="row1">
+                                                                <td>102.244.73.4</td>
+                                                                <td>Sep-15-2022 01:54:47 PM (5 days 20 hours)</td>
+                                                            </tr>
+                                                            <tr class="row2">
+                                                                <td>129.0.212.197</td>
+                                                                <td>Sep-15-2022 06:33:21 AM (6 days 4 hours)</td>
+                                                            </tr>
+                                                            <tr class="row1">
+                                                                <td>129.0.212.209</td>
+                                                                <td>Sep-14-2022 07:14:59 PM (6 days 15 hours)</td>
+                                                            </tr>
+                                                            <tr class="row2">
+                                                                <td>102.244.73.64</td>
+                                                                <td>Sep-14-2022 01:21:32 PM (6 days 21 hours)</td>
+                                                            </tr>
+                                                            <tr class="row1">
+                                                                <td>102.244.73.92</td>
+                                                                <td>Sep-13-2022 07:06:45 AM (8 days 3 hours)</td>
+                                                            </tr>
+                                                            <tr class="row2">
+                                                                <td>102.244.73.22</td>
+                                                                <td>Sep-12-2022 04:07:33 PM (8 days 18 hours)</td>
+                                                            </tr>
+                                                            <tr class="row1">
+                                                                <td>102.244.73.198</td>
+                                                                <td>Sep-12-2022 10:19:44 AM (9 days 0 hours)</td>
+                                                            </tr>
+                                                            <tr class="row2">
+                                                                <td>129.0.212.231</td>
+                                                                <td>Sep-12-2022 12:10:35 AM (9 days 10 hours)</td>
+                                                            </tr>
+                                                            <tr class="row1">
+                                                                <td>102.244.73.81</td>
+                                                                <td>Sep-11-2022 06:11:14 PM (9 days 16 hours)</td>
+                                                            </tr>
+                                                            <tr class="row2">
+                                                                <td>102.244.73.46</td>
+                                                                <td>Sep-10-2022 06:37:17 PM (10 days 16 hours)</td>
+                                                            </tr>
+                                                            <tr class="row1">
+                                                                <td>129.0.212.252</td>
+                                                                <td>Sep-9-2022 05:45:08 PM (11 days 17 hours)</td>
+                                                            </tr>
+                                                            <tr class="row2">
+                                                                <td>102.244.73.33</td>
+                                                                <td>Sep-9-2022 05:07:59 PM (11 days 17 hours)</td>
+                                                            </tr>
+                                                            <tr class="row1">
+                                                                <td>102.244.73.153</td>
+                                                                <td>Sep-7-2022 09:53:41 PM (13 days 12 hours)</td>
+                                                            </tr>
+                                                            <tr class="row2">
+                                                                <td>102.244.73.96</td>
+                                                                <td>Sep-6-2022 10:29:48 PM (14 days 12 hours)</td>
+                                                            </tr>
+                                                            <tr class="row1">
+                                                                <td>102.244.73.216</td>
+                                                                <td>Sep-6-2022 05:04:35 PM (14 days 17 hours)</td>
+                                                            </tr>
+                                                            <tr class="row2">
+                                                                <td>102.244.73.154</td>
+                                                                <td>Sep-6-2022 08:55:53 AM (15 days 1 hour)</td>
+                                                            </tr>
+                                                            <tr class="row1">
+                                                                <td>102.244.73.238</td>
+                                                                <td>Sep-5-2022 05:37:24 PM (15 days 17 hours)</td>
+                                                            </tr>
+                                                            <tr class="row2">
+                                                                <td>102.244.73.75</td>
+                                                                <td>Sep-5-2022 08:12:51 AM (16 days 2 hours)</td>
+                                                            </tr>
+                                                            <tr class="row1">
+                                                                <td>102.244.73.120</td>
+                                                                <td>Sep-4-2022 05:48:11 PM (16 days 16 hours)</td>
+                                                            </tr>
+                                                            <tr class="row2">
+                                                                <td>102.244.73.68</td>
+                                                                <td>Sep-3-2022 10:46:02 PM (17 days 12 hours)</td>
+                                                            </tr>
+                                                            <tr class="row1">
+                                                                <td>129.0.212.226</td>
+                                                                <td>Sep-3-2022 04:43:33 PM (17 days 18 hours)</td>
+                                                            </tr>
+                                                            <tr class="row2">
+                                                                <td>102.244.73.107</td>
+                                                                <td>Sep-3-2022 03:45:27 PM (17 days 19 hours)</td>
+                                                            </tr>
+                                                            <tr class="row1">
+                                                                <td>41.202.207.130</td>
+                                                                <td>Sep-1-2022 03:47:28 PM (19 days 19 hours)</td>
+                                                            </tr>
+                                                            <tr class="row2">
+                                                                <td>41.202.207.129</td>
+                                                                <td>Sep-1-2022 02:56:34 PM (19 days 19 hours)</td>
+                                                            </tr>
+                                                            <tr class="row1">
+                                                                <td>198.244.189.135</td>
+                                                                <td>Sep-1-2022 02:51:10 PM (19 days 19 hours)</td>
+                                                            </tr>
+                                                            <tr class="row2">
+                                                                <td>102.244.73.226</td>
+                                                                <td>Aug-27-2022 01:31:04 PM (24 days 21 hours)</td>
+                                                            </tr>
+                                                            <tr class="row1">
+                                                                <td>129.0.208.227</td>
+                                                                <td>Aug-27-2022 12:20:07 AM (25 days 10 hours)</td>
+                                                            </tr>
+                                                            <tr class="row2">
+                                                                <td>102.244.73.212</td>
+                                                                <td>Aug-11-2022 09:57:22 PM (40 days 12 hours)</td>
+                                                            </tr>
+                                                            <tr class="row1">
+                                                                <td>129.0.212.248</td>
+                                                                <td>Jul-17-2022 12:29:14 PM (65 days 22 hours)</td>
+                                                            </tr>
+                                                        </table> <br>
+                                                        <div class="alert alert-warning"> Manage user funds:<br> Account
+                                                            balance: how many funds can the user deposit to any
+                                                            investment package or withdraw from the system.<br> Total
+                                                            deposit: how many funds has the user ever deposited to your
+                                                            system.<br> Total active deposit: the whole current deposit
+                                                            of this user.<br> Total earnings: how many funds has the
+                                                            user ever earned with your system.<br> Total withdrawals:
+                                                            how many funds has the user ever withdrawn from system.<br>
+                                                            Total bonus: how many funds has the administrator ever added
+                                                            to the user account as a bonus.<br> Total penalty: how many
+                                                            funds has the administrator ever deleted from the user
+                                                            account as a penalty.<br> Actions:<br> Transactions history
+                                                            - you can check the transactions history for this user.<br>
+                                                            Active deposits/Transactions history - you can check the
+                                                            deposits history for this user.<br> Earnings history - you
+                                                            can check the earnings history for this user.<br>
+                                                            Withdrawals history - you can check the withdrawals history
+                                                            for this user.<br> Process withdrawals - you can withdraw
+                                                            funds by clicking this link if a user asked you for a
+                                                            withdrawal.<br> Bonuses history - you can check the bonuses
+                                                            history for this user.<br> Penalties history - you can check
+                                                            the penalties history for this user.<br> Add a bonus and add
+                                                            a penalty - add a bonus or a penalty to this user.<br>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </table> <!-- Main: END -->
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td height="19" bgcolor="ff8d00">
+                    <div align="center" class="forCopyright">Powered with HYIP Manager Pro. <a
+                            href=http://www.goldcoders.com class="forCopyright">GoldCoders.com</a></div>
+                </td>
+            </tr>
+        </table>
+    </center>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+</body>
+</html>

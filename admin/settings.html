@@ -1,0 +1,1644 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+    <title>HYIP Manager Pro. Auto-payment, mass payment included.</title>
+    <link href="css/adminstyle.css" rel="stylesheet" type="text/css">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <style>
+        .pagination {
+            display: -ms-flexbox;
+            display: flex;
+            padding-left: 0;
+            list-style: none;
+        }
+
+        .page-link {
+            position: relative;
+            display: block;
+            padding: 0.5rem 0.75rem;
+            margin-left: -1px;
+            line-height: 1.25;
+            color: #000;
+            background-color: #fff;
+            border: 1px solid #999;
+        }
+
+        .page-item:first-child .page-link {
+            margin-left: 0;
+            border-top-left-radius: 0.25rem;
+            border-bottom-left-radius: 0.25rem;
+        }
+
+        .page-item:last-child .page-link {
+            border-top-right-radius: 0.25rem;
+            border-bottom-right-radius: 0.25rem;
+        }
+
+        .page-link:hover {
+            z-index: 2;
+            color: #000;
+            text-decoration: none;
+            background-color: #ccc;
+            border-color: #999;
+        }
+
+        .page-link.disabled {
+            color: #999;
+        }
+
+        .page-link.disabled:hover {
+            background-color: #fff;
+        }
+
+        .page-link {
+            cursor: pointer;
+            text-decoration: none;
+            color: #000;
+        }
+
+        .page-item.active .page-link {
+            z-index: 1;
+            color: #000;
+            background-color: #ccc;
+            border-color: #999;
+        }
+
+        .page-item.disabled .page-link {
+            color: #666;
+            pointer-events: none;
+            cursor: auto;
+            background-color: #fff;
+            border-color: #999;
+        }
+
+        .alert {
+            padding: 5px 5px 5px 15px;
+            margin: 2px;
+            border: solid 1px black;
+            display: block;
+        }
+
+        .alert.alert-danger {
+            background: #FFEEEE;
+            border-color: red;
+            color: #660000;
+        }
+
+        .alert.alert-warning {
+            background: #FFFFEE;
+            border-color: yellow;
+            color: #333300;
+        }
+
+        .alert.alert-success {
+            background: #EEFFEE;
+            border-color: green;
+            color: #006600;
+        }
+
+        .alert.alert-info {
+            background: #EEEEFF;
+            border-color: blue;
+            color: #000066;
+        }
+
+        table.form {
+            width: 100%;
+        }
+
+        table.form th {
+            width: 30%;
+            padding: 3px;
+            padding-right: 5px;
+            text-align: right;
+            background: #FFC982;
+            color: #493011;
+        }
+
+        table.form th.title {
+            width: 100%;
+            padding-left: 5px;
+            text-align: left;
+            color: #a45c07;
+        }
+
+        table.form td {
+            width: 70%;
+            padding: 3px;
+            text-align: left;
+            background: #FEF5EA;
+        }
+
+        table.form.nosize td {
+            width: auto;
+        }
+
+        table.form.nosize th {
+            width: auto;
+        }
+
+        table.form thead th {
+            width: auto;
+            padding: 3px;
+            text-align: center;
+            background: #FFC982;
+            color: #FFFFFF;
+        }
+
+        table.form thead td {
+            width: auto;
+            padding: 3px;
+            text-align: left;
+        }
+
+        table.form td input[type=text],
+        table.form td input[type=password],
+        table.form td textarea,
+        table.form td select {
+            width: 100%;
+        }
+
+        table.form td input[type=text].nosize,
+        table.form td input[type=password].nosize,
+        table.form td textarea.nosize,
+        table.form td select.nosize {
+            width: auto;
+        }
+
+        table.form.controls td {
+            background: transparent;
+            width: auto;
+        }
+
+        table.form.controls td input[type=text],
+        table.form.controls td input[type=password],
+        table.form.controls td textarea,
+        table.form.controls td select {
+            margin: 3px;
+        }
+
+        table.list {
+            width: 100%;
+        }
+
+        table.list td {
+            width: auto;
+            padding: 3px;
+        }
+
+        table.list.sub td {
+            width: auto;
+            padding: 1px;
+        }
+
+        table.list th {
+            width: auto;
+            padding: 3px;
+            text-align: center;
+            background: #FFC982;
+            color: #493011;
+        }
+
+        table.list .row1 {
+            background: #FCE7CA;
+        }
+
+        table.list .row2 {
+            background: #FFF3E3;
+        }
+
+        form input[type=submit],
+        form input[type=button],
+        form button,
+        .sbmt {
+            display: inline-block;
+            font-weight: bold;
+            text-align: center;
+            text-decoration: none;
+            white-space: nowrap;
+            vertical-align: middle;
+            user-select: none;
+            border: 1px solid transparent;
+            padding: .25rem .5rem;
+            line-height: 1.5;
+            border-radius: .2rem;
+            border: none;
+        }
+
+        form input[type=submit]:hover,
+        form input[type=button]:hover,
+        form button:hover,
+        .sbmt:hover {
+            background-color: #FAD252;
+        }
+
+        form input[type=submit]:active,
+        form input[type=button]:active,
+        form button:active,
+        .sbmt:active {
+            background-color: #FFC200;
+        }
+
+        form input[type=submit]:focus,
+        form input[type=button]:focus,
+        form button:focus,
+        .sbmt:focus {
+            box-shadow: 0 0 0 .2rem rgba(255, 236, 176, .5);
+        }
+
+        form input[type=submit]:disabled,
+        form input[type=button]:disabled,
+        form button:disabled,
+        .sbmt:disabled {
+            opacity: .65;
+        }
+
+        .btn {
+            cursor: pointer;
+            text-transform: uppercase;
+            margin: 1px;
+        }
+
+        .sbmt.btn-sm {
+            font-size: .525rem;
+            padding: .25rem .35rem;
+            text-transform: uppercase;
+            cursor: pointer;
+            margin: 1px;
+        }
+
+        .btn-success {
+            color: #fff;
+            background-color: #28a745;
+            border-color: #28a745;
+        }
+
+        .btn-success:hover {
+            background-color: #218838 !important;
+            border-color: #1e7e34 !important;
+        }
+
+        .btn-success:focus {
+            background-color: #218838 !important;
+            box-shadow: 0 0 0 .2rem rgba(40, 167, 69, .5) !important;
+        }
+
+        .btn-danger {
+            color: #fff;
+            background-color: #dc3545;
+            border-color: #dc3545;
+        }
+
+        .btn-danger:hover {
+            background-color: #c82333 !important;
+            border-color: #bd2130 !important;
+        }
+
+        .btn-danger:focus {
+            background-color: #c82333 !important;
+            box-shadow: 0 0 0 .2rem rgba(220, 53, 69, .5) !important;
+        }
+
+        .btn-info {
+            color: #fff;
+            background-color: #17a2b8;
+            border-color: #17a2b8;
+        }
+
+        .btn-info:hover {
+            background-color: #138496 !important;
+            border-color: #117a8b !important;
+        }
+
+        .btn-info:focus {
+            background-color: #138496 !important;
+            box-shadow: 0 0 0 .2rem rgba(23, 162, 184, .5) !important;
+        }
+
+        .btn-primary {
+            color: #fff;
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+
+        .btn-primary:hover {
+            background-color: #0069d9 !important;
+            border-color: #0062cc !important;
+        }
+
+        .btn-primary:focus {
+            background-color: #007bff !important;
+            box-shadow: 0 0 0 .2rem rgba(38, 143, 255, .5) !important;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: .25em .4em;
+            font-size: 75%;
+            font-weight: 700;
+            line-height: 1;
+            text-align: center;
+            /*white-space: nowrap;*/
+            vertical-align: baseline;
+            border-radius: .25rem;
+            margin: .25em;
+        }
+
+        .badge-bg {
+            display: inline-block;
+            font-size: .525rem;
+            padding: .25rem .35rem;
+            text-transform: uppercase;
+            font-weight: 700;
+            text-align: center;
+            /*white-space: nowrap;*/
+            vertical-align: baseline;
+            border-radius: .25rem;
+        }
+
+        .badge-success {
+            color: #fff;
+            background-color: #28a745;
+        }
+
+        .badge-info {
+            color: #fff;
+            background-color: #17a2b8;
+        }
+
+        .badge-danger {
+            color: #fff;
+            background-color: #dc3545;
+        }
+
+        .badge-warning {
+            color: #212529;
+            background-color: #ffc107;
+        }
+
+        .badge-primary {
+            color: #fff;
+            background-color: #007bff;
+        }
+
+        .badge.sticker {
+            font-size: 90%;
+        }
+
+        .hide {
+            display: none;
+        }
+
+        .pshead {
+            padding: 3px;
+            background: #FF8D00;
+            margin: 2px 0;
+            font-weight: bold;
+            overflow: hidden;
+        }
+
+        .pshead b {
+            display: block;
+            width: 250px;
+            float: left;
+        }
+
+        .pshead a {
+            float: right;
+        }
+
+        .psettings {
+            display: none;
+        }
+    </style>
+    <style>
+        .nav {
+            --display: flex;
+            --flex-wrap: wrap;
+            padding: 0 .25rem;
+            margin-bottom: 0;
+            list-style: none;
+        }
+
+        .nav-link {
+            border-radius: .25rem;
+            display: block;
+            padding: .5rem 1rem;
+            color: #493011;
+            text-decoration: none;
+            background-color: #FFF3E3;
+            border: solid 1px transparent;
+            -webkit-text-decoration-skip: objects;
+            margin-top: 0.2rem;
+            text-align: left;
+            font-weight: bold;
+        }
+
+        .nav-link:last-child {
+            margin-bottom: 0.2rem;
+        }
+
+        .nav-link:hover {
+            background-color: #FFC982;
+        }
+
+        .nav-link.active {
+            background-color: #FFC982;
+        }
+
+        .nav-link:active,
+        .nav-link:focus {
+            background-color: #FCE7CA
+        }
+
+        .dropdown-toggle.show {
+            border-bottom-right-radius: 0;
+            border-bottom-left-radius: 0;
+        }
+
+        .dropdown-toggle::after {
+            --display: inline-block;
+            display: none;
+            width: 0;
+            height: 0;
+            margin-left: .255em;
+            vertical-align: .255em;
+            content: "";
+            border-top: .3em solid;
+            border-right: .3em solid transparent;
+            border-bottom: 0;
+            border-left: .3em solid transparent;
+            z-index: 1000;
+        }
+
+        .dropdown-menu {
+            --position: absolute;
+            --top: 100%;
+            left: 0;
+            z-index: 1000;
+            --display: none;
+            --float: left;
+            --min-width: 10rem;
+            padding: .5rem 0;
+            margin: 0 0 .125rem 0;
+            --font-size: 1rem;
+            color: #212529;
+            text-align: left;
+            list-style: none;
+            background-color: #fff;
+            background-clip: padding-box;
+            border: 1px solid rgba(0, 0, 0, .15);
+            border-top: 0;
+            border-bottom-right-radius: .25rem;
+            border-bottom-left-radius: .25rem;
+        }
+
+        .dropdown-menu.show {
+            display: block;
+        }
+
+        .dropdown-item {
+            display: block;
+            --width: 100%;
+            padding: .25rem 1rem;
+            clear: both;
+            font-weight: 400;
+            color: #212529;
+            text-align: inherit;
+            --white-space: nowrap;
+            background-color: transparent;
+            border: 0;
+            text-decoration: none;
+        }
+
+        .dropdown-item:hover {
+            background-color: #FCE7CA;
+        }
+
+        .dropdown-item.active {
+            background-color: #FFC982;
+        }
+
+        .dropdown-item:active,
+        .dropdown-item:focus {
+            background-color: #FCE7CA;
+        }
+
+        a.sort_link {
+            cursor: pointer;
+            color: #606060;
+        }
+
+        a.sort_link.active {
+            color: red;
+        }
+
+        a.link.username {
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        b.username {
+            font-size: 1.2em;
+        }
+
+        .hlp.badge {
+            color: #fff;
+            font-size: 100%;
+        }
+
+        .hlp {
+            --font-size: auto;
+            color: black;
+            text-decoration: none;
+            cursor: help;
+            position: relative;
+            display: inline-block;
+        }
+
+        .hlp[title]:after,
+        .hlp[data-hlp]:after {
+            opacity: 0;
+            content: attr(title);
+            position: absolute;
+            top: 100%;
+            left: 0;
+            color: #fff;
+            transition: opacity 0.3s;
+            border-radius: 6px;
+            background-color: #555;
+            padding: 5px 5px;
+            width: 220px;
+            display: none;
+            font-size: 90%;
+            z-index: 1000;
+            text-align: left;
+            white-space: pre-wrap;
+        }
+
+        .hlp[data-hlp]:after {
+            content: attr(data-hlp);
+            white-space: pre-wrap;
+        }
+
+        .hlp[title]:hover:after,
+        .hlp[data-hlp]:hover:after {
+            opacity: 1;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body bgcolor="#FFFFF2" link="#666699" vlink="#666699" alink="#666699" leftmargin="0" topmargin="0" marginwidth="0"
+    marginheight="0">
+    <center>
+        <table width="760" border="0" cellpadding="0" cellspacing="0">
+            <tr>
+                <td valign=top>
+                    <table cellspacing=0 cellpadding=0 border=0 width=100%>
+                        <tr>
+                            <td background="images/ver.gif" bgcolor=#FF8D00><img src="css/images/top.gif" border="0"
+                                    align=left></td>
+                            <td background="images/ver.gif" bgcolor=#FF8D00 valign=bottom align=right> <span
+                                    style="font-family: verdana; font-size: 12px; color: white"> <b>
+                                        <div id="google_translate_element"></div> <a href=? class=toplink>Home</a>
+                                        &middot; <a href=index.php?a=logout class=toplink>Logout</a>
+                                    </b></span>&nbsp; &nbsp; </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td valign=top>
+                    <table cellspacing=0 cellpadding=1 border=0 width=100% bgcolor=#ff8d00>
+                        <tr>
+                            <td>
+                                <table width="100%" height="100%" border="0" cellpadding="0" cellspacing="0">
+                                    <tr bgcolor="#FFFFFF" valign="top">
+                                        <td width="300" align=center>
+                                            <table cellspacing=0 cellpadding=2 border=0 width="172">
+                                                <tr>
+                                                    <th colspan=2><img src=images/q.gif width=1 height=3></th>
+                                                </tr>
+                                                <tr>
+                                                    <th colspan=2 class=title>Menu</th>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a href="investment-program.html">Investment Programs</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a href="expiring-deposit.html">Expiring
+                                                            Deposits</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt>&nbsp;</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a href="users.html">Users</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a href="account-blacklist.html">Accounts
+                                                            Blacklist</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a href="top-referrals.html">Top Referral
+                                                            Earnings</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt>&nbsp;</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt>&nbsp;</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a href="Transactions.html">Transactions</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a href="withdrawal-request.html">Withdrawal
+                                                            Requests</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a href="add-funds.html">Add
+                                                            Funds</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a
+                                                            href="deposits.html">Deposits</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a
+                                                            href="withdrawals.html">Withdrawals</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a
+                                                            href="earnings.html">Earnings</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a
+                                                            href="referrals.html">Referral</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a
+                                                            href="exchange.html">Exchange</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a href="pending-deposit.html">Pending Deposits</a>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a href="add-bonus.html">Add Bonus</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt>&nbsp;</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt>&nbsp;</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a href="settings.html">Settings</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a href="proccessings.html">Processings</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a href="?a=auto-pay-settings">Auto-Withdrawals
+                                                            Settings</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a href="?a=referrals">Referral Settings</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a href="?a=email_templates">Email Templates</a>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a href="?a=seo_links">Links Replacement</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a href="?a=security">Security</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a href="?a=earning_holidays">Earning Holidays</a>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a href="?a=info_box_settings">Info Box
+                                                            Settings</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a href="?a=exchange_rates">Exchange Rates</a>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a href="?a=maintenance_page">Maintenance Page</a>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt>&nbsp;</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt>&nbsp;</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt>&nbsp;</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a href="?a=check_ips">IPs Check</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a href="?a=newsletter">Send a Newsletter</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a href="?a=custompages">Custom Pages</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a href="?a=news">News</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a href="?a=user_notices">User Notices</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a href="?a=tell_friend">Tell A Friend</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt>&nbsp;</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt>&nbsp;</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a href=?a=logout>Logout</a></td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                        <td bgcolor="#ff8d00" valign="top" width=1><img src=images/q.gif width=1
+                                                height=1></td>
+                                        <td bgcolor="#FFFFFF" valign="top" width=99%>
+                                            <!-- Main: Start -->
+                                            <table width="100%" height="100%" border="0" cellpadding="10"
+                                                cellspacing="0" class="forTexts">
+                                                <tr>
+                                                    <td width=100% height=100% valign=top>
+                                                        <h3>Main Settings:</h3>
+                                                        <script
+                                                            language=javascript> var use_alternative_passphrase = 1; var alternative_passphrase_isset = 0; var ipvar = []; ipvar[0] = ""; ipvar[1] = ""; ipvar[2] = ""; ipvar[3] = ""; ipvar[4] = ""; ipvar[5] = ""; function test_smtp() { if (document.mainform.smtp_host.value == "") { alert("SMTP Host is required"); document.mainform.smtp_host.focus(); return false; } if (document.mainform.smtp_port.value == "") { alert("SMTP Port is required"); document.mainform.smtp_port.focus(); return false; } win = window.open("", "testsmtp", "width=400, height=200, status=0"); document.testsmtp.target = "testsmtp"; document.testsmtp.smtp_secure.value = document.mainform.smtp_secure.options[document.mainform.smtp_secure.selectedIndex].value; document.testsmtp.smtp_host.value = document.mainform.smtp_host.value; document.testsmtp.smtp_port.value = document.mainform.smtp_port.value; document.testsmtp.smtp_user.value = document.mainform.smtp_user.value; document.testsmtp.smtp_pass.value = document.mainform.smtp_pass.value; document.testsmtp.submit(); win.focus(); } function check_form() { var d = document.mainform; if (use_alternative_passphrase && d.use_alternative_passphrase.options[d.use_alternative_passphrase.selectedIndex].value == 1 && d.new_alternative_passphrase.value == "") { alert("Please enter your New Alternative Passphrase!"); d.new_alternative_passphrase.focus(); return false; } if (d.new_alternative_passphrase.value != "" && d.new_alternative_passphrase.value != d.new_alternative_passphrase2.value) { alert("Please, check your Alternative Passphrase!"); d.new_alternative_passphrase2.focus(); return false; } if (alternative_passphrase_isset && d.alternative_passphrase.value == "") { alert("Please enter Alternative Passphrase"); d.alternative_passphrase.focus(); return false; } return true; } /* function setnew_pass(id) { document.getElementById(id+"_div_pass").style.display = "block"; document.getElementById(id+"_hide_link").style.display = "none"; } function setnew_pass_cancel(id) { document.getElementById(id+"_div_pass").style.display = "none"; document.getElementById(id+"_div_pass_reset").checked = false; document.getElementById(id+"_hide_link").style.display = "block"; } */ function ajax_get(url, fsuccess = null, ferror = null) { var xhr = new XMLHttpRequest(); xhr.open("GET", url); xhr.onload = function () { if (xhr.status === 200) { if (fsuccess) { fsuccess(xhr.responseText); } } else { if (ferror) { ferror(xhr.status); } } }; xhr.send(); } function check_proxy() {
+                                                                    var ip = ""; document.getElementById("yourip").innerHTML = ""; ajax_get("https://www.goldcoders.com/ip.php?license={$settings.license}&domain=" + window.location.hostname, function (ret) { _check_proxy(ret); });
+                                                                } function _check_proxy(ip) {
+                                                                    document.getElementById("yourip").innerHTML = "Your IP: <b>" + ip + "</b>"; ipidx = -1; for (i in ipvar) { document.getElementById("ipopt" + i).style.background = "inherit"; if (ipvar[i] && ipvar[i] == ip) { document.getElementById("ipopt" + i).style.background = "#FF9999"; if (ipidx == -1) ipidx = i; } } if (ipidx == -1) { // alert("Detection is failed");
+                                                                    } else { // document.mainform.ddos_type.selectedIndex = ipidx;
+                                                                        document.mainform.ddos_type[ipidx].checked = true;
+                                                                    }
+                                                                } function open_payment_settings(a, ii) { var id = "settings_" + a; document.getElementById(id).style.display = document.getElementById(id).style.display == "table" ? "none" : "table"; } function open_trs(a, ii) { for (i = 1; i <= ii; i++) { obj = document.getElementById(a + "_tr_" + i); if (obj) obj.style.display = ""; } } function close_trs(a, ii) { for (i = 1; i <= ii; i++) { obj = document.getElementById(a + "_tr_" + i); if (obj) obj.style.display = "none"; } }  </script>
+                                                        <script type="text/javascript"
+                                                            src="images/js/jscolor.js"></script>
+                                                        <form name=testsmtp method=post><input type="hidden"
+                                                                name="form_id" value="16659907709474"><input
+                                                                type="hidden" name="form_token"
+                                                                value="ede4944f295a4a62345a213dcaa0a56a"> <input
+                                                                type=hidden name=a value="test_smtp"> <input type=hidden
+                                                                name=smtp_secure> <input type=hidden name=smtp_host>
+                                                            <input type=hidden name=smtp_port> <input type=hidden
+                                                                name=smtp_user> <input type=hidden name=smtp_pass>
+                                                        </form>
+                                                        <form method=post name="mainform"
+                                                            onsubmit="return check_form()"><input type="hidden"
+                                                                name="form_id" value="16659907709474"><input
+                                                                type="hidden" name="form_token"
+                                                                value="ede4944f295a4a62345a213dcaa0a56a"> <input
+                                                                type=hidden name=a value=settings> <input type=hidden
+                                                                name=action value=save> <input type=hidden name=say
+                                                                value="">
+                                                            <table class="form settings">
+                                                                <tr>
+                                                                    <th>Site name:</th>
+                                                                    <td><input type=text name=site_name
+                                                                            value="avropower.ltd" class=inpts size=30>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th>Site url:</th>
+                                                                    <td><input type=text name=site_url
+                                                                            value="https://avropower.ltd" class=inpts
+                                                                            size=30></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th>Start day:</th>
+                                                                    <td> <select name="site_start_Day"
+                                                                            class="inpts nosize">
+                                                                            <option value="1">01</option>
+                                                                            <option value="2">02</option>
+                                                                            <option value="3">03</option>
+                                                                            <option value="4">04</option>
+                                                                            <option value="5">05</option>
+                                                                            <option value="6">06</option>
+                                                                            <option value="7">07</option>
+                                                                            <option value="8">08</option>
+                                                                            <option value="9">09</option>
+                                                                            <option value="10">10</option>
+                                                                            <option value="11" selected="selected">11
+                                                                            </option>
+                                                                            <option value="12">12</option>
+                                                                            <option value="13">13</option>
+                                                                            <option value="14">14</option>
+                                                                            <option value="15">15</option>
+                                                                            <option value="16">16</option>
+                                                                            <option value="17">17</option>
+                                                                            <option value="18">18</option>
+                                                                            <option value="19">19</option>
+                                                                            <option value="20">20</option>
+                                                                            <option value="21">21</option>
+                                                                            <option value="22">22</option>
+                                                                            <option value="23">23</option>
+                                                                            <option value="24">24</option>
+                                                                            <option value="25">25</option>
+                                                                            <option value="26">26</option>
+                                                                            <option value="27">27</option>
+                                                                            <option value="28">28</option>
+                                                                            <option value="29">29</option>
+                                                                            <option value="30">30</option>
+                                                                            <option value="31">31</option>
+                                                                        </select>
+                                                                        <select name="site_start_Month"
+                                                                            class="inpts nosize">
+                                                                            <option value="01">01</option>
+                                                                            <option value="02">02</option>
+                                                                            <option value="03">03</option>
+                                                                            <option value="04" selected="selected">04
+                                                                            </option>
+                                                                            <option value="05">05</option>
+                                                                            <option value="06">06</option>
+                                                                            <option value="07">07</option>
+                                                                            <option value="08">08</option>
+                                                                            <option value="09">09</option>
+                                                                            <option value="10">10</option>
+                                                                            <option value="11">11</option>
+                                                                            <option value="12">12</option>
+                                                                        </select>
+                                                                        <select name="site_start_Year"
+                                                                            class="inpts nosize">
+                                                                            <option value="2012">2012</option>
+                                                                            <option value="2013">2013</option>
+                                                                            <option value="2014">2014</option>
+                                                                            <option value="2015" selected="selected">
+                                                                                2015</option>
+                                                                            <option value="2016">2016</option>
+                                                                            <option value="2017">2017</option>
+                                                                            <option value="2018">2018</option>
+                                                                            <option value="2019">2019</option>
+                                                                            <option value="2020">2020</option>
+                                                                            <option value="2021">2021</option>
+                                                                            <option value="2022">2022</option>
+                                                                            <option value="2023">2023</option>
+                                                                        </select>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th>Redirect to HTTPS:</th>
+                                                                    <td> <select name=redirect_to_https
+                                                                            class="inpts nosize">
+                                                                            <option value=0>No
+                                                                            <option value=1 selected>Yes
+                                                                        </select> <small>Do not change this option until
+                                                                            you know how it works exactly. If you are
+                                                                            using redirect from http:// to https:// you
+                                                                            have set &#39;https://&#39; into Site URL
+                                                                            field above!</small>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th>DDoS Protection:</th>
+                                                                    <td>
+                                                                        <table class=list>
+                                                                            <tr>
+                                                                                <th><input type="radio" name="ddos_type"
+                                                                                        value="0"></th>
+                                                                                <td id="ipopt0">
+                                                                                    Default<br><b>172.71.134.118</p>
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <th><input type="radio" name="ddos_type"
+                                                                                        value="1"></th>
+                                                                                <td id="ipopt1">Proxy
+                                                                                    (X-FORWARDED-FOR)<br><b>105.112.214.24
+                                                                                        </p>
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <th><input type="radio" name="ddos_type"
+                                                                                        value="2"></th>
+                                                                                <td id="ipopt2">DDOS Proxy Protection
+                                                                                    (X-REAL-IP)<br><i>N/A</i></td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <th><input type="radio" name="ddos_type"
+                                                                                        value="3" checked></th>
+                                                                                <td id="ipopt3">CloudFlare
+                                                                                    (CF-CONNECTING-IP)<br><b>105.112.214.24
+                                                                                        </p>
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <th><input type="radio" name="ddos_type"
+                                                                                        value="4"></th>
+                                                                                <td id="ipopt4">Sucuri
+                                                                                    (X-SUCURI-CLIENTIP)<br><i>N/A</i>
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <th><input type="radio" name="ddos_type"
+                                                                                        value="5"></th>
+                                                                                <td id="ipopt5">Proxy
+                                                                                    (CLIENT-IP)<br><i>N/A</i></td>
+                                                                            </tr>
+                                                                        </table> <button type="button"
+                                                                            onclick="check_proxy()"
+                                                                            class="sbmt">Detect</button> <span
+                                                                            id="yourip"></span>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td colspan=2>
+                                                                        <div class="alert alert-warning"> Site name:
+                                                                            your site title.<br> Site url: your site
+                                                                            url, without tailing slash
+                                                                            (http://yoursite.com for example).<br>
+                                                                            Start day: shows days online. Select the
+                                                                            date you have launched your site here.<br>
+                                                                            Redirect to HTTPS: Redirects users from HTTP
+                                                                            to HTTPS. Use this option only if you can
+                                                                            access your site using https. You should go
+                                                                            to <a href="https://avropower.ltd"
+                                                                                target=_blank>https://avropower.ltd</a>
+                                                                            and your site will be displayed if the HTTPS
+                                                                            is supported.<br> </div>
+                                                                    </td>
+                                                                </tr>
+                                                            </table> <br>
+                                                            <table class="form settings">
+                                                                <tr>
+                                                                    <th>Processings:</th>
+                                                                    <td class="alert alert-danger"><a
+                                                                            href="?a=processings"
+                                                                            targe=_blank>Processings setup is here</a>
+                                                                    </td>
+                                                                </tr>
+                                                            </table> <br><br>
+                                                            <table class="form settings">
+                                                                <th colspan=2>Administrator login settings:</th>
+                                                </tr>
+                                                <tr>
+                                                    <th>Login:</th>
+                                                    <td><input type=text name="admin_username" class=inpts id="username" placeholder="Login" autocomplete="off"
+                                                            size=30></td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Password:</th>
+                                                    <td><input type="password" name=password id="password" class=inpts autocomplete="off"
+                                                            size=30></td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Retype password:</th>
+                                                    <td><input type=password name=password2 id="password2" value="" class=inpts
+                                                            size=30></td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Administrator E-Mail:</th>
+                                                    <td><input type=text name=admin_email placeholder="Administrator Email" id="admin_email"
+                                                            class=inpts size=30></td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Admin Area Charset:</th>
+                                                    <td><input type=text name=admin_charset id="admin_area_charset" value="UTF-8" class=inpts
+                                                            size=30></td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Show Google Translator:</th>
+                                                    <td> <select name=use_admin_translator class=inpts id="show_google_translator">
+                                                            <option value="No" selected>No
+                                                            <option value="yes">Yes
+                                                        </select> </td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan=2>
+                                                        <div class="alert alert-warning"> Administrator login settings:
+                                                            type a new login and a password here to login the admin
+                                                            area.<br> </div>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                            <table class="form settings">
+                                                <tr>
+                                                    <th colspan=2>Other settings:</th>
+                                                </tr>
+                                                <tr>
+                                                    <th>Reverse left and right columns:</th>
+                                                    <td><select name=reverse_columns class=inpts>
+                                                            <option value=0 selected>No
+                                                            <option value=1>Yes
+                                                        </select> </td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Deny registrations:</th>
+                                                    <td><select name=deny_registration class=inpts>
+                                                            <option value=0 selected>No
+                                                            <option value=1>Yes
+                                                        </select></td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Double opt-in during registration:<br><small>Confirm email
+                                                            address on signup</small></th>
+                                                    <td><select name=use_opt_in class=inpts>
+                                                            <option value=0 selected>No
+                                                            <option value=1>Yes
+                                                        </select></td>
+                                                </tr>
+                                                <!-- top.gif -->
+                                                <tr>
+                                                    <th>System e-mail:</th>
+                                                    <td><input type=text name=system_email value="admin@avropower.ltd"
+                                                            class=inpts size=30></td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Support e-mail:</th>
+                                                    <td><input type=text name=support_email value="" class=inpts
+                                                            size=30></td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Enable Calculator:</th>
+                                                    <td><select name=enable_calculator class=inpts>
+                                                            <option value=0>No
+                                                            <option value=1 selected>Yes
+                                                        </select></td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Use double entry accounting:</th>
+                                                    <td><select name=use_history_balance_mode class=inpts>
+                                                            <option value=0 selected>No
+                                                            <option value=1>Yes
+                                                        </select></td>
+                                                </tr>
+                                                <tr>
+                                                    <th>After user logout move him to:</th>
+                                                    <td><select name=redirect_logout class=inpts>
+                                                            <option value="home">Home
+                                                            <option value="login">Login
+                                                        </select></td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan=2>
+                                                        <div class="alert alert-warning"> Double opt-in when
+                                                            registering: Select &#39;yes&#39; if a user has to confirm
+                                                            the registration. An E-mail with the confirmation code will
+                                                            be sent to the user after he had submitted the registration
+                                                            request.<br> Opt-in e-mail: Confirmation messages will be
+                                                            sent from this e-mail account.<br> System e-mail: All system
+                                                            messages will be sent from this e-mail account.<br> Use user
+                                                            location fields: Adds &quot;Address&quot;, &quot;City&quot;,
+                                                            &quot;State&quot;, &quot;Zip&quot; and &quot;Country&quot;
+                                                            fields to user&#39;s profile.<br> Use double entry
+                                                            accounting: This mod is used for the transactions history
+                                                            screen in both users and admin areas. It shows three
+                                                            different columns - "Debit", "Credit" and "Balance" instead
+                                                            of one "Amount" field.<br> Reverse left and right columns.
+                                                            If the (this) box is unchecked, the user menu will be
+                                                            located on the left and news box on the right. If checked:
+                                                            news on the left, user menu on the right </div>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                            <table class="form settings">
+                                                <tr>
+                                                    <th colspan=2>E-mail Settings:</th>
+                                                </tr>
+                                                <tr>
+                                                    <th>E-mail Charset:</th>
+                                                    <td><input type=text name=mail_charset value="" class=inpts size=30>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Send contact email from user&#39;s email:</th>
+                                                    <td> <select name=user_from_on_contact class=inpts>
+                                                            <option value=0 selected>No
+                                                            <option value=1>Yes
+                                                        </select> <i style="font-size:10;">Your hoster can deny sending
+                                                            mails from your server with email address outside of your
+                                                            domain name - use this settings to No in this case</i> </td>
+                                                </tr>
+                                                <tr>
+                                                    <th>E-mail throw:</th>
+                                                    <td> <select name=mail_method class=inpts
+                                                            onchange="if (this.selectedIndex == 1){open_trs('SMTP', 4);}else{close_trs('SMTP', 4)}">
+                                                            <option value=0 selected>PHP mail() function</option>
+                                                            <option value=1>SMTP</option>
+                                                        </select> </td>
+                                                </tr>
+                                                <tr id="SMTP_tr_1" style="display:none">
+                                                    <th colspan=2>SMTP Settings:</th>
+                                                </tr>
+                                                <tr id="SMTP_tr_2" style="display:none">
+                                                    <th>SMTP Server:</th>
+                                                    <td><select name=smtp_secure class="inpts nosize">
+                                                            <option value="" selected>None</option>
+                                                            <option value="ssl">SSL</option>
+                                                            <option value="tls">TLS</option>
+                                                        </select> <input type=text name=smtp_host value=""
+                                                            class="inpts nosize" size=15> <input type=text
+                                                            name=smtp_port value="0" class="inpts nosize" size=4> <input
+                                                            type=button class=sbmt value="Test SMTP Settings"
+                                                            onclick="test_smtp()"> </td>
+                                                </tr>
+                                                <tr id="SMTP_tr_3" style="display:none">
+                                                    <th>SMTP User:</th>
+                                                    <td><input type=text name=smtp_user value="" class=inpts size=30>
+                                                    </td>
+                                                </tr>
+                                                <tr id="SMTP_tr_4" style="display:none">
+                                                    <th>SMTP Password:</th>
+                                                    <td><input type=password name=smtp_pass value="" class=inpts
+                                                            size=30></td>
+                                                </tr>
+                                            </table> <br>
+                                            <table class="form settings">
+                                                <tr>
+                                                    <th colspan=2>Deposit Settings:</th>
+                                                </tr>
+                                                <tr>
+                                                    <th>Allow Topup Account Balance:</th>
+                                                    <td><select name=use_add_funds class=inpts>
+                                                            <option value=0 selected>No
+                                                            <option value=1>Yes
+                                                        </select></td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Deposit from Balance Fee (%):</th>
+                                                    <td><input type=text name=balance_deposit_fee_percent value="0.00"
+                                                            class=inpts size=30></td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Deposit Memo Template:</th>
+                                                    <td><input type=text name=payment_description
+                                                            value="Deposit to #site_name# User #username#" class=inpts
+                                                            size=30></td>
+                                                </tr>
+                                                <tr>
+                                                    <th colspan=2>Withdrawal Settings:</th>
+                                                </tr>
+                                                <tr>
+                                                    <th>Withdraw Disabled:</th>
+                                                    <td><select name="withdraw_disabled" class=inpts>
+                                                            <option value=0 selected>No</option>
+                                                            <option value=1>Yes</option>
+                                                        </select></td>
+                                                </tr>
+                                                <tr>
+                                                    <th>User Payment Account Required:</th>
+                                                    <td><select name=withdraw_force_account_filled class=inpts>
+                                                            <option value=0 selected>No</option>
+                                                            <option value=1>Yes</option>
+                                                        </select></td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Withdrawal Fees:</th>
+                                                    <td><a href="?a=processings" targe=_blank>Set withdrawal fees per
+                                                            processing</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Max daily withdraw ($):</th>
+                                                    <td><input type=text name=max_daily_withdraw class="inpts nosize"
+                                                            value="0.00" size=6> <small>(set 0 to skip limits)</small>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Limit Withdraw Period:</th>
+                                                    <td> <input type=text name=limit_withdraw_period_times value="0"
+                                                            class="inpts nosize" size=6> times per <select
+                                                            name=limit_withdraw_period_date class="inpts nosize">
+                                                            <option value="n" selected>none</option>
+                                                            <option value="day">day</option>
+                                                            <option value="week">week</option>
+                                                            <option value="month">month</option>
+                                                            <option value="year">year</option>
+                                                            <option value="ever">ever</option>
+                                                        </select> for <select name=limit_withdraw_period_pending_only
+                                                            class="inpts nosize">
+                                                            <option value="0" selected>Processed and Pending</option>
+                                                            <option value="1">Pending only</option>
+                                                        </select> </td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Withdraw Memo Template:</th>
+                                                    <td><input type=text name=withdraw_memo_string
+                                                            value="Withdraw to #username# from #site_name#" class=inpts
+                                                            size=30></td>
+                                                </tr>
+                                                <tr>
+                                                    <th colspan=2>Internal Transfer Settings:</th>
+                                                </tr>
+                                                <th>Allow internal transfer:</th>
+                                                <td><select name=internal_transfer_enabled class=inpts>
+                                                        <option value=0 selected>No
+                                                        <option value=1>Yes
+                                                    </select></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Min Internal Transfer Amount ($):</th>
+                                        <td><input type=text name=internal_transfer_min value="0.00" class=inpts size=6>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Max Internal Transfer Amount ($):</th>
+                                        <td><input type=text name=internal_transfer_max value="0.00" class=inpts size=6>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Internal Transfer Fee (%):</th>
+                                        <td><input type=text name=internal_transfer_fee value="0.00" class=inpts size=6>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Minimal Internal Transfer Fee ($):</th>
+                                        <td><input type=text name=minimum_internal_transfer_fee value="0.00" class=inpts
+                                                size=6></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Internal Transfer Fee Payer:</th>
+                                        <td><select name=internal_transfer_fee_payer class=inpts>
+                                                <option value=1>Receiver
+                                                <option value=0 selected>Payer
+                                            </select></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Limit Transfer Period:</th>
+                                        <td> <input type=text name=limit_transfer_period_times value="0"
+                                                class="inpts nosize" size=6> per <select name=limit_transfer_period_date
+                                                class="inpts nosize">
+                                                <option value="n" selected>none</option>
+                                                <option value="day">day</option>
+                                                <option value="week">week</option>
+                                                <option value="month">month</option>
+                                                <option value="year">year</option>
+                                            </select> </td>
+                                    </tr>
+                                </table>
+                                <table class="form settings">
+                                    <tr>
+                                        <th colspan=2>User Settings:</th>
+                                    </tr>
+                                    <tr>
+                                        <th>Use user location fields:</th>
+                                        <td><select name=use_user_location class=inpts>
+                                                <option value=0 selected>No
+                                                <option value=1>Yes Mandatory
+                                                <option value=2>Yes Optional
+                                            </select></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Minimal user password length:</th>
+                                        <td><input type=text name=min_user_password_length value="0" class=inpts size=6>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Enable 2FA (Two Factor Authentification) for user:</th>
+                                        <td><select name=use_tfa class=inpts>
+                                                <option value=0 selected>No
+                                                <option value=1>Yes
+                                            </select></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Users should use a transaction code to withdraw:</th>
+                                        <td><select name=use_transaction_code class=inpts>
+                                                <option value=0 selected>No
+                                                <option value=1>Yes
+                                            </select></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Minimal transaction code length:</th>
+                                        <td><input type=text name=min_transaction_code_length value="0" class=inpts
+                                                size=6></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Users should use a transaction code to edit account:</th>
+                                        <td><select name=use_transaction_code_edit_account class=inpts>
+                                                <option value=0 selected>No
+                                                <option value=1>Yes
+                                            </select></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Use confirmation code when account update:</th>
+                                        <td><select name=account_update_confirmation class=inpts>
+                                                <option value=0 selected>No
+                                                <option value=1>Yes
+                                            </select></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Change payment accounts:</th>
+                                        <td><select name=usercanchangeegoldacc class=inpts>
+                                                <option value=0>No
+                                                <option value=1 selected>Yes
+                                            </select></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Change e-mail:</th>
+                                        <td><select name=usercanchangeemail class=inpts>
+                                                <option value=0>No
+                                                <option value=1 selected>Yes
+                                            </select></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Notify user of his profile change:</th>
+                                        <td><select name=sendnotify_when_userinfo_changed class=inpts>
+                                                <option value=0>No
+                                                <option value=1 selected>Yes
+                                            </select></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan=2>
+                                            <div class="alert alert-warning"> Here you can specify whether user can
+                                                change his own e-gold or e-mail account after registration.<br> Min user
+                                                password length: Specifies the minimal user password and the transaction
+                                                code length.<br> Also system can send e-mail to user when he changes his
+                                                profile (for security reason).<br> Users should use transaction code to
+                                                withdraw: Specifies an additional password which is needed to do the
+                                                withdrawal. That password can be restored by the administrator only. It
+                                                is stored in MySQL database in plain format. </div>
+                                        </td>
+                                    </tr>
+                                </table>
+                                <script
+                                    language=javascript>  function gen_test_validation_image() { var advanced_values = ""; if (document.mainform.advanced_graph_validation) { if (document.mainform.advanced_graph_validation_min_font_size.value < 14) { document.mainform.advanced_graph_validation_min_font_size.style.backgroundColor = "red"; } else { document.mainform.advanced_graph_validation_min_font_size.style.backgroundColor = "white"; } if (document.mainform.advanced_graph_validation_min_font_size.value > document.mainform.advanced_graph_validation_max_font_size.value) { document.mainform.advanced_graph_validation_max_font_size.style.backgroundColor = "red"; } else { document.mainform.advanced_graph_validation_max_font_size.style.backgroundColor = "white"; } advanced_values += "&advanced_graph_validation=" + document.mainform.advanced_graph_validation.value; advanced_values += "&advanced_graph_validation_min_font_size=" + document.mainform.advanced_graph_validation_min_font_size.value; advanced_values += "&advanced_graph_validation_max_font_size=" + document.mainform.advanced_graph_validation_max_font_size.value; advanced_values += "&advanced_graph_validation_noice=" + document.mainform.advanced_graph_validation_noice.value; advanced_values += "&advanced_graph_validation_wave=" + document.mainform.advanced_graph_validation_wave.value; } if (document.mainform.graph_max_chars.value > 10) { document.mainform.graph_max_chars.value = 10; } if (document.mainform.graph_max_chars.value == 0) { document.mainform.graph_max_chars.value = 3; } img = document.getElementById("test_validation_image"); img.src = ""; img.src = "?a=test_validation_image&graph_max_chars=" + document.mainform.graph_max_chars.value + "&graph_bg_color=" + document.mainform.graph_bg_color.value + "&graph_text_color=" + document.mainform.graph_text_color.value + "&use_number_validation_number=" + (document.mainform.use_number_validation_number.value) + advanced_values + "&rand=" + Math.random(); } function show_hide_sample_image() { idx = document.mainform.graph_validation.selectedIndex; gv_opt = document.mainform.graph_validation.options[idx].value; z = document.getElementById("tr_sample_image_id0"); if (z) z.style.display = (gv_opt > 0 ? "table-row" : "none"); for (i = 1; i < 13; i++) { z = document.getElementById("tr_sample_image_id" + i); if (z) z.style.display = (gv_opt == 1 ? "table-row" : "none"); } for (i = 0; i < 5; i++) { z = document.getElementById("tr_sample_recaptcha_id" + i); if (z) z.style.display = (gv_opt == 2 ? "table-row" : "none"); } if (gv_opt == 1) { show_hide_advanced_image(); } } function show_hide_advanced_image() { for (i = 8; i < 13; i++) { z = document.getElementById("tr_sample_image_id" + i); if (z) z.style.display = (document.mainform.advanced_graph_validation.selectedIndex == 0 ? "none" : "table-row"); } }  </script>
+                                <br>
+                                <table class="form settings">
+                                    <tr>
+                                        <th colspan=2>Turing verification:</th>
+                                    </tr>
+                                    <tr>
+                                        <th>Turing Verification:</th>
+                                        <td> <select name=graph_validation class=inpts
+                                                onchange="show_hide_sample_image()">
+                                                <option value=0 selected>No</option>
+                                                <option value=1>Image</option>
+                                                <option value=2>reCaptcha</option>
+                                            </select> </td>
+                                    </tr>
+                                    <tr id=tr_sample_image_id0>
+                                        <td colspan=2> &nbsp; <input type=checkbox name="graph_validation_check[login]"
+                                                value=1 id="ti_login" checked><label for="ti_login">Login</label><br>
+                                            &nbsp; <input type=checkbox name="graph_validation_check[signup]" value=1
+                                                id="ti_signup" checked><label for="ti_signup">Signup</label><br> &nbsp;
+                                            <input type=checkbox name="graph_validation_check[edit_account]" value=1
+                                                id="ti_edit_account"><label for="ti_edit_account">Edit
+                                                Account</label><br> &nbsp; <input type=checkbox
+                                                name="graph_validation_check[support]" value=1 id="ti_support"
+                                                checked><label for="ti_support">Support</label><br> &nbsp; <input
+                                                type=checkbox name="graph_validation_check[forgot_password]" value=1
+                                                id="ti_forgot_password"><label for="ti_forgot_password">Forgot
+                                                Password</label><br> &nbsp; <input type=checkbox
+                                                name="graph_validation_check[withdrawal]" value=1
+                                                id="ti_withdrawal"><label for="ti_withdrawal">Withdrawal</label><br>
+                                            &nbsp; <input type=checkbox name="graph_validation_check[internal_transfer]"
+                                                value=1 id="ti_internal_transfer"><label
+                                                for="ti_internal_transfer">Internal Transfer</label><br>
+                                        </td>
+                                    </tr>
+                                    <tr id=tr_sample_image_id1>
+                                        <th>Sample:<div class="alert alert-danger"><small>Please be sure you can read
+                                                    sample before save settings</small></div>
+                                        </th>
+                                        <td><img src=?a=test_validation_image id=test_validation_image
+                                                style="min-width:20px;min-height:10px;border:solid 1px #FF8D00;"
+                                                alt="Loading..." align=absmiddle onclick="gen_test_validation_image()">
+                                            <button type=button onclick="gen_test_validation_image()"
+                                                class="sbmt">&#8635;</button>
+                                        </td>
+                                    </tr>
+                                    <!--tr id=tr_sample_image_id2>
+ <td colspan=2><small>Please be sure you can read sample before save settings</small></td> </tr-->
+                                    <tr id=tr_sample_image_id3>
+                                        <th>Number of characters in the turing image:</th>
+                                        <td> <select name=graph_max_chars class=inpts
+                                                onchange="gen_test_validation_image()">
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                                <option value="6" selected>6</option>
+                                                <option value="7">7</option>
+                                                <option value="8">8</option>
+                                                <option value="9">9</option>
+                                                <option value="10">10</option>
+                                            </select> </td>
+                                    </tr>
+                                    <tr id=tr_sample_image_id4>
+                                        <th>Use numbers only</th>
+                                        <td> <select name=use_number_validation_number class=inpts
+                                                onchange="gen_test_validation_image()">
+                                                <option value=0 selected>No</option>
+                                                <option value=1>Yes</option>
+                                            </select> </td>
+                                    </tr>
+                                    <tr id=tr_sample_image_id5>
+                                        <th>Turing image text color:</th>
+                                        <td><input type=text name=graph_text_color value="FF8D00"
+                                                onchange="gen_test_validation_image()" class=color
+                                                style="font-family: Verdana, Arial, Helvetica, sans-serif;font-size: 10px;border: 1px inset #FEE498;border-color: #FF8D00;border-style: solid;"
+                                                size=10></td>
+                                    </tr>
+                                    <tr id=tr_sample_image_id6>
+                                        <th>Turing image bg color:</th>
+                                        <td><input type=text name=graph_bg_color value="FFFFFF"
+                                                onchange="gen_test_validation_image()" class=color
+                                                style="font-family: Verdana, Arial, Helvetica, sans-serif;font-size: 10px;border: 1px inset #FEE498;border-color: #FF8D00;border-style: solid;"
+                                                size=10></td>
+                                    </tr>
+                                    <tr id=tr_sample_image_id7>
+                                        <th>Use advanced turing verification:</th>
+                                        <td> <select name=advanced_graph_validation class=inpts
+                                                onchange="show_hide_advanced_image();gen_test_validation_image()">
+                                                <option value=0 selected>No</option>
+                                                <option value=1>Yes</option>
+                                            </select> </td>
+                                    </tr>
+                                    <tr id=tr_sample_image_id8>
+                                        <th>Use noise:</th>
+                                        <td> <select name=advanced_graph_validation_noice class=inpts
+                                                onchange="gen_test_validation_image()">
+                                                <option value="0" selected value=1>0%</option>
+                                                <option value="10" value=1>10%</option>
+                                                <option value="20" value=1>20%</option>
+                                                <option value="30" value=1>30%</option>
+                                                <option value="40" value=1>40%</option>
+                                                <option value="50" value=1>50%</option>
+                                            </select> </td>
+                                    </tr>
+                                    <tr id=tr_sample_image_id11>
+                                        <th>Use distortion:</th>
+                                        <td> <select name=advanced_graph_validation_wave class=inpts
+                                                onchange="show_hide_advanced_image();gen_test_validation_image()">
+                                                <option value=0 selected>No</option>
+                                                <option value=1>Yes</option>
+                                            </select> </td>
+                                    </tr>
+                                    <tr id=tr_sample_image_id9>
+                                        <th>Font minimal size:</th>
+                                        <td><input type=text name=advanced_graph_validation_min_font_size
+                                                oninput="gen_test_validation_image()" value="0" class=inpts size=10>
+                                        </td>
+                                    </tr>
+                                    <tr id=tr_sample_image_id10>
+                                        <th>Font maximal size:</th>
+                                        <td><input type=text name=advanced_graph_validation_max_font_size
+                                                oninput="gen_test_validation_image()" value="0" class=inpts size=10>
+                                        </td>
+                                    </tr>
+                                    <tr id=tr_sample_image_id12>
+                                        <td colspan=2>
+                                            <div class="alert alert-warning"> Use advanced turing verification:<br>
+                                                Creates a turing image with the font &quot;fonts/font.ttf&quot; (you can
+                                                upload any TTF font into this file).<br> The font size (in a range
+                                                specified in &quot;Font min size&quot; and &quot;Font max size&quot;)
+                                                and angle are random for each char.<br> You can add pixels noise the
+                                                image for less readbility for robots.<br> You can apply distortion
+                                                effect to screw chracters for less readbility for robots. </div>
+                                        </td>
+                                    </tr>
+                                    <tr id=tr_sample_recaptcha_id1>
+                                        <th>ReCAPTCHA Version:</th>
+                                        <td> <select name=recaptcha_version class=inpts>
+                                                <option selected value=2>v2</option>
+                                                <option value=3>v3</option>
+                                            </select>
+                                    </tr>
+                                    <tr id=tr_sample_recaptcha_id2>
+                                        <th>ReCAPTCHA Site Key:</th>
+                                        <td><input type=text name=recaptcha_site_key value="" class=inpts size=10></td>
+                                    </tr>
+                                    <tr id=tr_sample_recaptcha_id3>
+                                        <th>ReCAPTCHA Secret Key:</th>
+                                        <td><input type=text name=recaptcha_secret_key value="" class=inpts size=10>
+                                        </td>
+                                    </tr>
+                                    <tr id=tr_sample_recaptcha_id4>
+                                        <td colspan=2>
+                                            <div class="alert alert-warning">
+                                                <div class="alert alert-danger">Next templates should be update to add
+                                                    &lcub;include file=&quote;captcha.tpl&quote;&rcub; to use with
+                                                    reCpatcha:<br> forgot_password.tpl<br> </div> Please visit <a
+                                                    href="https://www.google.com/recaptcha/" target=_blank>Google
+                                                    reCapatcha</a> page to create Site Key and Secret Key.
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan=2>
+                                            <div class="alert alert-warning"> You can use the turing image for
+                                                verification when users login to the system. It will stop brute force
+                                                scripts from hacking passwords.<br> </div>
+                                        </td>
+                                    </tr>
+                                </table>
+                                <script>gen_test_validation_image();</script> <br>
+                                <table class="form settings">
+                                    <tr>
+                                        <th colspan=2>Brute Force Protection:
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Prevent Brute Force:</th>
+                            <td><select name=brute_force_handler class=inpts>
+                                    <option value=0 selected>No
+                                    <option value=1>Yes
+                                </select></td>
+                        </tr>
+                        <tr>
+                            <th>Max Invalid Attempts:</th>
+                            <td><input type=text name=brute_force_max_tries value="0" class=inpts size=10></td>
+                        </tr>
+                        <tr>
+                            <td colspan=2>
+                                <div class="alert alert-warning"> Prevent Brute Force: Turns on the brute force
+                                    prevention system.<br> Max Invalid Attempts: The number of invalid login tries. The
+                                    login is being blocked if one tries to login more than specified here number of
+                                    times with the invalid password. The e-mail message with an activation link is
+                                    generated and being sent to a user. One cannot login even with a correct password
+                                    before the account activation. </div>
+                            </td>
+                        </tr>
+                    </table> <br>
+                    <table class="form settings">
+                        <tr>
+                            <th colspan=2>Time settings:</th>
+                        </tr>
+                        <tr>
+                            <th>Server time:</th>
+                            <td>17th of October 2022 07:12:50 AM</td>
+                        </tr>
+                        <tr>
+                            <th>System time:</th>
+                            <td>17th of October 2022 07:12:50 AM</td>
+                        </tr>
+                        <tr>
+                            <th>Difference:</th>
+                            <td><input type=text name=time_dif value="0" class="inpts nosize" size=5> hours</td>
+                        </tr>
+                        <tr>
+                            <td colspan=2>
+                                <div class="alert alert-warning"> Change your system time. You can set the system to
+                                    show all dates for your time zone. </div>
+                            </td>
+                        </tr>
+                        <tr> </tr>
+                    </table> <br>
+                    <table class="form settings">
+                        <tr>
+                            <th colspan=2>Administrator Alternative Passphrase:
+                </td>
+            </tr>
+            <tr>
+                <th>Use admin alternative passphrase:</th>
+                <td><select name=use_alternative_passphrase class=inpts>
+                        <option value=0 selected>No
+                        <option value=1>Yes
+                    </select></td>
+            </tr>
+            <tr>
+                <th>New alternative passphrase:</th>
+                <td><input type=password name=new_alternative_passphrase value="" class=inpts size=30></td>
+            </tr>
+            <tr>
+                <th>Confirm New alternative passphrase:</th>
+                <td><input type=password name=new_alternative_passphrase2 value="" class=inpts size=30></td>
+            </tr>
+            <tr>
+                <td colspan=2>
+                    <div class="alert alert-warning"> This feature raises the security level for the administrator area.
+                        If enabled Administrator can change &#39;Settings&#39;, &#39;Proceessings&#39;,
+                        &#39;Auto-Withdrawal Settings&#39; and &#39;Security&#39; properties knowing the Alternative
+                        Passphrase only. </div>
+                </td>
+            </tr>
+        </table> <br>
+        <center> <input type=submit value="Save Settings" id="save" class="btn btn-success sbmt"> </center>
+        </form>
+        <script language="JavaScript"> show_hide_sample_image();  </script>
+        </td>
+        </tr>
+        </table> <!-- Main: END -->
+        </td>
+        </tr>
+        </table>
+        </td>
+        </tr>
+        </table>
+        </td>
+        </tr>
+        <tr>
+            <td height="19" bgcolor="ff8d00">
+                <div align="center" class="forCopyright">Powered with HYIP Manager Pro. <a
+                        href=http://www.goldcoders.com class="forCopyright">GoldCoders.com</a></div>
+            </td>
+        </tr>
+        </table>
+    </center>
+    <script src="javascript/settings.js"></script>
+</body>
+</html>

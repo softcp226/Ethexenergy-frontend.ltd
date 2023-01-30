@@ -1,0 +1,196 @@
+
+
+main.profiler {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  flex-wrap: nowrap;
+  /* left: 10vw; */
+  flex-direction: column;
+  position: relative;
+  top: 50px;
+}
+
+
+
+.user-password-container > input,
+.user-password-container > select,
+.user-password-container > .amount_div,
+.user-profile-container > input,
+.user-profile-container > select,
+.user-profile-container > .amount_div {
+  /* margin: auto; */
+  width: 90%;
+  /* max-width: 80vw; */
+  padding: 17px;
+  border-radius: 5px;
+  border-color: #eee;
+  border: 1px solid #eee;
+  background-color: #eee;
+  margin: 7px;
+}
+
+@media (max-width: 699px) {
+
+  .user-profile-container,
+  .user-password-container {
+    width: 90vw;
+  }
+
+   .user-profile-container,
+  .user-password-container {
+    /* width: 450px;
+  
+    height: 400px; */
+    background-color: #fff;
+    text-align: center;
+    /* max-width: 35vw; */
+  }
+    .user-profile-container > button,
+  .user-password-container > button {
+    width: 150px;
+
+    padding: 8px;
+    border-radius: 5px;
+    border-color: #eee;
+    border: 1px solid #081336;
+    background-color: #081336;
+    color: #fff;
+    margin: auto;
+    /* margin-top: 8px; */
+    margin-left: 14px;
+    border-radius: 7px;
+  }
+}
+
+@media (min-width: 699px) {
+  /* main.profiler {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    left: 10vw;
+    flex-direction: column;
+    margin-top: 50px;
+
+    position: absolute;
+  } */
+
+
+
+
+
+
+main.profiler {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  flex-wrap: nowrap;
+  /* left: 10vw; */
+  flex-direction: row;
+  position: relative;
+  top: 110px;
+}
+
+
+
+.user-password-container > input,
+.user-password-container > select,
+.user-password-container > .amount_div,
+.user-profile-container > input,
+.user-profile-container > select,
+.user-profile-container > .amount_div {
+  /* margin: auto; */
+  width: 90%;
+  /* max-width: 80vw; */
+  padding: 17px;
+  border-radius: 5px;
+  border-color: #eee;
+  border: 1px solid #eee;
+  background-color: #eee;
+  margin: 7px;
+}
+
+
+
+  .user-profile-container > button,
+  .user-password-container > button {
+    width: 170px;
+
+    padding: 15px;
+    border-radius: 5px;
+    border-color: #eee;
+    border: 1px solid #081336;
+    background-color: #081336;
+    color: #fff;
+    margin: auto;
+    margin-top: 8px;
+    margin-left: 10px;
+    border-radius: 7px;
+  }
+
+}
+
+@media (min-width: 1000px) {
+  main.profiler {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-wrap: nowrap;
+    /* left: 10vw; */
+    flex-direction: row;
+    position: relative;
+    top: 110px;
+  }
+
+  .user-profile-container,
+  .user-password-container {
+    /* width: 450px;
+  
+    height: 400px;
+    background-color: #fff;
+    text-align: center; */
+    max-width: 35vw;
+  }
+
+  .user-password-container > input,
+  .user-password-container > select,
+  .user-password-container > .amount_div,
+  .user-profile-container > input,
+  .user-profile-container > select,
+  .user-profile-container > .amount_div {
+    /* margin: auto; */
+    width: 90%;
+    /* max-width: 80vw; */
+    padding: 17px;
+    border-radius: 5px;
+    border-color: #eee;
+    border: 1px solid #eee;
+    background-color: #eee;
+    margin: 7px;
+    /* position: relative;
+  top: 20px;
+  margin-top: 8px; */
+
+    /* -ms-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  -webkit-box-sizing: content-box;
+  box-sizing: content-box; */
+  }
+
+  .user-profile-container > button,
+  .user-password-container > button {
+    width: 200px;
+
+    padding: 15px;
+    border-radius: 5px;
+    border-color: #eee;
+    border: 1px solid #081336;
+    background-color: #081336;
+    color: #fff;
+    margin: auto;
+    margin-top: 8px;
+    margin-left: 10px;
+    border-radius: 7px;
+  }
+}

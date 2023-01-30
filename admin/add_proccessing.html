@@ -1,0 +1,983 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+    <title>HYIP Manager Pro. Auto-payment, mass payment included.</title>
+    <link href="css/adminstyle.css" rel="stylesheet" type="text/css">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <style>
+        .pagination {
+            display: -ms-flexbox;
+            display: flex;
+            padding-left: 0;
+            list-style: none;
+        }
+
+        .page-link {
+            position: relative;
+            display: block;
+            padding: 0.5rem 0.75rem;
+            margin-left: -1px;
+            line-height: 1.25;
+            color: #000;
+            background-color: #fff;
+            border: 1px solid #999;
+        }
+
+        .page-item:first-child .page-link {
+            margin-left: 0;
+            border-top-left-radius: 0.25rem;
+            border-bottom-left-radius: 0.25rem;
+        }
+
+        .page-item:last-child .page-link {
+            border-top-right-radius: 0.25rem;
+            border-bottom-right-radius: 0.25rem;
+        }
+
+        .page-link:hover {
+            z-index: 2;
+            color: #000;
+            text-decoration: none;
+            background-color: #ccc;
+            border-color: #999;
+        }
+
+        .page-link.disabled {
+            color: #999;
+        }
+
+        .page-link.disabled:hover {
+            background-color: #fff;
+        }
+
+        .page-link {
+            cursor: pointer;
+            text-decoration: none;
+            color: #000;
+        }
+
+        .page-item.active .page-link {
+            z-index: 1;
+            color: #000;
+            background-color: #ccc;
+            border-color: #999;
+        }
+
+        .page-item.disabled .page-link {
+            color: #666;
+            pointer-events: none;
+            cursor: auto;
+            background-color: #fff;
+            border-color: #999;
+        }
+
+        .alert {
+            padding: 5px 5px 5px 15px;
+            margin: 2px;
+            border: solid 1px black;
+            display: block;
+        }
+
+        .alert.alert-danger {
+            background: #FFEEEE;
+            border-color: red;
+            color: #660000;
+        }
+
+        .alert.alert-warning {
+            background: #FFFFEE;
+            border-color: yellow;
+            color: #333300;
+        }
+
+        .alert.alert-success {
+            background: #EEFFEE;
+            border-color: green;
+            color: #006600;
+        }
+
+        .alert.alert-info {
+            background: #EEEEFF;
+            border-color: blue;
+            color: #000066;
+        }
+
+        table.form {
+            width: 100%;
+        }
+
+        table.form th {
+            width: 30%;
+            padding: 3px;
+            padding-right: 5px;
+            text-align: right;
+            background: #FFC982;
+            color: #493011;
+        }
+
+        table.form th.title {
+            width: 100%;
+            padding-left: 5px;
+            text-align: left;
+            color: #a45c07;
+        }
+
+        table.form td {
+            width: 70%;
+            padding: 3px;
+            text-align: left;
+            background: #FEF5EA;
+        }
+
+        table.form.nosize td {
+            width: auto;
+        }
+
+        table.form.nosize th {
+            width: auto;
+        }
+
+        table.form thead th {
+            width: auto;
+            padding: 3px;
+            text-align: center;
+            background: #FFC982;
+            color: #FFFFFF;
+        }
+
+        table.form thead td {
+            width: auto;
+            padding: 3px;
+            text-align: left;
+        }
+
+        table.form td input[type=text],
+        table.form td input[type=password],
+        table.form td textarea,
+        table.form td select {
+            width: 100%;
+        }
+
+        table.form td input[type=text].nosize,
+        table.form td input[type=password].nosize,
+        table.form td textarea.nosize,
+        table.form td select.nosize {
+            width: auto;
+        }
+
+        table.form.controls td {
+            background: transparent;
+            width: auto;
+        }
+
+        table.form.controls td input[type=text],
+        table.form.controls td input[type=password],
+        table.form.controls td textarea,
+        table.form.controls td select {
+            margin: 3px;
+        }
+
+        table.list {
+            width: 100%;
+        }
+
+        table.list td {
+            width: auto;
+            padding: 3px;
+        }
+
+        table.list.sub td {
+            width: auto;
+            padding: 1px;
+        }
+
+        table.list th {
+            width: auto;
+            padding: 3px;
+            text-align: center;
+            background: #FFC982;
+            color: #493011;
+        }
+
+        table.list .row1 {
+            background: #FCE7CA;
+        }
+
+        table.list .row2 {
+            background: #FFF3E3;
+        }
+
+        form input[type=submit],
+        form input[type=button],
+        form button,
+        .sbmt {
+            display: inline-block;
+            font-weight: bold;
+            text-align: center;
+            text-decoration: none;
+            white-space: nowrap;
+            vertical-align: middle;
+            user-select: none;
+            border: 1px solid transparent;
+            padding: .25rem .5rem;
+            line-height: 1.5;
+            border-radius: .2rem;
+            border: none;
+        }
+
+        form input[type=submit]:hover,
+        form input[type=button]:hover,
+        form button:hover,
+        .sbmt:hover {
+            background-color: #FAD252;
+        }
+
+        form input[type=submit]:active,
+        form input[type=button]:active,
+        form button:active,
+        .sbmt:active {
+            background-color: #FFC200;
+        }
+
+        form input[type=submit]:focus,
+        form input[type=button]:focus,
+        form button:focus,
+        .sbmt:focus {
+            box-shadow: 0 0 0 .2rem rgba(255, 236, 176, .5);
+        }
+
+        form input[type=submit]:disabled,
+        form input[type=button]:disabled,
+        form button:disabled,
+        .sbmt:disabled {
+            opacity: .65;
+        }
+
+        .btn {
+            cursor: pointer;
+            text-transform: uppercase;
+            margin: 1px;
+        }
+
+        .sbmt.btn-sm {
+            font-size: .525rem;
+            padding: .25rem .35rem;
+            text-transform: uppercase;
+            cursor: pointer;
+            margin: 1px;
+        }
+
+        .btn-success {
+            color: #fff;
+            background-color: #28a745;
+            border-color: #28a745;
+        }
+
+        .btn-success:hover {
+            background-color: #218838 !important;
+            border-color: #1e7e34 !important;
+        }
+
+        .btn-success:focus {
+            background-color: #218838 !important;
+            box-shadow: 0 0 0 .2rem rgba(40, 167, 69, .5) !important;
+        }
+
+        .btn-danger {
+            color: #fff;
+            background-color: #dc3545;
+            border-color: #dc3545;
+        }
+
+        .btn-danger:hover {
+            background-color: #c82333 !important;
+            border-color: #bd2130 !important;
+        }
+
+        .btn-danger:focus {
+            background-color: #c82333 !important;
+            box-shadow: 0 0 0 .2rem rgba(220, 53, 69, .5) !important;
+        }
+
+        .btn-info {
+            color: #fff;
+            background-color: #17a2b8;
+            border-color: #17a2b8;
+        }
+
+        .btn-info:hover {
+            background-color: #138496 !important;
+            border-color: #117a8b !important;
+        }
+
+        .btn-info:focus {
+            background-color: #138496 !important;
+            box-shadow: 0 0 0 .2rem rgba(23, 162, 184, .5) !important;
+        }
+
+        .btn-primary {
+            color: #fff;
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+
+        .btn-primary:hover {
+            background-color: #0069d9 !important;
+            border-color: #0062cc !important;
+        }
+
+        .btn-primary:focus {
+            background-color: #007bff !important;
+            box-shadow: 0 0 0 .2rem rgba(38, 143, 255, .5) !important;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: .25em .4em;
+            font-size: 75%;
+            font-weight: 700;
+            line-height: 1;
+            text-align: center;
+            /*white-space: nowrap;*/
+            vertical-align: baseline;
+            border-radius: .25rem;
+            margin: .25em;
+        }
+
+        .badge-bg {
+            display: inline-block;
+            font-size: .525rem;
+            padding: .25rem .35rem;
+            text-transform: uppercase;
+            font-weight: 700;
+            text-align: center;
+            /*white-space: nowrap;*/
+            vertical-align: baseline;
+            border-radius: .25rem;
+        }
+
+        .badge-success {
+            color: #fff;
+            background-color: #28a745;
+        }
+
+        .badge-info {
+            color: #fff;
+            background-color: #17a2b8;
+        }
+
+        .badge-danger {
+            color: #fff;
+            background-color: #dc3545;
+        }
+
+        .badge-warning {
+            color: #212529;
+            background-color: #ffc107;
+        }
+
+        .badge-primary {
+            color: #fff;
+            background-color: #007bff;
+        }
+
+        .badge.sticker {
+            font-size: 90%;
+        }
+
+        .hide {
+            display: none;
+        }
+
+        .pshead {
+            padding: 3px;
+            background: #FF8D00;
+            margin: 2px 0;
+            font-weight: bold;
+            overflow: hidden;
+        }
+
+        .pshead b {
+            display: block;
+            width: 250px;
+            float: left;
+        }
+
+        .pshead a {
+            float: right;
+        }
+
+        .psettings {
+            display: none;
+        }
+    </style>
+    <style>
+        .nav {
+            --display: flex;
+            --flex-wrap: wrap;
+            padding: 0 .25rem;
+            margin-bottom: 0;
+            list-style: none;
+        }
+
+        .nav-link {
+            border-radius: .25rem;
+            display: block;
+            padding: .5rem 1rem;
+            color: #493011;
+            text-decoration: none;
+            background-color: #FFF3E3;
+            border: solid 1px transparent;
+            -webkit-text-decoration-skip: objects;
+            margin-top: 0.2rem;
+            text-align: left;
+            font-weight: bold;
+        }
+
+        .nav-link:last-child {
+            margin-bottom: 0.2rem;
+        }
+
+        .nav-link:hover {
+            background-color: #FFC982;
+        }
+
+        .nav-link.active {
+            background-color: #FFC982;
+        }
+
+        .nav-link:active,
+        .nav-link:focus {
+            background-color: #FCE7CA
+        }
+
+        .dropdown-toggle.show {
+            border-bottom-right-radius: 0;
+            border-bottom-left-radius: 0;
+        }
+
+        .dropdown-toggle::after {
+            --display: inline-block;
+            display: none;
+            width: 0;
+            height: 0;
+            margin-left: .255em;
+            vertical-align: .255em;
+            content: "";
+            border-top: .3em solid;
+            border-right: .3em solid transparent;
+            border-bottom: 0;
+            border-left: .3em solid transparent;
+            z-index: 1000;
+        }
+
+        .dropdown-menu {
+            --position: absolute;
+            --top: 100%;
+            left: 0;
+            z-index: 1000;
+            --display: none;
+            --float: left;
+            --min-width: 10rem;
+            padding: .5rem 0;
+            margin: 0 0 .125rem 0;
+            --font-size: 1rem;
+            color: #212529;
+            text-align: left;
+            list-style: none;
+            background-color: #fff;
+            background-clip: padding-box;
+            border: 1px solid rgba(0, 0, 0, .15);
+            border-top: 0;
+            border-bottom-right-radius: .25rem;
+            border-bottom-left-radius: .25rem;
+        }
+
+        .dropdown-menu.show {
+            display: block;
+        }
+
+        .dropdown-item {
+            display: block;
+            --width: 100%;
+            padding: .25rem 1rem;
+            clear: both;
+            font-weight: 400;
+            color: #212529;
+            text-align: inherit;
+            --white-space: nowrap;
+            background-color: transparent;
+            border: 0;
+            text-decoration: none;
+        }
+
+        .dropdown-item:hover {
+            background-color: #FCE7CA;
+        }
+
+        .dropdown-item.active {
+            background-color: #FFC982;
+        }
+
+        .dropdown-item:active,
+        .dropdown-item:focus {
+            background-color: #FCE7CA;
+        }
+
+        a.sort_link {
+            cursor: pointer;
+            color: #606060;
+        }
+
+        a.sort_link.active {
+            color: red;
+        }
+
+        a.link.username {
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        b.username {
+            font-size: 1.2em;
+        }
+
+        .hlp.badge {
+            color: #fff;
+            font-size: 100%;
+        }
+
+        .hlp {
+            --font-size: auto;
+            color: black;
+            text-decoration: none;
+            cursor: help;
+            position: relative;
+            display: inline-block;
+        }
+
+        .hlp[title]:after,
+        .hlp[data-hlp]:after {
+            opacity: 0;
+            content: attr(title);
+            position: absolute;
+            top: 100%;
+            left: 0;
+            color: #fff;
+            transition: opacity 0.3s;
+            border-radius: 6px;
+            background-color: #555;
+            padding: 5px 5px;
+            width: 220px;
+            display: none;
+            font-size: 90%;
+            z-index: 1000;
+            text-align: left;
+            white-space: pre-wrap;
+        }
+
+        .hlp[data-hlp]:after {
+            content: attr(data-hlp);
+            white-space: pre-wrap;
+        }
+
+        .hlp[title]:hover:after,
+        .hlp[data-hlp]:hover:after {
+            opacity: 1;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body bgcolor="#FFFFF2" link="#666699" vlink="#666699" alink="#666699" leftmargin="0" topmargin="0" marginwidth="0"
+    marginheight="0">
+    <center>
+        <table width="760" border="0" cellpadding="0" cellspacing="0">
+            <tr>
+                <td valign=top>
+                    <table cellspacing=0 cellpadding=0 border=0 width=100%>
+                        <tr>
+                            <td background="images/ver.gif" bgcolor=#FF8D00><img src="css/images/top.gif" border="0"
+                                    align=left></td>
+                            <td background="images/ver.gif" bgcolor=#FF8D00 valign=bottom align=right> <span
+                                    style="font-family: verdana; font-size: 12px; color: white"> <b>
+                                        <div id="google_translate_element"></div> <a href=? class=toplink>Home</a>
+                                        &middot; <a href=index.php?a=logout class=toplink>Logout</a>
+                                    </b></span>&nbsp; &nbsp; </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td valign=top>
+                    <table cellspacing=0 cellpadding=1 border=0 width=100% bgcolor=#ff8d00>
+                        <tr>
+                            <td>
+                                <table width="100%" height="100%" border="0" cellpadding="0" cellspacing="0">
+                                    <tr bgcolor="#FFFFFF" valign="top">
+                                        <td width="300" align=center>
+                                            <table cellspacing=0 cellpadding=2 border=0 width="172">
+                                                <tr>
+                                                    <th colspan=2><img src=images/q.gif width=1 height=3></th>
+                                                </tr>
+                                                <tr>
+                                                    <th colspan=2 class=title>Menu</th>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a href="investment-program.html">Investment Programs</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a href="expiring-deposit.html">Expiring
+                                                            Deposits</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt>&nbsp;</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a href="users.html">Users</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a href="account-blacklist.html">Accounts
+                                                            Blacklist</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a href="top-referrals.html">Top Referral
+                                                            Earnings</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt>&nbsp;</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt>&nbsp;</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a href="Transactions.html">Transactions</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a href="withdrawal-request.html">Withdrawal
+                                                            Requests</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a href="add-funds.html">Add
+                                                            Funds</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a
+                                                            href="deposits.html">Deposits</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a
+                                                            href="withdrawals.html">Withdrawals</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a
+                                                            href="earnings.html">Earnings</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a
+                                                            href="referrals.html">Referral</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a
+                                                            href="exchange.html">Exchange</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a href="pending-deposit.html">Pending Deposits</a>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a href="add-bonus.html">Add Bonus</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt>&nbsp;</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt>&nbsp;</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a href="settings.html">Settings</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a href="proccessings.html">Processings</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a href="?a=auto-pay-settings">Auto-Withdrawals
+                                                            Settings</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a href="?a=referrals">Referral Settings</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a href="?a=email_templates">Email Templates</a>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a href="?a=seo_links">Links Replacement</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a href="?a=security">Security</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a href="?a=earning_holidays">Earning Holidays</a>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a href="?a=info_box_settings">Info Box
+                                                            Settings</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a href="?a=exchange_rates">Exchange Rates</a>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a href="?a=maintenance_page">Maintenance Page</a>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt>&nbsp;</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt>&nbsp;</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt>&nbsp;</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a href="?a=check_ips">IPs Check</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a href="?a=newsletter">Send a Newsletter</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a href="?a=custompages">Custom Pages</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a href="?a=news">News</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a href="?a=user_notices">User Notices</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a href="?a=tell_friend">Tell A Friend</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt>&nbsp;</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt>&nbsp;</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class=menutxt><a href=?a=logout>Logout</a></td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                        <td bgcolor="#ff8d00" valign="top" width=1><img src=images/q.gif width=1
+                                                height=1></td>
+                                        <td bgcolor="#FFFFFF" valign="top" width=99%>
+                                            <!-- Main: Start -->
+                                            <table width="100%" height="100%" border="0" cellpadding="10"
+                                                cellspacing="0" class="forTexts">
+                                                <tr>
+                                                    <td width=100% height=100% valign=top>
+                                                        <h3>Edit Processing &quot;&quot;</h3>
+                                                        <script> var use_transaction = 0;   function check_asettings() { if (use_transaction && document.formsettings.alternative_passphrase.value == "") { alert("Please enter Alternative Passphrase"); document.formsettings.alternative_passphrase.focus(); return false; } return true; } function setnew_pass(id) { document.getElementById(id+"_div_pass").style.display = "block"; document.getElementById(id+"_hide_link").style.display = "none"; } function setnew_pass_cancel(id) { document.getElementById(id+"_div_pass").style.display = "none"; document.getElementById(id+"_div_pass_reset").checked = false; document.getElementById(id+"_hide_link").style.display = "block"; } function test_autopayment(id, subform, subid) { var frm = document.getElementById("withdraw_settings"+"_"+id+(subid ? "_"+subid : "")); var inpts = frm.getElementsByTagName("input"); var params = ""; if (subform) params = "processing="+subid+"&"; for (i in inpts) { var inpt = inpts[i]; if (inpt.type && (inpt.type.toLowerCase() == "text" || inpt.type.toLowerCase() == "password")) { var name = inpt.name.replace(/^ps_withdraw\[\d+\](\[\d+\])?\[/, "").replace(/\]$/, ""); var val = inpt.value; if (val != "") { params += encodeURIComponent(name)+"="+encodeURIComponent(val)+"&"; } else { alert(inpt.title + " is required"); inpt.focus(); return false; } } } win = window.open("", "test_"+id+subid, "width=400, height=200, status=0"); document.testsettings.target = "test_"+id+subid; document.testsettings.a.value = "processings"; document.testsettings.action.value = "withdraw_test"; document.testsettings.processing.value = id; document.testsettings.params.value = params; document.testsettings.submit(); win.focus(); } function fieldAdd(t) { var tpl1 = document.getElementById(t+"field_tpl"); tpl = tpl1.cloneNode(true); var lst = document.getElementById(t+"field_last"); var prt = lst.parentNode; tpl.style.display = "table-row"; prt.insertBefore(tpl, lst); } function fieldRemove(o) { var tr = o.parentNode.parentNode; var bd = tr.parentNode; bd.removeChild(tr); } function checkFiat() { var d = document.formsettings.fiat; if (!d) return; var s = d.value; s = s.replace(/[^a-zA-Z0-9]/, ""); s = s.toUpperCase(); d.value = s; } function checkFiatPow() { var d = document.formsettings.fiat_pow; if (!d) return; var s = d.value; s = parseInt(s); if (isNaN(s)) s = ""; if (s != "" && s < 0) s = 0; if (s != "" && s > 8) s = 8; d.value = s; } </script>
+                                                        <!-- <form ><input type="hidden"
+                                                                name="form_id" value="16659913396842"><input
+                                                                type="hidden" name="form_token"
+                                                                value="7a3ba5f7767c79b2968a0f8991f8d131"> <input
+                                                                type=hidden name=a> <input type=hidden name=action>
+                                                            <input type=hidden name=acc> <input type=hidden name=pass>
+                                                            <input type=hidden name=code> <input type=hidden name=email>
+                                                            <input type=hidden name=processing> <input type=hidden
+                                                                name=params> </form> -->
+                                                        <!-- <script> function check_form() { var max_auto = parseFloat(document.formsettings.out_amount_max_auto.value); if (isNaN(max_auto)) max_auto = 0; if (document.formsettings.autowithdraw_status.selectedIndex == 1 && max_auto <= 0) { alert("Max auto withdraw value is required"); document.formsettings.out_amount_max_auto.focus(); return false; } return true; } </script> -->
+                                                        <form method=post>
+                                                            <!-- <input type="hidden"
+                                                                name="form_id" value="16659913396842"><input
+                                                                type="hidden" name="form_token"
+                                                                value="7a3ba5f7767c79b2968a0f8991f8d131"> <input
+                                                                type=hidden name=a value=processings> <input type=hidden
+                                                                name=action value=edit> <input type=hidden name=save
+                                                                value=1> <input type=hidden name=id value="1006"> <input
+                                                                type=hidden name=say value=""> -->
+                                                            <table class=form>
+                                                                <tr>
+                                                                    <th>  Processing: </th>
+                                                                    <td> <input type="text" name="name" placeholder="Proccessing" id="name">
+                                                                             </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th> Icon Link: </th>
+                                                                    <td> <input type="text" id="icon_link" name="name" placeholder="ICON LINK"></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th>Status:</th>
+                                                                    <td> <select name="status" class=inpts id="status" >
+                                                                            <option value="inactive">Off</option>
+                                                                            <option value="active" selected>On</option>
+                                                                        </select> </td>
+                                                                </tr>
+                                                            </table>
+                                                            <h3>Deposit:</h3>
+                                                            <table class="form">
+                                                                <tr>
+                                                                    <th>Payment Instructions for Users:</th>
+                                                                    <td><input type="text" style="height: 90px;" id="payment_instruction"  placeholder="Payment instruction">
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th class="title" colspan=2>User Transaction Fields:
+                                                                    </th>
+                                                                <tr>
+                                                                <tr>
+                                                                    <th><input type=button value="-"
+                                                                            onclick="fieldRemove(this)"
+                                                                            class="btn-sm sbmt"></th>
+                                                                    <td><input type="text" name="dfields[]"
+                                                                            value="Transaction ID" class=inpts></td>
+                                                                </tr>
+                                                                <tr id="dfield_last">
+                                                                    <th></th>
+                                                                    <td><input type=button value="+"
+                                                                            onclick="fieldAdd('d')" class="btn-sm sbmt">
+                                                                    </td>
+                                                                </tr>
+                                                                <tr id="dfield_tpl" style="display:none">
+                                                                    <th><input type=button value="-"
+                                                                            onclick="fieldRemove(this)"
+                                                                            class="btn-sm sbmt"></th>
+                                                                    <td><input type="text" name="dfields[]" value=""
+                                                                            class=inpts></td>
+                                                                </tr>
+                                                            </table>
+                                                            <table class="form nosize">
+                                                                <tr>
+                                                                    <th class="title" colspan=4>Deposit Limits:</th>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th>Min ($)</th>
+                                                                    <td><input type=text name="in_amount_min"
+                                                                            class="inpts nosize" value=""></td>
+                                                                    <th>Max ($)</th>
+                                                                    <td><input type=text name="in_amount_max"
+                                                                            class="inpts nosize" value=""></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th class="title" colspan=4>Deposit Fees:</th>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th>Fee (%)</th>
+                                                                    <td><input type=text name="in_percent"
+                                                                            class="inpts nosize" value="0"></td>
+                                                                    <th>Additional Fee ($)</th>
+                                                                    <td><input type=text name="in_add_amount"
+                                                                            class="inpts nosize" value=""></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th>Min ($)</th>
+                                                                    <td><input type=text name="in_fee_min"
+                                                                            class="inpts nosize" value=""></td>
+                                                                    <th>Max ($)</th>
+                                                                    <td><input type=text name="in_fee_max"
+                                                                            class="inpts nosize" value=""></td>
+                                                                </tr>
+                                                            </table> <br><br> <br>
+                                                            <h3>Withdraw:</h3>
+                                                            <table class="form nosize">
+                                                                <tr>
+                                                                    <th class="title" colspan=4>Withdraw Limits:</th>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th>Min ($)</th>
+                                                                    <td><input type=text name="out_amount_min"
+                                                                            class="inpts nosize" value=""></td>
+                                                                    <th>Max ($)</th>
+                                                                    <td><input type=text name="out_amount_max"
+                                                                            class="inpts nosize" value=""></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th class="title" colspan=4>Withdraw Fees:</th>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th>Fee (%)</th>
+                                                                    <td><input type=text name="out_percent"
+                                                                            class="inpts nosize" value="0"></td>
+                                                                    <th>Additional Fee ($)</th>
+                                                                    <td><input type=text name="out_add_amount"
+                                                                            class="inpts nosize" value=""></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th>Min ($)</th>
+                                                                    <td><input type=text name="out_fee_min"
+                                                                            class="inpts nosize" value=""></td>
+                                                                    <th>Max ($)</th>
+                                                                    <td><input type=text name="out_fee_max"
+                                                                            class="inpts nosize" value=""></td>
+                                                                </tr>
+                                                            </table>
+                                                            <table class="form">
+                                                                <tr>
+                                                                    <th class="title" colspan=2>User Account Fields:
+                                                                    </th>
+                                                                <tr>
+                                                                <tr>
+                                                                    <th><input type=button value="-"
+                                                                            onclick="fieldRemove(this)"
+                                                                            class="btn-sm sbmt"></th>
+                                                                    <td><input type="text" name="wfields[]"
+                                                                            value="Wallet Address" class=inpts></td>
+                                                                </tr>
+                                                                <tr id="wfield_last">
+                                                                    <th></th>
+                                                                    <td><input type=button value="+"
+                                                                            onclick="fieldAdd('w')" class="btn-sm sbmt">
+                                                                    </td>
+                                                                </tr>
+                                                                <tr id="wfield_tpl" style="display:none">
+                                                                    <th><input type=button value="-"
+                                                                            onclick="fieldRemove(this)"
+                                                                            class="btn-sm sbmt"></th>
+                                                                    <td><input type="text" name="wfields[]" value=""
+                                                                            class=inpts></td>
+                                                                </tr>
+                                                            </table> <br><br>
+                                                            <p class="alert alert-warning" id="errMessage" style="font-weight: bolder;"> </p>
+                                                            <center> <input type=submit value="Update"
+                                                                    class="btn btn-success sbmt" id="update"> <input type=button
+                                                                    value="Return" class="btn btn-warning sbmt"
+                                                                    onclick="document.location='?a=processings'">
+                                                            </center>
+                                                            <!-- update -->
+                                                        </form> <br><br>
+                                                        <div class="alert alert-warning"> Enter all the user
+                                                            instructions, your account number in this payment system and
+                                                            all the needed information here. You'll see all new user
+                                                            transactions in the "Pending deposits" section.<br> You can
+                                                            also choose the fields a user has to fill after he has
+                                                            transferred the funds to your account. You can ask the user
+                                                            to give you the batch ID or his account number in the
+                                                            corresponding payment system. This information will help you
+                                                            to easily find the transfer or define whether it was really
+                                                            sent. </div>
+                                                    </td>
+                                                </tr>
+                                            </table> <!-- Main: END -->
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td height="19" bgcolor="ff8d00">
+                    <div align="center" class="forCopyright">Powered with HYIP Manager Pro. <a
+                            href=http://www.goldcoders.com class="forCopyright">GoldCoders.com</a></div>
+                </td>
+            </tr>
+        </table>
+    </center>
+    <script src="javascript/add_proccessing.js"></script>
+</body>
+</html>
