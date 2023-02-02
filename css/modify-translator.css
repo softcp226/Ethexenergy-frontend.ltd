@@ -1,0 +1,30 @@
+/* #google_translate_element{
+    margin: auto;
+    top: 0;
+    position:fixed;
+    padding: 0px;
+    text-align: center;
+
+
+} */
+
+#google_translate_element select {
+  background-color: #fff;
+  padding: 10px;
+  border-radius: 5px;
+  /* margin: 4px; */
+  border: 1px solid #c4cad2;
+  box-shadow: 2px 6px 15px 0 rgba(116, 115, 118, 0.02);
+  font-size: 17px;
+  text-align: center;
+
+  align-self: center;
+  justify-self: center;
+}
+
+.skiptranslate.goog-te-gadget{
+    color: #1b2a4e;
+}
+.goog-logo-link {
+  display: none;
+}
