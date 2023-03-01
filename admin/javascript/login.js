@@ -16,6 +16,7 @@ const fetch_admin = async (admin_form) => {
   // console.log(admin_form);
   try {
     const response = await fetch(
+      // "http://localhost:5000/api/admin/login",
       "https://ethexenergy-ltd.glitch.me/api/admin/login",
       {
         method: "POST",

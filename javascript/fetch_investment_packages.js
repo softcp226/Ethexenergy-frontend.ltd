@@ -17,6 +17,8 @@ const setPackages = (investment_package) => {
   try {
     const response = await fetch(
       "https://ethexenergy-ltd.glitch.me/api/investment_packages/fetch",
+      // "http://localhost:5000/api/investment_packages/fetch",
+
       {
         method: "POST",
         headers: { "content-type": "application/json" },
@@ -26,12 +28,12 @@ const setPackages = (investment_package) => {
     const result = await response.json();
     console.log("result", result);
     if (result.error) {
-      alert(result.errMessage);
+      // alert(result.errMessage);
     } else {
       setPackages(result.message);
     }
   } catch (error) {
     console.log(error);
-    alert(error.message);
+    // alert(error.message);
   }
 })();

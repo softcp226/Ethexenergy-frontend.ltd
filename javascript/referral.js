@@ -50,6 +50,7 @@ const setText2 = (user) => {
   try {
     const response = await fetch(
       "https://ethexenergy-ltd.glitch.me/api/user/find",
+      // "http://localhost:5000/api/user/find",
       {
         method: "POST",
         headers: { "content-type": "application/json" },

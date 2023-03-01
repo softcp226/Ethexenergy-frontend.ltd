@@ -24,13 +24,13 @@ const set_payment_proccessing = (data) => {
     const result = await response.json();
     console.log("result", result);
     if (result.error) {
-      alert(result.errMessage);
+      // alert(result.errMessage);
     } else {
       payment_proccessing = result.message;
       set_payment_proccessing(result.message);
     }
   } catch (error) {
     console.log(error);
-    alert(error.message);
+    // alert(error.message);
   }
 })();

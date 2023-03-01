@@ -35,7 +35,7 @@ const setText = (investment_package) => {
     package_max_li.innerHTML = `Max: $${investment_package.max}`;
 
     package_return_li.append(
-      `${investment_package.percentage}% ${investment_package.payment_period} Return`,
+      `${investment_package.percentage}% Return After ${investment_package.payment_period} `,
     );
 
     package_principal_li.innerHTML = "PRINCIPAL WITHDRAWAL";
@@ -63,6 +63,8 @@ const setText = (investment_package) => {
   try {
     const response = await fetch(
       "https://ethexenergy-ltd.glitch.me/api/investment_packages/fetch",
+          //  "http://localhost:5000/api/investment_packages/fetch",
+
       {
         method: "POST",
         headers: { "content-type": "application/json" },

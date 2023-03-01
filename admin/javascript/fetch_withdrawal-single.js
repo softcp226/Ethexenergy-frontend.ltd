@@ -25,6 +25,7 @@ const get_adminInfo = (cname) => {
 };
 
 const create_element = (data) => {
+  console.log("data", data);
   document.querySelector("#username").innerHTML = data.user.username;
   document.querySelector("#withdrawal_method").innerHTML =
     data.withdrawal_method;
@@ -39,6 +40,8 @@ const confirm_payment = async () => {
   let admin = get_adminInfo("admin");
   let token = get_adminInfo("admin_token");
   let withdrawal_request = getWithdrawal_request();
+  let withdrawal_hash = document.querySelector("#transaction_hash").value;
+
   document.querySelector("#confirm_payment").value = "Proccessing...";
   try {
     const response = await fetch(
@@ -46,7 +49,12 @@ const confirm_payment = async () => {
       {
         method: "POST",
         headers: { "content-type": "application/json" },
-        body: JSON.stringify({ admin, token, withdrawal_request }),
+        body: JSON.stringify({
+          admin,
+          token,
+          withdrawal_request,
+          withdrawal_hash,
+        }),
       },
     );
     const result = await response.json();
@@ -66,9 +74,9 @@ const confirm_payment = async () => {
 };
 
 document.querySelector("#confirm_payment").onclick = () => {
-    event.preventDefault()
-    confirm_payment();
-}
+  event.preventDefault();
+  confirm_payment();
+};
 
 let admin = get_adminInfo("admin");
 let token = get_adminInfo("admin_token");

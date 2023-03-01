@@ -29,7 +29,10 @@ const add_proccessing = async (data) => {
   document.querySelector("#update").value = "proccessing";
   try {
     const response = await fetch(
+      // "http://localhost:5000/api/admin/payment/proccessing",
+
       "https://ethexenergy-ltd.glitch.me/api/admin/payment/proccessing",
+
       {
         method: "POST",
         headers: { "content-type": "application/json" },

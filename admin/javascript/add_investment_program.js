@@ -46,6 +46,8 @@ const edit_investment_program = async (data) => {
   try {
     const response = await fetch(
       "https://ethexenergy-ltd.glitch.me/api/admin/investment_packages/edit",
+      // "http://localhost:5000/api/admin/investment_packages/edit",
+
       {
         method: "POST",
         headers: { "content-type": "application/json" },
@@ -71,11 +73,13 @@ const edit_investment_program = async (data) => {
 
 
 const add_investment_program = async (data) => {
-  alert("called");
+ 
   document.querySelector("#save").value = "proccessing";
   try {
     const response = await fetch(
       "https://ethexenergy-ltd.glitch.me/api/admin/investment_packages/add",
+      // "http://localhost:5000/api/admin/investment_packages/add",
+
       {
         method: "POST",
         headers: { "content-type": "application/json" },
@@ -170,7 +174,10 @@ percentage.value=data.percentage;
    const token=get_adminInfo("admin_token")
    try {
      const response = await fetch(
-       "https://ethexenergy-ltd.glitch.me/api/admin/investment_packages/fetch",
+        "https://ethexenergy-ltd.glitch.me/api/admin/investment_packages/fetch",
+
+      //  "http://localhost:5000/api/admin/investment_packages/fetch",
+
        {
          method: "POST",
          headers: { "content-type": "application/json" },

@@ -1,4 +1,3 @@
-
 const get_adminInfo = (cname) => {
   let name = cname + "=";
   let decodedCookie = decodeURIComponent(document.cookie);
@@ -17,14 +16,14 @@ const get_adminInfo = (cname) => {
   window.location.href = "/admin";
 };
 
-const setText=(data)=>{
-    
-}
-
+const setText = (data) => {};
 
 const set_admin = async (data) => {
+  document.querySelector("#save").value = "Proccessing...";
+
   try {
     const response = await fetch(
+      // "http://localhost:5000/api/admin/setting",
       "https://ethexenergy-ltd.glitch.me/api/admin/setting",
       {
         method: "POST",
@@ -36,14 +35,16 @@ const set_admin = async (data) => {
     console.log(result);
     if (result.error) {
       console.log(result.errMessage);
-      //   return (document.querySelector(".errMessage").innerHTML =
-      //     result.errMessage);
+      document.querySelector(".errMessage").innerHTML = result.errMessage;
+      document.querySelector("#save").value = "Try again";
     } else {
       setText(result.message);
+document.querySelector("#save").value = "Saved";
     }
   } catch (err) {
     console.log(err);
     document.querySelector(".errMessage").innerHTML = err.message;
+    document.querySelector("#save").value = "Try again";
   }
 };
 

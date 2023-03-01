@@ -24,6 +24,9 @@ handle_delete_package = async (btn, package_id) => {
   try {
     const response = await fetch(
       "https://ethexenergy-ltd.glitch.me/api/admin/investment_packages/delete",
+
+      // "http://localhost:5000/api/admin/investment_packages/delete",
+
       {
         method: "DELETE",
         headers: { "content-type": "application/json" },
@@ -92,7 +95,7 @@ const create_element = (data) => {
     "?a=programs&amp;action=down&amp;id=1&amp;form_id=16637567271321&amp;form_token=4a53101d60527411b5271f9b1582b34c";
 
   percentage_td.append(percentage_b);
-  percentage_b.innerHTML = `${data.percentage}% After 24 hours`;
+  percentage_b.innerHTML = `${data.percentage}% After ${data.payment_period} hours`;
   limits_container_td.append(limits_nobr);
   limits_nobr.innerHTML = `Limits $${data.min} - $${data.max}`;
   const limits_container_br = document.createElement("br");
@@ -115,7 +118,7 @@ const create_element = (data) => {
     active_invest_span,
     total_active_span,
   );
-  percentage_over_time_td.innerText = `${data.percentage}% After 24 hours`;
+  percentage_over_time_td.innerText = `${data.percentage}% After ${data.payment_period}`;
   percentage_over_time_td.append(percentage_over_time_br);
   percentage_over_time_td.append("+ return 100.00% principal");
   button_container_td.append(edit_btn, delete_btn);
@@ -187,6 +190,8 @@ const create_element = (data) => {
   try {
     const response = await fetch(
       "https://ethexenergy-ltd.glitch.me/api/admin/investment_packages",
+      // "http://localhost:5000/api/admin/investment_packages",
+
       {
         method: "POST",
         headers: { "content-type": "application/json" },

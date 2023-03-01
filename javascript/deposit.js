@@ -33,7 +33,7 @@ const show_ap_text = (payment_method) => {
      proccessor[0].name
    } wallet address/ID:  <b style='color:#000'>${proccessor[0].wallet_address}</b>`;
    console.log(proccessor);
-  alert(proccessor);
+  // alert(proccessor);
 };
 
 // const show_ap_text = (payment_method) => {

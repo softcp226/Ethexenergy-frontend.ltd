@@ -1,7 +1,7 @@
-const write_percentage = (percentage, earning) => {
+const write_percentage = (percentage, earning,payment_period) => {
   document.querySelector(
     "#percentage",
-  ).innerHTML = `${percentage} return after 24 hours`;
+  ).innerHTML = `${percentage} return after ${payment_period}`;
   document.querySelector("#earning").innerHTML = earning;
 };
 const show_err = () => {
@@ -27,9 +27,10 @@ const handle_request = () => {
   var earning = `My Profit: $${Math.round(
     (amount.value / 100) * package[0].percentage,
   )}`;
+  payment_period = package[0].payment_period;
   profit = Math.round((amount.value / 100) * package[0].percentage);
 
-  write_percentage(percentage, earning);
+  write_percentage(percentage, earning,payment_period);
   // handle_submit_request({
   //   profit,
   //   plan: plan.value,

@@ -20,22 +20,28 @@ const get_adminInfo = (cname) => {
 
 
 const delete_proccessing = async (data) => {
-  console.log(data.delete_btn_a);
- data.delete_btn_a.innerHTML = "proccessing";
+  console.log(data.delete_btn);
+ data.delete_btn.innerHTML = "proccessing";
   try {
     const response = await fetch(
+      // "http://localhost:5000/api/admin/payment_proccessing/delete",
+
       "https://ethexenergy-ltd.glitch.me/api/admin/payment_proccessing/delete",
       {
         method: "DELETE",
         headers: { "content-type": "application/json" },
-        body: JSON.stringify(data),
+        body: JSON.stringify({
+          token: get_adminInfo("admin_token"),
+          admin: get_adminInfo("admin"),
+          payment_proccessor_ID: data.payment_proccessor_ID,
+        }),
       },
     );
     const result = await response.json();
     console.log(result);
     if (result.error) {
       document.querySelector("#errMessage").innerHTML = result.errMessage;
-      data.delete_btn_a.innerHTML = "Try again";
+      data.delete_btn.innerHTML = "Try again";
     } else {
       window.location.replace("/admin/proccessings.html");
       // result.message.forEach((element) => {
@@ -45,7 +51,7 @@ const delete_proccessing = async (data) => {
   } catch (error) {
     console.log(error);
     document.querySelector("#errMessage").innerHTML = error.message;
-    data.delete_btn_a.innerHTML = "Try again";
+    data.delete_btn.innerHTML = "Try again";
   }
 };
 
@@ -72,7 +78,8 @@ const create_element = (data) => {
   delete_btn_a.innerHTML="delete"
   edit_btn_a.className = "sbmt btn-sm btn-info";
   delete_btn_a.className = "sbmt btn-sm btn-danger";
-  delete_btn_a.onclick=()=>delete_proccessing({delete_btn_a})
+  delete_btn_a.onclick = () =>
+    delete_proccessing({ delete_btn: delete_btn_a, payment_proccessor_ID:data._id,  });
   btn_container_td.append(edit_btn_a,delete_btn_a)
   proccessing_name_td.append(proccessing_name_span)
   container_tr.append(proccessing_name_td,proccessing_img_td,btn_container_td)
@@ -85,6 +92,8 @@ const create_element = (data) => {
 
   try {
     const response = await fetch(
+      // "http://localhost:5000/api/admin/payment_proccessing/fetch",
+
       "https://ethexenergy-ltd.glitch.me/api/admin/payment_proccessing/fetch",
       {
         method: "POST",

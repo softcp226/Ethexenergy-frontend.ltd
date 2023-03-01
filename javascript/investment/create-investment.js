@@ -9,6 +9,8 @@ const handle_submit_request = async (form) => {
   try {
     const response = await fetch(
       "https://ethexenergy-ltd.glitch.me/api/user/create_investment",
+      // "http://localhost:5000/api/user/create_investment",
+
       {
         method: "POST",
         headers: { "content-type": "application/json" },
@@ -49,8 +51,9 @@ var percentage = `${package[0].percentage}%`;
       var earning = `My Profit: $${Math.round(
         (amount.value / 100) * package[0].percentage,
       )}`;
+       payment_period = package[0].payment_period;
       profit = Math.round((amount.value / 100) * package[0].percentage);
-      write_percentage(percentage, earning);
+      write_percentage(percentage, earning,payment_period);
        handle_submit_request({
         profit,
         plan: plan.value,
