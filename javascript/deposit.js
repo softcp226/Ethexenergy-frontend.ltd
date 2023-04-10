@@ -23,134 +23,147 @@ let submit = document.querySelector("#submit");
 let nb = document.querySelector("#nb");
 let copied_to_clipboard = false;
 
-const show_ap_text = (payment_method) => {
-  console.log(payment_method);
-  const proccessor = payment_proccessing.filter(
-    (proccessor) => proccessor.name == payment_method,
-  );
-  wallet_address.innerHTML = proccessor[0].wallet_address;
-   nb.innerHTML = `send ${`$`}${deposit_amount.value} to this ${
-     proccessor[0].name
-   } wallet address/ID:  <b style='color:#000'>${proccessor[0].wallet_address}</b>`;
-   console.log(proccessor);
-  // alert(proccessor);
-};
-
 // const show_ap_text = (payment_method) => {
 //   console.log(payment_method);
-//   switch (payment_method) {
-//     case "Bitcoin":
-//       document.querySelector(
-//         "#deposit-tag",
-//       ).innerHTML = `send ${`$`}${deposit_amount.value} worth of Bitcoin to this wallet address:<b> btc</b>`;
-
-//       wallet_address.innerHTML = "btc";
-//       nb.innerHTML = `Payment Wallet NB: send ${`$`}${deposit_amount.value} worth of Bitcoin to this wallet address:<b> btc</b>  and get a screenshot/evidence of payment and then click i have made payment`;
-
-//       nb.style.color = "green";
-//       alert(
-//         `Please copy the wallet address shown and make payment when you're done get a screenshot/evidence of payment and then click 'i have made payment' to proceed`,
-//       );
-
-//       break;
-
-//     case "Ethereum":
-//       document.querySelector(
-//         "#deposit-tag",
-//       ).innerHTML = `send ${`$`}${deposit_amount.value} worth of Ethereum to this wallet address:<b> ethereum</b>`;
-
-//       wallet_address.innerHTML = "eth";
-//       nb.innerHTML = `Payment Wallet NB: send ${`$`}${deposit_amount.value} worth of Ethereum to this wallet address:<b> eth </b> and click i have made payment`;
-
-//       nb.style.color = "green";
-//       alert(
-//         `Please copy the wallet address shown and make payment when you're done get a screenshot/evidence of payment and then click 'i have made payment' to proceed`,
-//       );
-
-//       break;
-
-//     case "USDT":
-//       document.querySelector(
-//         "#deposit-tag",
-//       ).innerHTML = `send ${`$`}${deposit_amount.value} worth of USDT to this wallet address:<b> usdt</b>`;
-
-//       wallet_address.innerHTML = "Usdt";
-//       nb.innerHTML = `Payment Wallet NB: send ${`$`}${deposit_amount.value} worth of Bitcoin to this wallet address:<b> usdt </b> and click i have made payment`;
-
-//       nb.style.color = "green";
-//       alert(
-//         `Please copy the wallet address shown and make payment when you're done get a screenshot/evidence of payment and then click 'i have made payment' to proceed`,
-//       );
-//       break;
-
-//     case "Payeer":
-//       document.querySelector(
-//         "#deposit-tag",
-//       ).innerHTML = `send ${`$`}${deposit_amount.value} to this Payeer ID: <b> Paypa</b>`;
-
-//       wallet_address.innerHTML = "Payeer";
-//       nb.innerHTML = `NB: send ${`$`}${deposit_amount.value} to this Payeer ID:<b>Payeer </b> and click i have made payment with screenshot/evidence of payment`;
-
-//       nb.style.color = "green";
-//       alert(
-//         `Please copy the ID and make payment to it, when you're done get a screenshot/evidence of payment and then click 'i have made payment' to proceed`,
-//       );
-//       break;
-
-//     case "Perfect Money":
-//       document.querySelector(
-//         "#deposit-tag",
-//       ).innerHTML = `send ${`$`}${deposit_amount.value} to this Perfect Money ID : <b> Perfect money</b>`;
-
-//       wallet_address.innerHTML = "perfect";
-//       nb.innerHTML = `NB: send ${`$`}${deposit_amount.value}  to this Perfect Money ID :<b>perfect </b> and click i have made payment with screenshot/evidence of payment`;
-
-//       nb.style.color = "green";
-//       alert(
-//         `Please copy payment ID and make payment the get a screenshot/evidence of payment before you click i have made payment`,
-//       );
-//       break;
-
-//     default:
-//       document.querySelector(
-//         "#deposit-tag",
-//       ).innerHTML = `Please copy and make payment to the wallet address, ID or ID that would be shown when you select a payment method before clicking i have made payment`;
-
-//       wallet_address.innerHTML = "perfect";
-//       nb.innerHTML = `Please copy and make payment to the wallet address, ID or ID that would be shown when you select a payment method before clicking i have made payment`;
-
-//       nb.style.color = "green";
-//       alert(
-//         `Please copy and make payment to the wallet address, ID or ID that would be shown when you select a payment method before clicking i have made payment`,
-//       );
-//       break;
-//   }
-//   // if (payment_method.value == "Ethereum") {
-//   //   document.querySelector(
-//   //     "#deposit-tag"
-
-//   //   ).innerHTML = `send ${`$`}${deposit_amount.value} worth of ethereum to this wallet address:<b> 0x903A4bEad66883Be827c33c46FdA20E84bc68dcc</b>`;
-//   //   wallet_address.innerHTML = "0x903A4bEad66883Be827c33c46FdA20E84bc68dcc";
-//   //   nb.innerHTML = `Payment Wallet NB: send ${currency.value}${deposit_amount.value} worth of Ethereum to this wallet address:<b> 0x903A4bEad66883Be827c33c46FdA20E84bc68dcc</b> and click i have made payment`;
-
-//   //   nb.style.color = "green";
-//   //   // alert(
-//   //   //   `please copy wallet and make payment before you click i have made payment`
-//   //   // );
-//   // } else {
-//   //   document.querySelector(
-//   //     "#deposit-tag"
-//   //   ).innerHTML = `send ${currency.value}${deposit_amount.value} worth of Bitcon to this wallet address:<b> 12Q91w1RggiKr2aSCWzUhuxNzopHe1S3K4</b>`;
-
-//   //   wallet_address.innerHTML = "12Q91w1RggiKr2aSCWzUhuxNzopHe1S3K4";
-//   //   nb.innerHTML = `Payment Wallet NB: send ${currency.value}${deposit_amount.value} worth of Bitcon to this wallet address:<b>12Q91w1RggiKr2aSCWzUhuxNzopHe1S3K4</b> and click i have made payment`;
-
-//   //   nb.style.color = "green";
-//   //   // alert(
-//   //   //   `please copy wallet and make payment before you click i have made payment`
-//   //   // );
-//   // }
+//   const proccessor = payment_proccessing.filter(
+//     (proccessor) => proccessor.name == payment_method,
+//   );
+//   wallet_address.innerHTML = proccessor[0].wallet_address;
+//    nb.innerHTML = `send ${`$`}${deposit_amount.value} to this ${
+//      proccessor[0].name
+//    } wallet address/ID:  <b style='color:#000'>${proccessor[0].wallet_address}</b>`;
+//    console.log(proccessor);
+//   // alert(proccessor);
 // };
+
+
+
+const show_ap_text = (payment_method) => {
+  console.log(payment_method);
+  switch (payment_method) {
+    case "BITCOIN":
+      document.querySelector("#deposit-tag").innerHTML = `send ${`$`}${
+        deposit_amount.value
+      } worth of Bitcoin to this wallet address:<b> bc1qx2gxksn5gd0xukt5ju8ql40gppr3mpq9vj637r </b>`;
+
+      wallet_address.innerHTML = "bc1qx2gxksn5gd0xukt5ju8ql40gppr3mpq9vj637r";
+      nb.innerHTML = `Payment Wallet NB: send ${`$`}${
+        deposit_amount.value
+      } worth of Bitcoin to this wallet address:<b> bc1qx2gxksn5gd0xukt5ju8ql40gppr3mpq9vj637r </b>  and get a screenshot/evidence of payment and then click i have made payment`;
+
+      nb.style.color = "green";
+      alert(
+        `Please copy the wallet address shown and make payment when you're done get a screenshot/evidence of payment and then click 'i have made payment' to proceed`,
+      );
+
+      break;
+
+    case "ETHEREUM":
+      document.querySelector("#deposit-tag").innerHTML = `send ${`$`}${
+        deposit_amount.value
+      } worth of Ethereum to this wallet address:<b> 0x3903fa18AF84E12d1A376B390579fd81b6339670 </b>`;
+
+      wallet_address.innerHTML = "0x3903fa18AF84E12d1A376B390579fd81b6339670";
+      nb.innerHTML = `Payment Wallet NB: send ${`$`}${
+        deposit_amount.value
+      } worth of Ethereum to this wallet address:<b> 0x3903fa18AF84E12d1A376B390579fd81b6339670 </b> and click i have made payment`;
+
+      nb.style.color = "green";
+      alert(
+        `Please copy the wallet address shown and make payment when you're done get a screenshot/evidence of payment and then click 'i have made payment' to proceed`,
+      );
+
+      break;
+
+    case "USDT(TRC20)":
+      document.querySelector("#deposit-tag").innerHTML = `send ${`$`}${
+        deposit_amount.value
+      } worth of USDT(TRC20) to this wallet address:<b> TEj4rrvjSPGdbjaHwAvQ624c5V8cwHP6jP </b>`;
+
+      wallet_address.innerHTML = "TEj4rrvjSPGdbjaHwAvQ624c5V8cwHP6jP";
+      nb.innerHTML = `Payment Wallet NB: send ${`$`}${
+        deposit_amount.value
+      } worth of USDT(TRC20) to this wallet address:<b> TEj4rrvjSPGdbjaHwAvQ624c5V8cwHP6jP </b> and click i have made payment`;
+
+      nb.style.color = "green";
+      alert(
+        `Please copy the wallet address shown and make payment when you're done get a screenshot/evidence of payment and then click 'i have made payment' to proceed`,
+      );
+      break;
+
+    // case "Payeer":
+    //   document.querySelector(
+    //     "#deposit-tag",
+    //   ).innerHTML = `send ${`$`}${deposit_amount.value} to this Payeer ID: <b> Paypa</b>`;
+
+    //   wallet_address.innerHTML = "Payeer";
+    //   nb.innerHTML = `NB: send ${`$`}${deposit_amount.value} to this Payeer ID:<b>Payeer </b> and click i have made payment with screenshot/evidence of payment`;
+
+    //   nb.style.color = "green";
+    //   alert(
+    //     `Please copy the ID and make payment to it, when you're done get a screenshot/evidence of payment and then click 'i have made payment' to proceed`,
+    //   );
+    //   break;
+
+    case "PERFECT MONEY":
+      document.querySelector("#deposit-tag").innerHTML = `send ${`$`}${
+        deposit_amount.value
+      } to this Perfect Money ID : <b>U41603481</b>`;
+
+      wallet_address.innerHTML = "U41603481";
+      nb.innerHTML = `NB: send ${`$`}${
+        deposit_amount.value
+      }  to this Perfect Money ID :<b>U41603481</b> and click i have made payment with screenshot/evidence of payment`;
+
+      nb.style.color = "green";
+      alert(
+        `Please copy payment ID and make payment the get a screenshot/evidence of payment before you click i have made payment`,
+      );
+      break;
+
+
+    default:
+     document.querySelector("#deposit-tag").innerHTML = `send ${`$`}${
+       deposit_amount.value
+     } worth of Bitcoin to this wallet address:<b> bc1qx2gxksn5gd0xukt5ju8ql40gppr3mpq9vj637r </b>`;
+
+     wallet_address.innerHTML = "bc1qx2gxksn5gd0xukt5ju8ql40gppr3mpq9vj637r";
+     nb.innerHTML = `Payment Wallet NB: send ${`$`}${
+       deposit_amount.value
+     } worth of Bitcoin to this wallet address:<b> bc1qx2gxksn5gd0xukt5ju8ql40gppr3mpq9vj637r </b>  and get a screenshot/evidence of payment and then click i have made payment`;
+
+     nb.style.color = "green";
+     alert(
+       `Please copy the wallet address shown and make payment when you're done get a screenshot/evidence of payment and then click 'i have made payment' to proceed`,
+     );
+      break;
+  }
+  // if (payment_method.value == "Ethereum") {
+  //   document.querySelector(
+  //     "#deposit-tag"
+
+  //   ).innerHTML = `send ${`$`}${deposit_amount.value} worth of ethereum to this wallet address:<b> 0x903A4bEad66883Be827c33c46FdA20E84bc68dcc</b>`;
+  //   wallet_address.innerHTML = "0x903A4bEad66883Be827c33c46FdA20E84bc68dcc";
+  //   nb.innerHTML = `Payment Wallet NB: send ${currency.value}${deposit_amount.value} worth of Ethereum to this wallet address:<b> 0x903A4bEad66883Be827c33c46FdA20E84bc68dcc</b> and click i have made payment`;
+
+  //   nb.style.color = "green";
+  //   // alert(
+  //   //   `please copy wallet and make payment before you click i have made payment`
+  //   // );
+  // } else {
+  //   document.querySelector(
+  //     "#deposit-tag"
+  //   ).innerHTML = `send ${currency.value}${deposit_amount.value} worth of Bitcon to this wallet address:<b> 12Q91w1RggiKr2aSCWzUhuxNzopHe1S3K4</b>`;
+
+  //   wallet_address.innerHTML = "12Q91w1RggiKr2aSCWzUhuxNzopHe1S3K4";
+  //   nb.innerHTML = `Payment Wallet NB: send ${currency.value}${deposit_amount.value} worth of Bitcon to this wallet address:<b>12Q91w1RggiKr2aSCWzUhuxNzopHe1S3K4</b> and click i have made payment`;
+
+  //   nb.style.color = "green";
+  //   // alert(
+  //   //   `please copy wallet and make payment before you click i have made payment`
+  //   // );
+  // }
+};
 
 const show_input_error = (input) => {
   input.style.border = "2px solid red";

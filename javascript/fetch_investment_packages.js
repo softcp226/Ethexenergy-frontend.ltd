@@ -4,12 +4,14 @@ const setPackages = (investment_package) => {
   investment_packages = investment_package;
 
   investment_package.forEach((package) => {
+   
     const option = document.createElement("option");
     option.value = package.package_name;
     option.min = package.min;
     option.max = package.max;
     option.innerHTML = `${package.package_name} ($${package.min}-$${package.max})`;
     document.querySelector("#plan").append(option);
+   
   });
 };
 
