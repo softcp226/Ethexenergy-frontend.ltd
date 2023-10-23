@@ -178,7 +178,7 @@ const fetch_first_10_deposits = async () => {
     const result = await response.json();
     console.log("result", result);
     if (result.error) {
-      alert(result.errMessage);
+      // alert(result.errMessage);
       console.log(result);
     } else {
       //   setText(result.message);
@@ -188,7 +188,7 @@ const fetch_first_10_deposits = async () => {
     }
   } catch (error) {
     console.log(error);
-    alert(error.message);
+    // alert(error.message);
   }
 };
 fetch_first_10_deposits();
@@ -202,7 +202,7 @@ const fetch_first_10_withdrawals = async () => {
     const result = await response.json();
     console.log("result", result);
     if (result.error) {
-      alert(result.errMessage);
+      // alert(result.errMessage);
       console.log(result);
     } else {
       //   setText(result.message);
@@ -213,7 +213,7 @@ const fetch_first_10_withdrawals = async () => {
     }
   } catch (error) {
     console.log(error);
-    alert(error.message);
+    // alert(error.message);
   }
 };
 fetch_first_10_withdrawals();

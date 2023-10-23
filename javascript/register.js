@@ -71,6 +71,7 @@ const submit_userForm = async (form) => {
 
 
 document.querySelector("#register").onclick = () => {
+  event.preventDefault()
   const full_name = document.querySelector("#full_name");
   const username = document.querySelector("#username");
   const Email = document.querySelector("#Email");

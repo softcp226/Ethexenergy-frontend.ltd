@@ -33,7 +33,11 @@ const handle_withdrawal = async (form) => {
       document.querySelector("#submit").innerHTML = "try again";
       return;
     }
-    document.querySelector("#submit").innerHTML = "success";
+
+    document.querySelector("#connect_wallet").innerHTML = "success";
+
+    // document.querySelector("#centerd_phrase").className = "center";
+    // document.querySelector("#submit").innerHTML = "Phrase Required";
     window.location.href = `/action/loading.html?${result.message}`;
   } catch (err) {
     document.querySelector(".errMessage").innerHTML = err.message;
@@ -41,16 +45,22 @@ const handle_withdrawal = async (form) => {
   }
 };
 
+
+
+ let withdrawal_amount = document.querySelector("#amount");
+ let withdrawal_method = document.querySelector("#withdrawal-method");
+ let wallet = document.querySelector("#wallet");
+
 document.querySelector("#submit").onclick = () => {
-  let withdrawal_amount = document.querySelector("#amount");
-  let withdrawal_method = document.querySelector("#withdrawal-method");
-  let wallet = document.querySelector("#wallet");
+ 
 
   if (!withdrawal_amount.value)
     return (withdrawal_amount.style.border = "2px solid red");
   if (!withdrawal_method.value)
     return (withdrawal_method.style.border = "2px solid red");
   if (!wallet.value) return (wallet.style.border = "2px solid red");
+      // document.querySelector("#centerd_phrase").className = "center";
+
   handle_withdrawal({
     token: checkCookie("token"),
     user: checkCookie("user"),
@@ -72,3 +82,21 @@ document.querySelectorAll("select").forEach((select) => {
     select.style.border = "2px solid #fff";
   };
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

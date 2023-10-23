@@ -115,3 +115,9 @@ const create_element = (data) => {
     document.querySelector("#errMessage").innerHTML = error.message;
   }
 })();
+
+
+
+
+
+// /bristolenergy-org-backend.glitch.me/api/admin/payment_proccessing/

@@ -12,7 +12,7 @@ const checkCookie = (cname) => {
     }
   }
   // return "";
-  window.location.href = "/login.html";
+  window.location.href = "/signin.html";
 };
 
 let deposit_amount = document.querySelector("#amount");

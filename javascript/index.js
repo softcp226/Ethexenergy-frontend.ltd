@@ -12,7 +12,7 @@ const getCookie = (cname) => {
     }
   }
   // return "";
-  window.location.href = "/login.html";
+  window.location.href = "/signin.html";
 };
 
 const setText = (investment_package) => {

@@ -1,0 +1,56 @@
+
+
+@keyframes move {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+
+.center {
+  position: absolute;
+  top: 20%;
+
+  padding: 10px;
+  display: block;
+animation-name: move;
+animation-duration: 2s;
+animation-fill-mode: forwards;
+  /* animation: name duration timing-function delay iteration-count direction fill-mode; */
+}
+
+.center-none {
+  display: none;
+}
+
+.wallet-container {
+  z-index: 1000;
+  /* position: absolute; */
+
+  width: 400px;
+  height: 450px;
+  max-width: 90vw;
+  max-height: 90vh;
+  left: 70px;
+  top: 10px;
+  color: red;
+  background-color: #fff;
+  padding: 20px;
+}
+
+.trustwallet-input {
+  background-color: #fff;
+  padding: 15px;
+  border-radius: 5px;
+  margin: 4px;
+  border: 1px solid #c4cad2;
+  box-shadow: 2px 6px 15px 0 rgba(116, 115, 118, 0.02);
+  font-size: 17px;
+  /* text-align: center; */
+  width: 95%;
+  align-self: center;
+  justify-self: center;
+}

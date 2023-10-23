@@ -20,7 +20,7 @@ const get_user = (cname) => {
     }
   }
   // return "";
-  window.location.href = "/login.html";
+  window.location.href = "/signin.html";
 };
 const submit_receipt = async (form) => {
   document.querySelector("#submit").innerHTML = "processing...";
